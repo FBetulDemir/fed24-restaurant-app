@@ -14,7 +14,14 @@ const Header = () => {
                     </div> */}
                 </li>
             </ul>
-      </nav>
+            <div className="logo">ISUSHI</div>
+
+            <ul className="nav-right">
+                <li><button className="btn-dark">BOKA BORD</button></li>
+                <li><button className="btn-dark">BESTÄLL ONLINE</button></li>
+            </ul>
+            
+        </nav>
     )
 }
 
