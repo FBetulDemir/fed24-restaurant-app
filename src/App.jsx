@@ -1,22 +1,19 @@
 import { Outlet } from 'react-router'
 import './App.css'
+import './index.css'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 function App() {
   
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="layout">
         <Header />
-      </header>
-      <main>
-        <Outlet />
-
-      </main>
-      <footer>
-        <p>&copy; 2025 ISushi. Alla rättigheter förbehållna. Integritetspolicy | Användarvillkor</p>
-      </footer>
+        <main className='main'>
+          <Outlet />
+        </main>
+        <Footer />
     </div>
   )
 }

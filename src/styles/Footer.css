@@ -1,0 +1,20 @@
+.footer{
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    color: #e6d6b2;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 2em;
+}
+.navlink-footer, .email-footer{
+    color: #e6d6b2;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover{
+        color: #D9BF77;
+    }
+}
