@@ -1,4 +1,6 @@
+import { Outlet } from 'react-router'
 import './App.css'
+import Header from './components/Header'
 
 function App() {
   
@@ -6,11 +8,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Welcome to ISushi</h1>
-        
+        <Header />
       </header>
       <main>
-        
+        <Outlet />
 
       </main>
       <footer>
