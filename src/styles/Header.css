@@ -1,0 +1,28 @@
+.nav {
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: #2A2828;
+ 
+    align-items: center;
+    ul{
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        
+        li .navlink{
+            color: #EFE7D2;
+            text-decoration: none;
+            cursor: pointer;
+            &:hover{
+                color: #D9BF77;
+            }
+        }
+    }
+}
+
+.dropdown{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+

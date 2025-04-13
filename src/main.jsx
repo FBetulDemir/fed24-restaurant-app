@@ -5,6 +5,8 @@ import App from './App.jsx'
 import { createHashRouter, RouterProvider } from 'react-router'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
+import Menu from './pages/Menu.jsx'
+// import { HashRouter } from 'react-router'
 
 
 const router = createHashRouter(
@@ -20,6 +22,10 @@ const router = createHashRouter(
         {
           path: '/pages/:aboutId?',
           Component: About,
+        },
+        {
+          path: '/pages/menu/:menuId?',
+          Component: Menu,
         }
         
       ]
