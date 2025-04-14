@@ -5,6 +5,7 @@ import "../styles/Header.css";
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [hamburgerOpen, setHamburgerOpen] = useState(false);
     
 
     const toggleDropdown = () => {
@@ -50,10 +51,22 @@ const Header = () => {
                 </ul>
                 <div className="logo">ISUSHI</div>
 
-                <div className="hamburger-button">
+                <button className="hamburger-button" onClick={() => setHamburgerOpen(!hamburgerOpen)}>
                     <span className="hamburger-line"></span>
                     <span className="hamburger-line"></span>
                     <span className="hamburger-line"></span>
+                </button>
+
+                <div className="dropdown-content" style={{ display: hamburgerOpen ? 'block' : 'none' }}>
+                    <NavLink to="/pages/home" className="navlink">Hem</NavLink>
+                    <NavLink to="/pages/about" className="navlink">Om</NavLink>
+                    <NavLink to="/pages/menu" className="navlink">
+                        <button className="btn-dark">BOKA BORD</button>
+                    </NavLink>
+                    <NavLink to="/pages/orderOnline" className="navlink">
+                        <button className="btn-dark">BESTÄLL ONLINE</button>
+                    </NavLink>
+                    
                 </div>
                             
                 <ul className="nav-right">

@@ -26,6 +26,10 @@ const router = createHashRouter(
         {
           path: '/pages/menu/:menuId?',
           Component: Menu,
+        },
+        {
+          path: '/pages/orderOnline/:orderId?',
+          Component: Menu,
         }
         
       ]

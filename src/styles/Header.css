@@ -73,10 +73,31 @@
             background-color: #a09f9f;
         }
     }
+    .navlink{
+        color: #EFE7D2;
+        cursor: pointer;
+        &:hover{
+            color: #D9BF77;
+        }
+        .btn-dark{
+            background-color: transparent;
+            border: 2px solid #EFE7D2;
+            border-radius: 8px;
+            padding: 1em 1.5em;
+            color: #EFE7D2;
+            text-decoration: none;
+            cursor: pointer;
+            &:hover{
+                color: #D9BF77;
+            }
+        }
+    }
 }
 
 .hamburger-button{
     display: none;
+    background-color: transparent;
+    border: none;
     span{
         display: block;
         width: 0em;
