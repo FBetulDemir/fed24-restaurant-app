@@ -1,4 +1,5 @@
 import './App.css'
+import MakiSushi from './pages/ProductMaki'
 
 function App() {
   
@@ -6,15 +7,15 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Welcome to ISushi</h1>
+        <h1>Welcome to iSushi</h1>
         
       </header>
       <main>
-        
+        <MakiSushi />
 
       </main>
       <footer>
-        <p>&copy; 2025 ISushi. Alla rättigheter förbehållna. Integritetspolicy | Användarvillkor</p>
+        <p>&copy; 2025 iSushi. Alla rättigheter förbehållna. Integritetspolicy | Användarvillkor</p>
       </footer>
     </div>
   )
