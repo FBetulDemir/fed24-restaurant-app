@@ -58,8 +58,8 @@ const Header = () => {
                 </button>
 
                 <div className="dropdown-content" style={{ display: hamburgerOpen ? 'block' : 'none' }}>
-                    <NavLink to="/pages/home" className="navlink">Hem</NavLink>
-                    <NavLink to="/pages/about" className="navlink">Om</NavLink>
+                    <NavLink to="/" className="navlink">HEM</NavLink>
+                    <NavLink to="/pages/about" className="navlink">OM</NavLink>
                     <NavLink to="/pages/menu" className="navlink">
                         <button className="btn-dark">BOKA BORD</button>
                     </NavLink>

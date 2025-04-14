@@ -76,6 +76,9 @@
     .navlink{
         color: #EFE7D2;
         cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         &:hover{
             color: #D9BF77;
         }
@@ -85,8 +88,8 @@
             border-radius: 8px;
             padding: 1em 1.5em;
             color: #EFE7D2;
-            text-decoration: none;
             cursor: pointer;
+            
             &:hover{
                 color: #D9BF77;
             }
@@ -147,6 +150,7 @@
         top: 5.6em;
         left: 0;
         width: 100%;
+
     }
 
       
