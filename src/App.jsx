@@ -1,4 +1,5 @@
 import './App.css'
+import InLogg from './pages/inlogg'
 
 function App() {
   
@@ -11,7 +12,8 @@ function App() {
       </header>
       <main>
         
-
+        <InLogg />
+        
       </main>
       <footer>
         <p>&copy; 2025 ISushi. Alla rättigheter förbehållna. Integritetspolicy | Användarvillkor</p>
