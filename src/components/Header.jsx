@@ -5,6 +5,8 @@ import "../styles/Header.css";
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
+    
+
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
@@ -34,6 +36,9 @@ const Header = () => {
                                 <polyline points="6 9 12 15 18 9" />
                             </svg>
                         </button>
+                        
+
+
                         {isOpen && (
                             <div className="dropdown-content">
                                 <NavLink to="/pages/menu" className="navlink">Sushi</NavLink>
@@ -44,6 +49,12 @@ const Header = () => {
                     </li>
                 </ul>
                 <div className="logo">ISUSHI</div>
+
+                <div className="hamburger-button">
+                    <span className="hamburger-line"></span>
+                    <span className="hamburger-line"></span>
+                    <span className="hamburger-line"></span>
+                </div>
                             
                 <ul className="nav-right">
                     <li><button className="btn-dark">BOKA BORD</button></li>
