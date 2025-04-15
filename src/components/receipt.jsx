@@ -12,6 +12,9 @@ const total = testCart.reduce((sum, item) => {
 	return sum + item.price * item.quantity;
 }, 0);
 
+const moms = total * 0.25;
+const totalMedMoms = total + moms;
+
 const Receipt = () => {
   return (
 	
@@ -19,9 +22,9 @@ const Receipt = () => {
       <div className="receipt-wrapper">
         <img src={receiptImg} alt="receipt" className="receipt-bg" />
         <section className="receipt-container"> 
-        	<h2>Tack för din beställning</h2>
+        	<h2> Tack för din beställning! </h2>
 		  	<div className="receipt-divider"></div>
-          	<p className="order-number">#1235566</p>
+          	<p className="order-number">Order nummer: #1235566</p>
           	<div className="receipt-items">
 				{testCart.map((item, index) => (
 				<div className="receipt-item" key={index}>
@@ -32,7 +35,8 @@ const Receipt = () => {
 				))}
 			</div>
 		  <div className="receipt-divider"></div>
-		  <p className="receipt-total">Totalt: {total}kr</p>
+		  	<p className="receipt-moms">Moms (25%): {moms.toFixed(2)} kr</p>
+			<p className="receipt-total-incl">Totalt inkl. moms: {totalMedMoms.toFixed(2)} kr</p>
           <button className="new-order">Ny beställning</button>
         </section>
       </div>
