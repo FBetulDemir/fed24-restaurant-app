@@ -2,14 +2,48 @@
 const Cart = () =>{
 	return (
 		<main>
+			<header></header>
 	<h1 classname="your-order">Din Beställning</h1>
+<section classname = "box1">
 <div classname = "produkt1">
+	<h2 classname = "title">Sushi 1</h2>
 	<img classname = "pics" src="-" alt="Bild på sushi" />
-	<p classname = "description"> {"placeholder"} </p>
+	<p classname = "description"> {"beskrivning"} </p>
 	<button classname = "addBtn">Lägg Till</button>
+	<div classname = "counter">0</div>
 	<button classname = "subBtn">Ta Bort</button>
-
 </div>
+</section>
+<section classname = "box2">
+<div classname = "produkt2">
+	<h2 classname = "title">Sushi 2</h2>
+	<img classname = "pics" src="-" alt="Bild på sushi" />
+	<p classname = "description"> {"beskrivning"} </p>
+	<button classname = "addBtn">Lägg Till</button>
+	<div classname = "counter">0</div>
+	<button classname = "subBtn">Ta Bort</button>
+</div>
+</section>
+<section classname = "box3">
+<div classname = "produkt3">
+	<h2 classname = "title">Sushi 3</h2>
+	<img classname = "pics" src="-" alt="Bild på sushi" />
+	<p classname = "description"> {"beskrivning"} </p>
+	<button classname = "addBtn">Lägg Till</button>
+	<div classname = "counter">0</div>
+	<button classname = "subBtn">Ta Bort</button>
+</div>
+</section>
+
+<section classname = "price">
+	<div classname = "price-numbers">{}</div>
+	<div classname = "moms">25%</div>
+	<div classname = "totalPrice">Totalt:{}</div>
+</section>
+
+
+	<button id = "paymentBtn">Gå Vidare</button>
+<footer></footer>
 </main>
 	)
 }
