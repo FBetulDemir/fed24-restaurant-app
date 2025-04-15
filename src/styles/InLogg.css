@@ -1,8 +1,18 @@
-.sign-section {
-    background-color: #787878a9;
-    margin: 10px;
+.blurp {
+    background-image: url('blossom.jpg');
+    margin: 0;
     padding: 10px;
+    height: 500px;
+}
+
+.sign-section {
+    background-color: #403b3bd6;
+    color: white;
+    margin: 10px;
+    padding: 30px;
     width: 200px;
+    margin-left: 50px;
+    margin-top: 50px;
 }
 
 .text-underline {
@@ -16,14 +26,17 @@
 .input-error {
     border: 2px solid red;
     background-color: #ffe5e5;
+    text-shadow: 2px 2px 4px solid black;
+    color: black;
   }
   
-  .input-correct {
+.input-correct, .correct {
     border: 2px solid green;
     background-color: #e5ffe5;
   }
   
   .error {
     color: red;
+    text-shadow: 2px 2px 4px solid black;
     font-weight: bold;
   }
