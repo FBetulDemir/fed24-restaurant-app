@@ -1,13 +1,19 @@
 //Steg för steg
-
-//1. Skapa grupper/arrays eventuellt
-
-<main>
+const Cart = () =>{
+	return (
+		<main>
 	<h1 classname="your-order">Din Beställning</h1>
 <div classname = "produkt1">
+	<img classname = "pics" src="-" alt="Bild på sushi" />
+	<p classname = "description"> {"placeholder"} </p>
+	<button classname = "addBtn">Lägg Till</button>
+	<button classname = "subBtn">Ta Bort</button>
 
 </div>
 </main>
+	)
+}
+//1. Skapa grupper/arrays eventuellt
 
 //2. Fånga upp de genom classname
 //3. Det skall finnas en bild på rätten, en snabb beskrivning av vad som finns i den (alltså ingredienser) och även en lägg till/ta bort funktion med en counter därtill.
@@ -29,3 +35,5 @@
 //11. Informationen skall kunna lagras vidare, du skall även kunna gå tillbaka till förra sidan(fliken) om du så önskar - det skall finnas en knapp för "beställ nu" som leder vidare till sista sidan.
 
 //12. Sista sidan skall du kunna se ditt ordernummer (ingen ångra knapp), vad du har valt för betalningssätt, totalpris och sedan två rutor där under där den ene ger dig en QR kod till kvittot - "tack för din beställning" och under den en ruta som räknar ner tid från ca 10 minuter, ge den ett random-spann mellan 15-10 minuter ish borde räcka.
+
+export default Cart

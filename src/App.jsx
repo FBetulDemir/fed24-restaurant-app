@@ -1,4 +1,6 @@
 import './App.css'
+import Cart from './pages/Cart.jsx'
+
 
 function App() {
   
@@ -10,7 +12,7 @@ function App() {
         
       </header>
       <main>
-        
+        <Cart />
 
       </main>
       <footer>
