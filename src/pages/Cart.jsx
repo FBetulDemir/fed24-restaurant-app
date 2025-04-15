@@ -2,7 +2,12 @@
 
 //1. Skapa grupper/arrays eventuellt
 
-<h1 id="your-order">Din Beställning</h1>
+<main>
+	<h1 id="your-order">Din Beställning</h1>
+<div classname = "produkt1">
+
+</div>
+</main>
 
 //2. Fånga upp de genom ID
 //3. Det skall finnas en bild på rätten, en snabb beskrivning av vad som finns i den (alltså ingredienser) och även en lägg till/ta bort funktion med en counter därtill.
