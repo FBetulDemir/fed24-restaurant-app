@@ -1,4 +1,5 @@
 import './App.css'
+import Receipt from './components/receipt'
 
 function App() {
   
@@ -10,7 +11,7 @@ function App() {
         
       </header>
       <main>
-        
+	  	<Receipt />
 
       </main>
       <footer>
