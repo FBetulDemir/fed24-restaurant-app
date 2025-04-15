@@ -3,15 +3,16 @@ import receiptImg from "../assets/receipt.png";
 import "../styles/receipt.css";
 
 const testCart = [
-	{ name: "Maki roll", quantity: 2, price: 45 },
-	{ name: "Sushi mega", quantity: 3, price: 50 },
-	{ name: "Sushi oma", quantity: 2, price: 68 },
+	{ name: "Maki roll", quantity: 12, price: 45 },
+	{ name: "Sushi mega", quantity: 9, price: 50 },
+	{ name: "Sushi oma", quantity: 15, price: 68 },
   ];
 
 const total = testCart.reduce((sum, item) => {
 	return sum + item.price * item.quantity;
 }, 0);
 
+// plocka bort hårdkodad testcart och lägg till den data so mvi skapar tillsammans
 const moms = total * 0.25;
 const totalMedMoms = total + moms;
 
@@ -34,10 +35,10 @@ const Receipt = () => {
 				</div>
 				))}
 			</div>
-		  <div className="receipt-divider"></div>
+		  	<div className="receipt-divider"></div>
 		  	<p className="receipt-moms">Moms (25%): {moms.toFixed(2)} kr</p>
 			<p className="receipt-total-incl">Totalt inkl. moms: {totalMedMoms.toFixed(2)} kr</p>
-          <button className="new-order">Ny beställning</button>
+          	<button className="new-order">Ny beställning</button>
         </section>
       </div>
     </div>
