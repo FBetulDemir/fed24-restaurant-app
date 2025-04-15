@@ -3,13 +3,13 @@
 //1. Skapa grupper/arrays eventuellt
 
 <main>
-	<h1 id="your-order">Din Beställning</h1>
+	<h1 classname="your-order">Din Beställning</h1>
 <div classname = "produkt1">
 
 </div>
 </main>
 
-//2. Fånga upp de genom ID
+//2. Fånga upp de genom classname
 //3. Det skall finnas en bild på rätten, en snabb beskrivning av vad som finns i den (alltså ingredienser) och även en lägg till/ta bort funktion med en counter därtill.
 
 //4. Skapa en function för lägg till/ta bort och koppla samman den med räknaren
