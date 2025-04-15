@@ -1,3 +1,29 @@
+.sign-section {
+    background-color: #787878a9;
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+}
+
 .text-underline {
     text-decoration: underline;
 }
+
+.text-underline:hover {
+    color: #787878;
+}
+
+.input-error {
+    border: 2px solid red;
+    background-color: #ffe5e5;
+  }
+  
+  .input-correct {
+    border: 2px solid green;
+    background-color: #e5ffe5;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+  }
