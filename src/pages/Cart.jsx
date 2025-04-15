@@ -1,56 +1,53 @@
-//Steg för steg
+import './cart.css'
+
+//1. Skapa grupper/arrays eventuellt
+
 const Cart = () =>{
 	return (
 		<main>
 			<header></header>
-	<h1 classname="your-order">Din Beställning</h1>
-<section classname = "box1">
-<div classname = "produkt1">
-	<h2 classname = "title">Sushi 1</h2>
-	<img classname = "pics" src="-" alt="Bild på sushi" />
-	<p classname = "description"> {"beskrivning"} </p>
-	<button classname = "addBtn">Lägg Till</button>
-	<div classname = "counter">0</div>
-	<button classname = "subBtn">Ta Bort</button>
-</div>
-</section>
-<section classname = "box2">
-<div classname = "produkt2">
-	<h2 classname = "title">Sushi 2</h2>
-	<img classname = "pics" src="-" alt="Bild på sushi" />
-	<p classname = "description"> {"beskrivning"} </p>
-	<button classname = "addBtn">Lägg Till</button>
-	<div classname = "counter">0</div>
-	<button classname = "subBtn">Ta Bort</button>
-</div>
-</section>
-<section classname = "box3">
-<div classname = "produkt3">
-	<h2 classname = "title">Sushi 3</h2>
-	<img classname = "pics" src="-" alt="Bild på sushi" />
-	<p classname = "description"> {"beskrivning"} </p>
-	<button classname = "addBtn">Lägg Till</button>
-	<div classname = "counter">0</div>
-	<button classname = "subBtn">Ta Bort</button>
+	<h1 id = "your-order">Din Beställning</h1>
+<section className = "box">
+<div id = "produkt1">
+	<h2 id = "title">Sushi 1</h2>
+	<div className = "desPic">
+	<img id = "pics" src="-" alt="Bild på sushi" />
+	<p id = "description"> {"beskrivning"} </p>
+	</div>
+	<div className = "btns">
+	<button id = "addBtn">LÄGG TILL</button>
+	<div id = "counter">0</div>
+	<button id = "subBtn">TA BORT</button>
+	</div>
 </div>
 </section>
 
-<section classname = "price">
-	<div classname = "price-numbers">{}</div>
-	<div classname = "moms">25%</div>
-	<div classname = "totalPrice">Totalt:{}</div>
+
+<section id = "priceOrder">
+
+	<div className = "prices">
+	<div id = "price-numbers">{"PRIS EX MOMS"} KR</div>
+	<p> 25% {"moms-priset"}</p>
+	<div id = "totalPrice">Totalt: {"PRIS INK MOMS"} KR</div>
+	</div>
+
+	<div className = "orderNr">
+		<p id = "numbers"> ORDERNUMMER# {123456}</p>
+		<button id = "cancelOrdBtn"> ÅNGRA </button>
+	</div>
+
+
 </section>
 
 
-	<button id = "paymentBtn">Gå Vidare</button>
+	<button id = "processBtn">GÅ VIDARE</button>
 <footer></footer>
 </main>
 	)
 }
-//1. Skapa grupper/arrays eventuellt
 
 //2. Fånga upp de genom classname
-//3. Det skall finnas en bild på rätten, en snabb beskrivning av vad som finns i den (alltså ingredienser) och även en lägg till/ta bort funktion med en counter därtill.
+
 
 //4. Skapa en function för lägg till/ta bort och koppla samman den med räknaren
 
