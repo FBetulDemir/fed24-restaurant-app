@@ -38,7 +38,7 @@ body {
 	align-items: center;
 }
 .new-order {
-	background-color: transparent;
+	background-color: #181818;
 	border: 2px solid #EFE7D2;
 	border-radius: 8px;
 	padding: 1em 1.5em;
@@ -46,8 +46,10 @@ body {
 	cursor: pointer;
 	margin-bottom: 2rem;
 	
-	&:hover{
+	&:hover {
 		color: #D9BF77;
+		background-color: #474747;
+		border: 2px solid #D9BF77;
 	}
 }
 .receipt-divider {
