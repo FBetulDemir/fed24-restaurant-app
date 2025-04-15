@@ -1,6 +1,9 @@
 //Steg för steg
 
 //1. Skapa grupper/arrays eventuellt
+
+
+
 //2. Fånga upp de genom ID
 //3. Det skall finnas en bild på rätten, en snabb beskrivning av vad som finns i den (alltså ingredienser) och även en lägg till/ta bort funktion med en counter därtill.
 
