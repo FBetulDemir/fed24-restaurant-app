@@ -11,6 +11,9 @@ function InLogg() {
     const [error, setError] = useState('')
     const [correct, setCorrect] = useState('')
     const [isvalid, setIsValid] = useState(null)
+    const [userNameError, setUserNameError] = useState(false)
+    const [passwordError, setPasswordError] = useState(false) 
+    
     // const navigate = useNavigate()
 
     const schema = Joi.object({
@@ -21,25 +24,40 @@ function InLogg() {
     const correctUsername = 'David'
     const correctPassword = 'Mums'
 
+
     const handleSubmit = (e) => {
-        console.log('Sign in')
         e.preventDefault()
 
         const { error } = schema.validate({ userName, password })
 
+
+
         if (error) {
+        console.log('Valideringfel', error.details[0].message)
             setError('Fyll i användarnamn och lösenord korrekt')
             setIsValid(false)
             setCorrect('')
+
+
+            if (userName.length < 3) setUserNameError(true)
+            if (password.length < 4) setPasswordError(true)
+
         } else if (userName !== correctUsername || password !== correctPassword)  {
             setError('')
+            setCorrect('')
             setIsValid(false)
-            setCorrect('Inloggad')
+
+            setUserNameError(userName !== correctUsername)
+            setPasswordError(password !== correctPassword)
         } else {
             setError('')
-            setCorrect('Inloggning lyckades')
+            setCorrect('')
+
+            setUserNameError(false)
+            setPasswordError(false)
+
             setIsValid(true)
-            navigate('/employee')
+            navigate('/')
         }
 
     }       
@@ -54,21 +72,31 @@ function InLogg() {
                 
             {error && <p className='error'>{error}</p>}
 
-                <input className='input-box'
+                <input className={
+                `input-box ${userNameError ? 
+                'input-success' : isvalid === false ? 
+                'input-error' : ''}`}
+
                 type='text' 
                 placeholder='Username'
                 value={userName}
                 onChange={(e) => setUsername(e.target.value)}
                 />
+                {correct && <p className='success'>{correct}</p>}
+
             <p className="error"> &nbsp; </p> 
         
 
-            <input className='input-box'
-            type="password" 
-            placeholder='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            />
+                <input className={
+                `input-box ${passwordError ? 
+                'input-success' : isvalid === false ? 
+                'input-error' : ''}`}
+
+                type="password" 
+                placeholder='Password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                />
             <p> &nbsp; </p> 
 
             

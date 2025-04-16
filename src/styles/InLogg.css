@@ -29,8 +29,13 @@
     text-shadow: 2px 2px 4px solid black;
     color: black;
   }
-  
-.input-correct, .correct {
+
+.success {
+    color: greenyellow;
+}
+
+
+.input-success {
     border: 2px solid green;
     background-color: #e5ffe5;
   }
@@ -38,5 +43,13 @@
   .error {
     color: red;
     text-shadow: 2px 2px 4px solid black;
-    font-weight: bold;
   }
+
+  .input-box {
+    border: 2px solid transparent;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 4px;
+  }
+  
+
