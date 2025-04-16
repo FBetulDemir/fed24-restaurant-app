@@ -1,6 +1,6 @@
 import '../styles/ProductPage.css';	
 import React from 'react';
-import { sushiMenu, makiMenuList } from '../data/produktLists';
+import { sushiMenu, makiMenuList } from '../data/produktLists.js';
 
 const MakiSushi = () => {
 
