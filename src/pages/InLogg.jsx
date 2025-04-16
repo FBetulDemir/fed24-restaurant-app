@@ -11,47 +11,56 @@ function InLogg() {
     const [correct, setCorrect] = useState('')
     const [isvalid, setIsValid] = useState(null)
     const [passwordError, setPasswordError] = useState(false) 
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
     
     // const navigate = useNavigate()
 
     const schema = Joi.object({
-        password: Joi.string().min(6).required,
+        password: Joi.string().min(4).required(),
     })
 
-    const correctPassword = 'Mums'
+    const correctPassword = 'Mums';
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const { error } = schema.validate({ password })
-
-
-
-        if (error) {
+        const { error: joierror} = schema.validate({ password })
+        if (joierror) {
         console.log('Valideringfel', error.details[0].message)
-            setError('Fyll i lösenord korrekt')
+            setError('Minst 4 tecken')
             setIsValid(false)
             setCorrect('')
+            setIsLoggedIn(false)
+            return
 
+            // if (password.length < 4) setPasswordCorrect('true')
 
-            if (password.length < 4) setPasswordError(true)
 
         } else if (password !== correctPassword)  {
-            setError('')
-            setCorrect('')
+            setError('Fel lösenord')
             setIsValid(false)
-
-            setPasswordError(password !== correctPassword)
+            setIsLoggedIn(false)
+            return
+            
         } else {
             setError('')
             setCorrect('')
 
             setPasswordError(false)
-
             setIsValid(true)
-            navigate('/')
+            setIsLoggedIn(true)
+            window.location.href = '/employee'
         }
+
+        setError
+        setIsValid(true)
+
+        setTimeout(() => { 
+            window.location.href = '/employee'
+        }, 1000000000) 
+        
 
     }       
 
@@ -63,7 +72,7 @@ function InLogg() {
             <section className='form'>
                 {error && <p className='error'>{error}</p>}
 
-                <p className="error"> &nbsp; </p> 
+                <p className="error"> </p> 
             
                     <p>Ange ditt lösenord för att logga in</p>
                     <input className={
@@ -81,7 +90,17 @@ function InLogg() {
                  <button className='ghost-button' onClick={handleSubmit} type='submit'>Logga In</button>
             </section>
         </div>
+
+                {isLoggedIn && (
+                    <section className="employee-section">
+                        <h2>Välkommen till Employee-sidan</h2>
+                        <p>Här kan du se intern information eller gå vidare till andra funktioner.</p>
+                    </section>
+            )}
+
     </section>
+
+    
     )
 }
 

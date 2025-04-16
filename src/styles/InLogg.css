@@ -61,9 +61,14 @@
     background: transparent;
     border: 2px solid white;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .ghost-button:hover {
     color: grey;
     border: 2px solid grey;
+}
+
+.employee-section {
+    color: white;
 }
