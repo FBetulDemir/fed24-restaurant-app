@@ -1,5 +1,5 @@
 import { useParams } from 'react-router'
-import {ProductMaki} from '../pages/ProductMaki'
+import MakiSushi from '../pages/ProductMaki'
 
 const Menu = () => {
     const { menuId } = useParams()
@@ -7,7 +7,7 @@ const Menu = () => {
         <div className="menu">
             <h1>Vår meny </h1>
             <h2>Sushi</h2>
-            <ProductMaki />
+            <MakiSushi />
 
             <h2>Sashimi</h2>
                 <ul>
