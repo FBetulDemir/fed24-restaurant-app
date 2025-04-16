@@ -1,10 +1,10 @@
-import { useMenuStore } from '../stores/menuStore';
+import { store } from '../stores/store';
 import Header from '../components/Header';
 import '../styles/Admin.css';
 
 function Admin() {
-  const menuItems = useMenuStore((state) => state.menuItems);
-  const deleteMenu = useMenuStore((state) => state.deleteMenu);
+  const menuItems = store((state) => state.menuItems);
+  const deleteMenu = store((state) => state.deleteMenu);
 
   const handleDelete = async (id) => {
     if (window.confirm('คุณแน่ใจหรือไม่ว่าต้องการลบเมนูนี้?')) {
