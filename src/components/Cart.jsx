@@ -1,4 +1,4 @@
-import "./cart.css";
+import "../styles/Cart.css";
 
 //1. Skapa grupper/arrays eventuellt
 
