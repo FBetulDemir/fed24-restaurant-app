@@ -1,1 +1,86 @@
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .admin-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a1a;
+  }
+  
+  .main-content {
+    display: flex;
+    flex: 1;
+    margin: 20px;
+    gap: 20px;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #d3d3d3;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+  }
+  
+  .sidebar-btn:hover {
+    background-color: #c0c0c0;
+  }
+  
+  .menu-list {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .menu-list ul {
+    list-style: none;
+  }
+  
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .menu-item span {
+    font-size: 16px;
+  }
+  
+  .menu-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .action-btn img {
+    width: 20px;
+    height: 20px;
+  }

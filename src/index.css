@@ -1,0 +1,43 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2a2a2a;
+    padding: 10px 20px;
+    color: white;
+  }
+  
+  header nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  header img {
+    width: 60px;
+    height: auto;
+  }
+  
+  header a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  header a:hover {
+    color: #d4af37;
+  }
+  
+  header nav::before {
+    content: 'MENU ▼';
+    font-size: 14px;
+  }
+  
+  header nav::after {
+    content: url('/path-to-profile-icon.png');
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ff99cc;
+  }
