@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import { useMenuStore } from './stores/menuStore';
+import { store } from './stores/store';
 import Admin from './pages/Admin';
 
 function App() {
-  const fetchMenu = useMenuStore((state) => state.fetchMenu);
+  const fetchMenu = store((state) => state.fetchMenu);
 
   useEffect(() => {
     fetchMenu();
