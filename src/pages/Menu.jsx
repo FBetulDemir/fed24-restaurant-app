@@ -1,4 +1,5 @@
 import { useParams } from 'react-router'
+import Receipt from './receipt';
 
 const Menu = () => {
     const { menuId } = useParams()

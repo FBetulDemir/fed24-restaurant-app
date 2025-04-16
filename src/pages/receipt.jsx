@@ -1,6 +1,7 @@
 import React from 'react';
 import receiptImg from "../assets/receipt.png";
 import "../styles/receipt.css";
+import { useParams } from "react-router"
 
 const testCart = [
 	{ name: "Maki roll", quantity: 12, price: 45 },
@@ -17,11 +18,14 @@ const total = testCart.reduce((sum, item) => {
 const moms = total * 0.25;
 const totalMedMoms = total + moms;
 
+
 const Receipt = () => {
-  return (
-	
+	const { receiptId } = useParams()
+	return (
+
     <div className="receipt-layout">
       <div className="receipt-wrapper">
+	  { receiptId ? <p> kvitto </p> : <p>Page not found</p>}
         <img src={receiptImg} alt="receipt" className="receipt-bg" />
         <section className="receipt-container"> 
         	<h2> Tack för din beställning! </h2>

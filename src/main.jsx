@@ -6,6 +6,7 @@ import { createHashRouter, RouterProvider } from 'react-router'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Menu from './pages/Menu.jsx'
+import receipt from './pages/receipt.jsx'
 // import { HashRouter } from 'react-router'
 
 
@@ -30,6 +31,10 @@ const router = createHashRouter(
         {
           path: '/pages/orderOnline/:orderId?',
           Component: Menu,
+        },
+        {
+          path: '/pages/receipt/:receiptId?',
+          Component: receipt,
         }
         
       ]
