@@ -1,6 +1,6 @@
 import "./cart.css";
-
-//1. Skapa grupper/arrays eventuellt
+import "./CartFunctions";
+import { decreaseNumber, increaseNumber, numbers } from "./CartFunctions";
 
 const Cart = () => {
   return (
@@ -15,9 +15,9 @@ const Cart = () => {
             <p id="description"> {"beskrivning"} </p>
           </div>
           <div className="btns">
-            <button id="addBtn">LÄGG TILL</button>
+            <button onClick={() => numbers(increaseNumber)}>LÄGG TILL</button>
             <div id="counter">0</div>
-            <button id="subBtn">TA BORT</button>
+            <button onClick={() => numbers(decreaseNumber)}>TA BORT</button>
           </div>
         </div>
       </section>
