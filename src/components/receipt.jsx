@@ -13,6 +13,7 @@ const total = testCart.reduce((sum, item) => {
 }, 0);
 
 // plocka bort hårdkodad testcart och lägg till den data so mvi skapar tillsammans
+// lägga till : <Route path="/kvitto" element={<Receipt />} /> i app.jsx
 const moms = total * 0.25;
 const totalMedMoms = total + moms;
 
