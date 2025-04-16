@@ -3,6 +3,7 @@ import './App.css'
 import './index.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Receipt from './components/receipt'
 
 function App() {
   
