@@ -1,16 +1,10 @@
-import { Navigate } from 'react-router-dom';
 import { useMenuStore } from '../stores/menuStore';
 import Header from '../components/Header';
 import '../styles/Admin.css';
 
 function Admin() {
-  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
   const menuItems = useMenuStore((state) => state.menuItems);
   const deleteMenu = useMenuStore((state) => state.deleteMenu);
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
-  }
 
   const handleDelete = async (id) => {
     if (window.confirm('คุณแน่ใจหรือไม่ว่าต้องการลบเมนูนี้?')) {
@@ -31,7 +25,6 @@ function Admin() {
           <h2>Welcome Employee!</h2>
           <button className="sidebar-btn">NEW MENU</button>
           <button className="sidebar-btn">EDIT MENU</button>
-          {/* ลบ <Logout /> ออก */}
         </aside>
         <main className="menu-list">
           {menuItems.length === 0 ? (
