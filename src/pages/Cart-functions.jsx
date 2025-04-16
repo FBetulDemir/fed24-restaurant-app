@@ -2,30 +2,8 @@
 
 import React, { useState } from "react";
 
-function WareManager() {
-  const [wares, setWares] = useState([
-    { id: 1, name: "-", quantity: 0 },
-    { id: 2, name: "-", quantity: 0 },
-  ]);
+function addWare() {}
 
-  const addWare = (id) => {
-    setWares((prev) =>
-      prev.map((ware) =>
-        ware.id === id ? { ...ware, quantity: ware.quantity + 1 } : ware
-      )
-    );
-  };
+function remWare() {}
 
-  const removeWare = (id) => {
-    setWares((prev) =>
-      prev.map((ware) =>
-        ware.id === id && ware.quantity > 0
-          ? { ...ware, quantity: ware.quantity - 1 }
-          : ware
-      )
-    );
-  };
-
-
-
-
+function countOfWares() {}
