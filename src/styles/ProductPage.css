@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.product-page {
+    display: flex;
+    background-color: rgba(36, 34, 34, 1);
+    color: white;
+    
+    
+    .product-price-descrip-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .product-.product-image-sides-container {
+        margin: 3em 0 0 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+}
+
+.product-image {
+    border-radius: 1em;
+}
+
+.product-title {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 2em 0 2em 0;
+}
+.product-description {
+    margin-bottom: 3em;
+    font-size: 1.2em;
+    padding: 0 1em 0 1em;
+}
+
+.product-columns {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-price {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.product-sides {
+    margin: 2em 0 3em 0;
+    font-size: 1.2em;
+}
+
+.product-ingredients {
+    font-style: italic;
+}
+
+.product-buy-btn, .product-extra-btn {
+    background-color: rgba(24, 24, 24, 0.5);
+    color: rgba(239, 231, 210, 1);
+    border-radius: 0.5em;
+    padding: 0.5em 2em 0.5em 2em;
+    font-weight: bold;
+    border: 2px solid rgba(239, 231, 210, 0.15);
+    cursor: pointer;
+}
+
+.product-buy-btn {
+    margin-right: 0.5em;
+}
+.product-extra-btn {
+    margin-left: 0.5em;
+}
+
+
+
+
+
+.product-image {
+    width: 770px; /* Default size for high-resolution screens */
+    height: auto;
+  }
+  
+  /* For screens with a max-width of 1200px */
+  @media (max-width: 1264px) {
+    .product-image {
+      width: 600px;
+    }
+  }
+  
+
+  @media (max-width: 1058) {
+    .product-image {
+      width: 700px;
+    }
+    .product-page {
+      flex-direction: column; /* Stack elements vertically */
+      align-items: center; /* Center align items */
+    }
+  }
+  
+  /* For very small screens */
+  @media (max-width: 480px) {
+    .product-image {
+      width: 100%; /* Full width for small screens */
+    }
+  }

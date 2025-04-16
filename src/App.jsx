@@ -1,4 +1,4 @@
-import './App.css'
+import './styles/App.css'
 import MakiSushi from './pages/ProductMaki'
 
 function App() {

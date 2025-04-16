@@ -1,3 +1,4 @@
+import '../styles/ProductPage.css';	
 import React from 'react';
 import { sushiMenu, makiMenuList } from '../data/produktLists';
 
@@ -7,12 +8,20 @@ const MakiSushi = () => {
 
     return (
         <section className="product-page">
-            <h2 className="product-title">Maki Sushi (8 bitar)</h2>
-            <div className="product-container">
+            
+
+            <div className="product-img-sides-container">
                 <img src={makiSushi.image} alt={makiSushi.name} className="product-image" />
+                <p className="product-sides">{makiSushi.sides}</p>
+            </div>
+            
+            
+            <div className="product-price-descrip-container">
+                
+                <h2 className="product-title">Maki Sushi (8 bitar)</h2>
                 <p className="product-description">{makiSushi.description}</p>
                 {makiMenuList.map((maki, index) => (
-                    <div key={index} className="product-price-container">
+                    <div key={index} className="product-price">
                         <p className="product-name">
                             <button className="product-buy-btn">Lägg till</button>
                              {maki.name} {maki.price}:- 
@@ -22,12 +31,15 @@ const MakiSushi = () => {
                                 </>
                             )}</p>
                             {maki.ingredients && (
-                                <p className="product-ingredients">{maki.ingredients.join(", ")}</p>
+                                <p className="product-ingredients">({maki.ingredients.join(", ")})</p>
                         )}
                     </div>
                 ))}
-                <p className="product-sides">{makiSushi.sides}</p>
+
             </div>
+                
+                
+        
         </section>
     );
 };
