@@ -80,6 +80,24 @@ const sashimiMenuList = [
     }
 ];
 
+const drinksMenuList = [
+    { name: "Pepsi Max", volume: "0.33l", price: 20 },
+    { name: "Coca-Cola", volume: "0.33l", price: 20 },
+    { name: "Fanta Orange", volume: "0.33l", price: 20 },
+    { name: "Sprite", volume: "0.33l", price: 20 },
+    { name: "Ramlösa Citrus", volume: "0.5l", price: 25 },
+    { name: "Loka Naturell", volume: "0.5l", price: 25 },
+    { name: "Apelsinjuice", volume: "0.25l", price: 30 },
+    { name: "Äppeljuice", volume: "0.25l", price: 30 },
+    { name: "Ramune Yuzu", volume: "0.2l", price: 35 },
+    { name: "Ananasjuice", volume: "0.25l", price: 35 },
+    { name: "San Pellegrino Limonata", volume: "0.33l", price: 28 },
+    { name: "San Pellegrino Aranciata", volume: "0.33l", price: 28 },
+    { name: "Iskaffe", volume: "0.3l", price: 40 },
+    { name: "Japanskt grönt te", volume: "0.5l", price: 30 },
+    { name: "Kombucha Original", volume: "0.33l", price: 45 }
+];
+
 const sushiMenu = [
     {
         name: "Maki Sushi",
@@ -98,7 +116,14 @@ const sushiMenu = [
         description: "Sashimi är tunna skivor av färsk rå fisk eller skaldjur, såsom lax, tonfisk eller hälleflundra, serverade utan ris. Det är en ren och minimalistisk rätt som fokuserar på råvarornas kvalitet och smak, ofta presenterad med vacker estetik",
         sides: "5 bitar serveras med sojasås, wasabi, daikon och miso-soppa",
         image: "/src/assets/sashimi.jpg"
-    }
+    },
+
+    {
+    name: "Drycker",
+    description: "Ett urval av uppfriskande drycker, inklusive japanskt grönt te, och alkoholfria alternativ som ramune. Perfekt för att komplettera din måltid med autentiska japanska smaker.",
+    sides: "Serveras kylda eller varma beroende på dryck, med möjlighet till påfyllning för te.",
+    image: "/src/assets/drinks.jpg"
+}
 ];
 
-export { makiMenuList, nigiriMenuList, sashimiMenuList, sushiMenu };
+export { makiMenuList, nigiriMenuList, sashimiMenuList, drinksMenuList, sushiMenu };
