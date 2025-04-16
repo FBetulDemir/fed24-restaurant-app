@@ -1,4 +1,5 @@
 import './App.css'
+import CartApiTest from './components/CartApiTest'
 
 function App() {
   
@@ -11,6 +12,7 @@ function App() {
       </header>
       <main>
         
+		<CartApiTest />
 
       </main>
       <footer>
