@@ -1,4 +1,5 @@
 import Awards from "../components/Awards";
+import LandingMenuSushi from "../components/LandingMenuSushi";
 import MainBanner from "../components/MainBanner";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <div>
       <MainBanner />
       <Awards />
+      <LandingMenuSushi />
     </div>
   );
 }
