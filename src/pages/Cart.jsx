@@ -1,53 +1,47 @@
-import './cart.css'
+import "./cart.css";
 
 //1. Skapa grupper/arrays eventuellt
 
-const Cart = () =>{
-	return (
-		<main>
-			<header></header>
-	<h1 id = "your-order">Din Beställning</h1>
-<section className = "box">
-<div id = "produkt1">
-	<h2 id = "title">Sushi 1</h2>
-	<div className = "desPic">
-	<img id = "pics" src="-" alt="Bild på sushi" />
-	<p id = "description"> {"beskrivning"} </p>
-	</div>
-	<div className = "btns">
-	<button id = "addBtn">LÄGG TILL</button>
-	<div id = "counter">0</div>
-	<button id = "subBtn">TA BORT</button>
-	</div>
-</div>
-</section>
+const Cart = () => {
+  return (
+    <main>
+      <header></header>
+      <h1 id="your-order">Din Beställning</h1>
+      <section className="box">
+        <div id="produkt1">
+          <h2 id="title">Sushi 1</h2>
+          <div className="desPic">
+            <img id="pics" src="-" alt="Bild på sushi" />
+            <p id="description"> {"beskrivning"} </p>
+          </div>
+          <div className="btns">
+            <button id="addBtn">LÄGG TILL</button>
+            <div id="counter">0</div>
+            <button id="subBtn">TA BORT</button>
+          </div>
+        </div>
+      </section>
 
+      <section id="priceOrder">
+        <div className="prices">
+          <div id="price-numbers">{"PRIS EX MOMS"} KR</div>
+          <p> 25% {"moms-priset"}</p>
+          <div id="totalPrice">Totalt: {"PRIS INK MOMS"} KR</div>
+        </div>
 
-<section id = "priceOrder">
+        <div className="orderNr">
+          <p id="numbers"> ORDERNUMMER# {123456}</p>
+          <button id="cancelOrdBtn"> ÅNGRA </button>
+        </div>
+      </section>
 
-	<div className = "prices">
-	<div id = "price-numbers">{"PRIS EX MOMS"} KR</div>
-	<p> 25% {"moms-priset"}</p>
-	<div id = "totalPrice">Totalt: {"PRIS INK MOMS"} KR</div>
-	</div>
-
-	<div className = "orderNr">
-		<p id = "numbers"> ORDERNUMMER# {123456}</p>
-		<button id = "cancelOrdBtn"> ÅNGRA </button>
-	</div>
-
-
-</section>
-
-
-	<button id = "processBtn">GÅ VIDARE</button>
-<footer></footer>
-</main>
-	)
-}
+      <button id="processBtn">GÅ VIDARE</button>
+      <footer></footer>
+    </main>
+  );
+};
 
 //2. Fånga upp de genom classname
-
 
 //4. Skapa en function för lägg till/ta bort och koppla samman den med räknaren
 
@@ -67,4 +61,4 @@ const Cart = () =>{
 
 //12. Sista sidan skall du kunna se ditt ordernummer (ingen ångra knapp), vad du har valt för betalningssätt, totalpris och sedan två rutor där under där den ene ger dig en QR kod till kvittot - "tack för din beställning" och under den en ruta som räknar ner tid från ca 10 minuter, ge den ett random-spann mellan 15-10 minuter ish borde räcka.
 
-export default Cart
+export default Cart;
