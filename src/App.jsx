@@ -1,23 +1,24 @@
-import './App.css'
+import { useEffect } from 'react';
+import { HashRouter, Routes, Route } from 'react-router-dom';
+import { useMenuStore } from './stores/menuStore';
+import Admin from './pages/Admin';
 
 function App() {
-  
+  const fetchMenu = useMenuStore((state) => state.fetchMenu);
+
+  useEffect(() => {
+    fetchMenu();
+  }, [fetchMenu]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to ISushi</h1>
-        
-      </header>
-      <main>
-        
-
-      </main>
-      <footer>
-        <p>&copy; 2025 ISushi. Alla rättigheter förbehållna. Integritetspolicy | Användarvillkor</p>
-      </footer>
-    </div>
-  )
+    <HashRouter>
+      <Routes>
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/" element={<div>Home Page</div>} />
+        <Route path="/menu" element={<div>Menu Page</div>} />
+      </Routes>
+    </HashRouter>
+  );
 }
 
-export default App
+export default App;
