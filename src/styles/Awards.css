@@ -1,0 +1,31 @@
+.awards-wrapper{
+    display: flex;
+    justify-content: space-around;
+    padding: 3em 2em;
+    background-color: #2C2B2B;
+    color: #F5F2EA;
+    line-height: 2;
+
+    .award-card{
+        background-color: transparent;
+        padding: 2em;
+        border: 0.5px solid #EFE7D2;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+        text-align: center;
+        /* &:hover{
+            transform: scale(1.05);
+        } */
+        h3{
+            margin-bottom: 1em;
+            color: #D9BF77;
+            font-size: 24px;
+        }
+        .card-subtitle{
+            text-transform: uppercase;
+            font-weight: lighter;
+            font-size: 14px;
+        }
+    }
+}
