@@ -27,18 +27,16 @@ function InLogg() {
         e.preventDefault()
 
         const { error: joierror} = schema.validate({ password })
+
         if (joierror) {
-        console.log('Valideringfel', error.details[0].message)
+             console.log('Valideringfel', joierror.details[0].message)
             setError('Minst 4 tecken')
             setIsValid(false)
-            setCorrect('')
             setIsLoggedIn(false)
             return
-
-            // if (password.length < 4) setPasswordCorrect('true')
-
-
-        } else if (password !== correctPassword)  {
+            }  
+            
+        if (password !== correctPassword)  {
             setError('Fel lösenord')
             setIsValid(false)
             setIsLoggedIn(false)
@@ -68,7 +66,6 @@ function InLogg() {
     return (
         <section className='blurp'> 
         <div className='sign-section'>
-            <h3>LOGG IN</h3>
             <section className='form'>
                 {error && <p className='error'>{error}</p>}
 
