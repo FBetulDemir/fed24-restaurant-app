@@ -71,4 +71,7 @@
 
 .employee-section {
     color: white;
+    background-color: rgb(86, 86, 86);
+    padding: 10px;
+    width: 300px;
 }

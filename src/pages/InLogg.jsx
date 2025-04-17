@@ -20,7 +20,7 @@ function InLogg() {
         password: Joi.string().min(4).required(),
     })
 
-    const correctPassword = 'Mums';
+    const correctPassword = 'mums'
 
 
     const handleSubmit = (e) => {
@@ -49,7 +49,6 @@ function InLogg() {
             setPasswordError(false)
             setIsValid(true)
             setIsLoggedIn(true)
-            window.location.href = '/employee'
         }
 
         setError
@@ -73,7 +72,7 @@ function InLogg() {
             
                     <p>Ange ditt lösenord för att logga in</p>
                     <input className={
-                    `input-box ${passwordError ? 
+                    `input-box ${isvalid === true ? 
                     'input-success' : isvalid === false ? 
                     'input-error' : ''}`}
 
@@ -90,8 +89,10 @@ function InLogg() {
 
                 {isLoggedIn && (
                     <section className="employee-section">
-                        <h2>Välkommen till Employee-sidan</h2>
-                        <p>Här kan du se intern information eller gå vidare till andra funktioner.</p>
+                        <h2>Välkommen! Du är nu inloggad!</h2>
+                        <p>
+                         Detta är endast en test sida/section för att se så att knappen fungerar fram tills vi routar och lägger ihop våra sidor
+                        </p>
                     </section>
             )}
 

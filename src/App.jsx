@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import InLogg from './pages/inlogg'
-import employee from './pages/employee'
 
 function App() {
   
