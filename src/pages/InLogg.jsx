@@ -69,8 +69,8 @@ function InLogg() {
                 {error && <p className='error'>{error}</p>}
 
                 <p className="error"> </p> 
-            
-                    <p>Ange ditt lösenord för att logga in</p>
+                    <p className='admin'>Admin</p>
+                    {/* <p>Ange ditt lösenord för att logga in</p> */}
                     <input className={
                     `input-box ${isvalid === true ? 
                     'input-success' : isvalid === false ? 

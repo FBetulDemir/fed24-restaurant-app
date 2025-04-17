@@ -3,26 +3,24 @@
     margin: 0;
     padding: 10px;
     height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sign-section {
     background-color: #403b3bd6;
     color: white;
-    margin: 10px;
     padding: 30px;
     width: 300px;
-    margin-left: 50px;
-    margin-top: 50px;
-    border-radius: 5px;
-    border: 2px 2px 3px solid rgb(255, 255, 255);
-    justify-content: center;
-    color: rgb(255, 255, 255);
 }
 
 
 .input-box {
     background-color: #292828;
-    width: 200px;
+    width: 200px;    
+    border: 2px solid rgb(255, 255, 255);
+
 }
 
 .input-error {
@@ -62,6 +60,7 @@
     border: 2px solid white;
     border-radius: 5px;
     cursor: pointer;
+    align-items: center;
 }
 
 .ghost-button:hover {
@@ -74,4 +73,78 @@
     background-color: rgb(86, 86, 86);
     padding: 10px;
     width: 300px;
+}
+
+.admin {
+    color: lightgray;
+    font-style: italic;
+    font-size: 19px;
+    margin-bottom: 4px;
+}
+
+
+
+@media (max-width: 480px) {
+  .sign-section,
+  .employee-section {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .input-box {
+    width: 90%;
+    margin-left: -5px;
+  }
+
+  .ghost-button {
+    width: 50%;
+  }
+
+  .blurp {
+    height: auto;
+    padding: 20px;
+    background-size: cover;
+  }
+}
+
+/* Mellanstor (tablet, ca 750px) */
+@media (min-width: 481px) and (max-width: 900px) {
+  .sign-section,
+  .employee-section {
+    width: 80%;
+    margin: 30px auto;
+  }
+
+  .input-box {
+    width: 90%;
+  }
+
+  .ghost-button {
+    width: 150px;
+  }
+
+  .blurp {
+    height: auto;
+    padding: 30px;
+    background-size: cover;
+  }
+}
+
+/* Större skärmar (minst 1100px) */
+@media (min-width: 1100px) {
+  .sign-section,
+  .employee-section {
+    width: 400px;
+    margin-left: 100px;
+  }
+
+  .ghost-button {
+    width: 150px;
+  }
+
+  .blurp {
+    height: 500px;
+    background-size: cover;
+  }
 }
