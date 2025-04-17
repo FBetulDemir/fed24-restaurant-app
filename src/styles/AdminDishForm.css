@@ -1,0 +1,79 @@
+.form-wrapper{
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+    /* flex-direction: column; */
+    background-color: black;
+    /* gap: 2em; */
+    font-family: 'Forum', serif;
+    .sidebar{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 2em;
+        width: 20%;
+        padding: 4em 2em;
+        margin: 3em 0;
+        border: 1px solid #afaa9c;
+        background-color: #7e7d7c;
+        color: #EFE7D2;
+        h2{
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            text-align: center;
+        }
+    }
+    .form-btn{
+        background-color: transparent;
+        border: 2px solid #EFE7D2;
+        border-radius: 8px;
+        padding: 1em 1.5em;
+        color: #EFE7D2;
+        text-decoration: none;
+        cursor: pointer;
+        &:hover{
+            color: #D9BF77;
+        }
+    }
+
+}
+.form-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    width: 70%;
+    background-color: #7e7d7c;
+    color: #EFE7D2;
+    /* font-size: 1.5em;
+    font-weight: bold; */
+    padding: 4em 2em;
+    margin: 3em 0;
+}
+
+.dish-form{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    gap: 1rem;
+    width: 70%;
+    padding: 4em 2em;
+    border: 1px solid #afaa9c;
+    input {
+        padding: 0.75rem 1rem;
+        border: 1px solid #6b6a66;
+        border-radius: 6px;
+        background-color: #f3f2f2;
+        color: #efe7d2;
+        font-size: 1rem;
+      }
+    
+    input:focus {
+        outline: none;
+        border-color: #efe7d2;
+        box-shadow: 0 0 0 2px #d9bf77;
+    }
+}
+
