@@ -18,6 +18,15 @@ const Awards = () => {
       subtitle: "Topprankad sushi restaurangen",
     }
   ]
+
+  const prev = () => {
+    setCurrentIndex((currentIndex - 1 + awardsData.length) % awardsData.length)
+  }
+
+  const next = () => {
+    setCurrentIndex((currentIndex + 1) % awardsData.length)
+  }
+
   return (
     <div className="awards">
         <div className="awards-wrapper">
@@ -31,6 +40,8 @@ const Awards = () => {
               <p className="card-subtitle">{award.subtitle}</p>
             </div>
           ))}
+            <button className="arrow left" onClick={prev}>←</button>
+            <button className="arrow right" onClick={next}>→</button>
         </div>
     </div>
   );

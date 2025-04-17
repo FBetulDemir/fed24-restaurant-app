@@ -13,7 +13,7 @@ const LandingMenuSushi = () => {
                     varje bit är tillagad med färska råvaror och hantverksskicklighet.
                 </p>
                 <div className="sushi-preview">
-                <h3 className="subtitle-menu-fav">Gästers Favoriter</h3>
+                    <h3 className="subtitle-menu-fav">Gästers Favoriter</h3>
                     <ul>
                         <li>Lax Nigiri</li>
                         <li>Spicy Tuna Maki</li>

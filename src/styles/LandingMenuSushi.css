@@ -27,6 +27,11 @@
             font-size: 1.5em;
             margin-bottom: 1em;
         }
+        .subtitle-menu-fav{
+            font-size: 1.2em;
+            margin-bottom: 1em;
+            text-decoration: underline;
+        }
         .sushi-button{
             background-color: transparent;
             border: 2px solid #EFE7D2;
