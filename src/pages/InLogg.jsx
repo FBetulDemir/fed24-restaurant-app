@@ -6,59 +6,58 @@ import { useState } from 'react'
 
 
 function InLogg() {
-    const [userName, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [correct, setCorrect] = useState('')
     const [isvalid, setIsValid] = useState(null)
-    const [userNameError, setUserNameError] = useState(false)
     const [passwordError, setPasswordError] = useState(false) 
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
     
     // const navigate = useNavigate()
 
     const schema = Joi.object({
-        userName: Joi.string().min(3).required,
-        password: Joi.string().min(6).required,
+        password: Joi.string().min(4).required(),
     })
 
-    const correctUsername = 'David'
-    const correctPassword = 'Mums'
+    const correctPassword = 'mums'
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const { error } = schema.validate({ userName, password })
+        const { error: joierror} = schema.validate({ password })
 
-
-
-        if (error) {
-        console.log('Valideringfel', error.details[0].message)
-            setError('Fyll i användarnamn och lösenord korrekt')
+        if (joierror) {
+             console.log('Validationerors', joierror.details[0].message)
+            setError('Minst 4 tecken')
             setIsValid(false)
-            setCorrect('')
-
-
-            if (userName.length < 3) setUserNameError(true)
-            if (password.length < 4) setPasswordError(true)
-
-        } else if (userName !== correctUsername || password !== correctPassword)  {
-            setError('')
-            setCorrect('')
+            setIsLoggedIn(false)
+            return
+            }  
+            
+        if (password !== correctPassword)  {
+            setError('Fel lösenord')
             setIsValid(false)
-
-            setUserNameError(userName !== correctUsername)
-            setPasswordError(password !== correctPassword)
+            setIsLoggedIn(false)
+            return
+            
         } else {
             setError('')
             setCorrect('')
 
-            setUserNameError(false)
             setPasswordError(false)
-
             setIsValid(true)
-            navigate('/')
+            setIsLoggedIn(true)
         }
+
+        setError
+        setIsValid(true)
+
+        setTimeout(() => { 
+            window.location.href = '/employee'
+        }, 1000000000) 
+        
 
     }       
 
@@ -66,47 +65,40 @@ function InLogg() {
     return (
         <section className='blurp'> 
         <div className='sign-section'>
-            <h3>LOGG IN</h3>
             <section className='form'>
-                
-                
-            {error && <p className='error'>{error}</p>}
+                {error && <p className='error'>{error}</p>}
 
-                <input className={
-                `input-box ${userNameError ? 
-                'input-success' : isvalid === false ? 
-                'input-error' : ''}`}
-
-                type='text' 
-                placeholder='Username'
-                value={userName}
-                onChange={(e) => setUsername(e.target.value)}
-                />
-                {correct && <p className='success'>{correct}</p>}
-
-            <p className="error"> &nbsp; </p> 
-        
-
-                <input className={
-                `input-box ${passwordError ? 
-                'input-success' : isvalid === false ? 
-                'input-error' : ''}`}
-
-                type="password" 
-                placeholder='Password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                />
-            <p> &nbsp; </p> 
-
+                <p className="error"> </p> 
             
+                    <p>Ange ditt lösenord för att logga in</p>
+                    <input className={
+                    `input-box ${isvalid === true ? 
+                    'input-success' : isvalid === false ? 
+                    'input-error' : ''}`}
+
+                    type="password" 
+                    placeholder='Lösenord'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    />
+                <p> &nbsp; </p> 
+                
+                 <button className='ghost-button' onClick={handleSubmit} type='submit'>Logga In</button>
             </section>
-
-            <button className='ghost-button' onClick={handleSubmit} type='submit'>Sign In</button>
-
-            <p className='text-underline'>Forgotten password</p>
         </div>
+
+                {isLoggedIn && (
+                    <section className="employee-section">
+                        <h2>Välkommen! Du är nu inloggad!</h2>
+                        <p>
+                         Detta är endast en test sida/section för att se så att knappen fungerar fram tills vi routar och lägger ihop våra sidor
+                        </p>
+                    </section>
+            )}
+
     </section>
+
+    
     )
 }
 

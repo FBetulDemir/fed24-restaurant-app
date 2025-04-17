@@ -10,17 +10,19 @@
     color: white;
     margin: 10px;
     padding: 30px;
-    width: 200px;
+    width: 300px;
     margin-left: 50px;
     margin-top: 50px;
+    border-radius: 5px;
+    border: 2px 2px 3px solid rgb(255, 255, 255);
+    justify-content: center;
+    color: rgb(255, 255, 255);
 }
 
-.text-underline {
-    text-decoration: underline;
-}
 
-.text-underline:hover {
-    color: #787878;
+.input-box {
+    background-color: #292828;
+    width: 200px;
 }
 
 .input-error {
@@ -52,4 +54,24 @@
     border-radius: 4px;
   }
   
+.ghost-button {
+    color: white;
+    width: 110px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
+.ghost-button:hover {
+    color: grey;
+    border: 2px solid grey;
+}
+
+.employee-section {
+    color: white;
+    background-color: rgb(86, 86, 86);
+    padding: 10px;
+    width: 300px;
+}
