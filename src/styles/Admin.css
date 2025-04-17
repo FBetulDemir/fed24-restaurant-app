@@ -1,86 +1,279 @@
+/* รีเซ็ต CSS พื้นฐาน */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  .admin-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: #1a1a1a;
-  }
-  
-  .main-content {
-    display: flex;
-    flex: 1;
-    margin: 20px;
-    gap: 20px;
-  }
-  
-  .sidebar {
-    width: 250px;
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  .sidebar h2 {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .sidebar-btn {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #d3d3d3;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: left;
-  }
-  
-  .sidebar-btn:hover {
-    background-color: #c0c0c0;
-  }
-  
-  .menu-list {
-    flex: 1;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  .menu-list ul {
-    list-style: none;
-  }
-  
-  .menu-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .menu-item span {
-    font-size: 16px;
-  }
-  
-  .menu-actions {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .action-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .action-btn img {
-    width: 20px;
-    height: 20px;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #1F2525;
+  color: #333;
+}
+
+/* Header */
+.admin-header {
+  background-color: #2E3535;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-header .menu-dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.admin-header .menu-dropdown button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.admin-header .menu-dropdown svg {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+}
+
+.admin-header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: 2px solid #D4AF37;
+  padding: 0.5rem 1rem;
+}
+
+.admin-header .profile-icon {
+  width: 2rem;
+  height: 2rem;
+  background-color: #F4A7B9;
+  border-radius: 50%;
+}
+
+/* Main Layout */
+.admin-container {
+  display: flex;
+  min-height: calc(100vh - 64px); /* ลบความสูงของ header */
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 20%;
+  background-color: #D3D3D3;
+  padding: 1rem;
+}
+
+.admin-sidebar h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.admin-sidebar button {
+  width: 100%;
+  background-color: #A9A9A9;
+  color: white;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.admin-sidebar button:hover {
+  background-color: #8B8B8B;
+}
+
+/* Main Content */
+.admin-main {
+  width: 80%;
+  padding: 1rem;
+}
+
+.admin-content {
+  background-color: #E8ECEF;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+
+.admin-menu-list {
+  width: 50%;
+  padding-right: 1rem;
+}
+
+.admin-menu-form {
+  width: 50%;
+  padding-left: 1rem;
+}
+
+/* Menu List */
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.menu-item span {
+  font-size: 1rem;
+}
+
+.menu-item .actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.menu-item .actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-item .actions svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #666;
+}
+
+.menu-item .actions button:hover svg {
+  color: #333;
+}
+
+.menu-empty {
+  color: #666;
+  font-style: italic;
+}
+
+/* Menu Form */
+.menu-form {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.menu-form input,
+.menu-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.menu-form textarea {
+  height: 80px;
+  resize: none;
+}
+
+.menu-form .ingredient-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.menu-form .ingredient-group input {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.menu-form .ingredient-group button {
+  margin-left: 0.5rem;
+  background-color: #A9A9A9;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.menu-form .ingredient-group button:hover {
+  background-color: #8B8B8B;
+}
+
+.menu-form .add-ingredient {
+  background-color: #A9A9A9;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.menu-form .add-ingredient:hover {
+  background-color: #8B8B8B;
+}
+
+.menu-form .image-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.menu-form .image-group input {
+  width: 75%;
+  margin-bottom: 0;
+}
+
+.menu-form .image-group .image-preview {
+  width: 25%;
+  margin-left: 1rem;
+}
+
+.menu-form .image-group .image-preview img,
+.menu-form .image-group .image-placeholder {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+}
+
+.menu-form .image-group .image-placeholder {
+  background-color: #E0E0E0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-form .image-group .image-placeholder svg {
+  width: 32px;
+  height: 32px;
+  color: #A9A9A9;
+}
+
+.menu-form button[type="submit"] {
+  width: 100%;
+  background-color: #A9A9A9;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.menu-form button[type="submit"]:hover {
+  background-color: #8B8B8B;
+}
+
+.menu-form-error {
+  color: #e53e3e;
+  margin-top: 1rem;
+}
