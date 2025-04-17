@@ -60,8 +60,8 @@ const Header = () => {
                 <div className="dropdown-content" style={{ display: hamburgerOpen ? 'block' : 'none' }}>
                     <NavLink to="/" className="navlink">HEM</NavLink>
                     <NavLink to="/pages/about" className="navlink">OM</NavLink>
-                    <NavLink to="/pages/menu" className="navlink">
-                        <button className="btn-dark">BOKA BORD</button>
+                    <NavLink to="/pages/login" className="navlink">
+                        <button className="btn-dark">LOGGA IN</button>
                     </NavLink>
                     <NavLink to="/pages/orderOnline" className="navlink">
                         <button className="btn-dark">BESTÄLL ONLINE</button>
@@ -70,7 +70,11 @@ const Header = () => {
                 </div>
                             
                 <ul className="nav-right">
-                    <li><button className="btn-dark">BOKA BORD</button></li>
+                    <li>
+                        <NavLink to="/pages/login" className="navlink">
+                            <button className="btn-dark">LOGGA IN</button>
+                        </NavLink>
+                    </li>
                     <li><button className="btn-dark">BESTÄLL ONLINE</button></li>
                 </ul>
             </nav>

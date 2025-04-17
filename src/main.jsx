@@ -7,6 +7,7 @@ import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Menu from './pages/Menu.jsx'
 import receipt from './pages/receipt.jsx'
+import InLogg from './pages/InLogg.jsx'
 // import { HashRouter } from 'react-router'
 
 
@@ -35,7 +36,11 @@ const router = createHashRouter(
         {
           path: '/pages/receipt/:receiptId?',
           Component: receipt,
-        }
+        },
+        { 
+          path: 'pages/login/:loginId?', 
+          Component: InLogg 
+        },
         
       ]
    }
