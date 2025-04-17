@@ -29,7 +29,7 @@ function InLogg() {
         const { error: joierror} = schema.validate({ password })
 
         if (joierror) {
-             console.log('Valideringfel', joierror.details[0].message)
+             console.log('Validationerors', joierror.details[0].message)
             setError('Minst 4 tecken')
             setIsValid(false)
             setIsLoggedIn(false)
