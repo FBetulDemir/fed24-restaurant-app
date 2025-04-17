@@ -27,5 +27,53 @@
             font-weight: lighter;
             font-size: 14px;
         }
+        .awards-wrapper {
+            position: relative;
+        }
+        
+
     }
+} 
+.arrow{
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .awards-wrapper {
+      position: relative;
+      justify-content: center;
+      padding: 2em 1em;
+    }
+  
+    .award-card {
+      display: none;
+      width: 100%;
+      max-width: 300px;
+    }
+  
+    .award-card.active {
+      display: block;
+    }
+  
+    .arrow {
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        font-size: 2rem;
+        color: #EFE7D2;
+        cursor: pointer;
+        z-index: 10;
+      }
+    
+      .arrow.left {
+        left: 1em;
+        
+      }
+    
+      .arrow.right {
+        right: 1em;
+      }
 }
