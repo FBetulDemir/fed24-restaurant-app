@@ -1,7 +1,9 @@
 import "./cart.css";
-import "./CartFunctions";
-import { decreaseNumber, increaseNumber, numbers } from "./CartFunctions";
-
+import {
+  ButtonClickUp,
+  ButtonClickDown,
+  CounterDisplay,
+} from "./CartFunctions.jsx";
 const Cart = () => {
   return (
     <main>
@@ -15,9 +17,9 @@ const Cart = () => {
             <p id="description"> {"beskrivning"} </p>
           </div>
           <div className="btns">
-            <button onClick={() => numbers(increaseNumber)}>LÄGG TILL</button>
-            <div id="counter">0</div>
-            <button onClick={() => numbers(decreaseNumber)}>TA BORT</button>
+            <ButtonClickUp />
+            <CounterDisplay />
+            <ButtonClickDown />
           </div>
         </div>
       </section>
