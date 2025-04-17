@@ -57,12 +57,12 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
               required
             />
             <button type="button" onClick={() => removeIngredient(index)}>
-              ลบ
+              Remove
             </button>
           </div>
         ))}
         <button type="button" onClick={addIngredient} className="add-ingredient">
-          เพิ่มส่วนผสม
+          Add ingredient
         </button>
       </div>
       <div className="image-group">
