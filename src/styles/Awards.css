@@ -31,17 +31,12 @@
             position: relative;
         }
         
-        .arrow{
-            display: none;
-        }
+
     }
+} 
+.arrow{
+  display: none;
 }
-
-
-
-  
-
-  
 
 @media screen and (max-width: 768px) {
     .awards-wrapper {
