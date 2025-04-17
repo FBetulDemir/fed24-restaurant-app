@@ -8,6 +8,7 @@ const Home = () => {
       <MainBanner />
       <Awards />
       <LandingMenuSushi />
+      
     </div>
   );
 }
