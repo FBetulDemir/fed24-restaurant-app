@@ -1,0 +1,40 @@
+.menu-section {
+    padding: 3rem 2rem;
+    background-color: #1f1e1e;
+    color: #EFE7D2;
+    text-align: center;
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: #e6d6b2;
+        letter-spacing: 0.05em;
+    }
+}
+   
+.drinks-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 2em;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+}
+  
+.drink-item {
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem;
+    border: 2px solid #e6d6b2;
+    border-radius: 10px;
+    h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: #EFE7D2;
+    }
+    p {
+        font-size: 1rem;
+        margin: 0.3rem 0;
+        color: #ccc;
+    }       
+}
+  

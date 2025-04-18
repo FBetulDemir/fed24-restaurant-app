@@ -1,6 +1,6 @@
 import { useParams } from 'react-router'
 import MakiSushi from '../pages/ProductMaki'
-import {makiMenuList, nigiriMenuList, sashimiMenuList, drinksMenuList, sushiMenu} from '../data/produktLists';
+// import {makiMenuList, nigiriMenuList, sashimiMenuList, drinksMenuList, sushiMenu} from '../data/produktLists';
 import SashimiMenu from './SashimiMenu';
 import SushiMenu from './SushiMenu';
 import DrinksMenu from './DrinksMenu';

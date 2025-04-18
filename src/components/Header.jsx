@@ -62,7 +62,7 @@ const Header = () => {
                             <div className="dropdown-content">
                                 <NavLink to="/pages/menu/sushi/:sushiId?" className="navlink" onClick={() => setIsOpen(false)}>Sushi</NavLink>
                                 <NavLink to="/pages/menu/sashimi/:sashimiId?" className="navlink" onClick={() => setIsOpen(false)}>Sashimi</NavLink>
-                                <NavLink to="/pages/menu/drinks/:drinksId?" className="navlink" onClick={() => setIsOpen(false)}>Dryckor</NavLink> 
+                                <NavLink to="/pages/menu/drinks/:drinksId?" className="navlink" onClick={() => setIsOpen(false)}>Drycker</NavLink> 
                             </div>
                         )}
                     </li>

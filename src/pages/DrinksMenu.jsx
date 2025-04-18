@@ -1,4 +1,5 @@
 import { drinksMenuList } from "../data/produktLists";
+import "../styles/DrinksMenu.css";
 
 const DrinksMenu = () => {
   return (

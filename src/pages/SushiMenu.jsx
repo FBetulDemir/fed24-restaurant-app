@@ -1,4 +1,5 @@
 import {makiMenuList, nigiriMenuList} from '../data/produktLists';
+import "../styles/SushiMenu.css";
 
 const SushiMenu = () => {
   return (
