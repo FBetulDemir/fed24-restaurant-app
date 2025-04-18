@@ -44,13 +44,21 @@
 .product-columns {
     display: flex;
     flex-direction: column;
+   
 }
 
 .product-price {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     margin: 1em;
+    width: 30em;
+}
+.product-price-drinks-nigiri {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 1em;
+    width: 28em;
 }
 
 .product-sides {
@@ -60,6 +68,7 @@
 
 .product-ingredients {
     font-style: italic;
+    width: 27em;
 }
 
 .product-buy-btn, .product-extra-btn {
@@ -100,7 +109,9 @@
     margin: 0 0.5em 0 0.5em;
 }
 
-
+.product-length {
+    width: 13em;
+}
 
 .product-image {
     width: 770px;

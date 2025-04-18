@@ -1,5 +1,8 @@
 import './App.css'
 import MakiSushi from './pages/ProductMaki'
+import NigiriSushi from './pages/ProductNigiri'
+import Sashimi from './pages/ProductSashimi'
+import Dricker from './pages/ProductDrinks'
 
 function App() {
   
@@ -12,6 +15,9 @@ function App() {
       </header>
       <main>
         <MakiSushi />
+        <NigiriSushi />
+        <Sashimi />
+        <Dricker />
 
       </main>
       <footer>
