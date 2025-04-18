@@ -1,13 +1,19 @@
 import { useParams } from 'react-router'
 import MakiSushi from '../pages/ProductMaki'
+import {makiMenuList, nigiriMenuList, sashimiMenuList, drinksMenuList, sushiMenu} from '../data/produktLists';
+import SashimiMenu from './SashimiMenu';
+import SushiMenu from './SushiMenu';
+import DrinksMenu from './DrinksMenu';
+  
 
 const Menu = () => {
     const { menuId } = useParams()
     return (
         <div className="menu">
             <MakiSushi />
-
-            { menuId  ? <p>Här kan du se vår sushi och sashimi.</p> : <p>Page not found</p>}
+            <SushiMenu />
+            <SashimiMenu />
+            <DrinksMenu />
             
         </div>
     )

@@ -114,6 +114,25 @@
     background-color: #e6d6b2;
 }
 
+.cart-icon-wrapper {
+    position: relative;
+}
+  
+.cart-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: #D9BF77;
+    color: #2A2828;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
+    z-index: 10;
+}
+
+  
+
 
 @media screen and (max-width: 768px) {
     .nav {

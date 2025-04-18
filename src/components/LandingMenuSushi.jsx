@@ -2,6 +2,7 @@ import sushiMenu from "../assets/sushi-menu.png";
 import "../styles/LandingMenuSushi.css";
 import sashimiMenu from "../assets/sashimi-menu.png";
 import { useMenuStore } from "../stores/menuStore.js";
+import { NavLink } from "react-router";
 
 const LandingMenuSushi = () => {
     const menuItems = useMenuStore((state) => state.menuItems);
@@ -31,7 +32,10 @@ const LandingMenuSushi = () => {
                         <li>Dragon Roll</li>
                     </ul>
                 </div>
-                <button className="sushi-button">UPPTÄCK HELA MENYN</button>
+                <NavLink to="/pages/menu/menu/" className="navlink">
+                    <button className="sushi-button">UPPTÄCK HELA MENYN</button>
+                </NavLink>
+                
             </div>
         </div>
         <div className="sashimi-section">
@@ -48,7 +52,9 @@ const LandingMenuSushi = () => {
                         <li>Hälleflundra Sashimi</li>
                     </ul>
                 </div>
-                <button className="sushi-button">UPPTÄCK HELA MENYN</button>
+                <NavLink to="/pages/menu/menu/" className="navlink">
+                    <button className="sushi-button">UPPTÄCK HELA MENYN</button>
+                </NavLink>
             </div>
             <img src={sashimiMenu} alt="Solmon sashimi in a black plate." />
         </div>
