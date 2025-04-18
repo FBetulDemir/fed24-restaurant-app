@@ -28,6 +28,12 @@
     }
 }
 
+.footer-socials{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1em;
+
+}
 
 @media screen and (max-width: 768px) {
     .footer-section:first-child {

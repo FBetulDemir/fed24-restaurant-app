@@ -15,9 +15,6 @@ const AdminStart = () => {
         <NavLink to="/components/adminNewDish">
             <button className="form-btn">Logga ut</button>
         </NavLink>
-        
-        
-
   </div>
   );
 }
