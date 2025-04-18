@@ -16,10 +16,15 @@
 }
 .navlink-footer, .email-footer{
     color: #e6d6b2;
-    text-decoration: none;
+    text-decoration: underline;
     cursor: pointer;
     &:hover{
-        color: #D9BF77;
+        color: #8993d1;
+        cursor: pointer;
+        transform: translateX(5px);
+    }
+    li{
+        list-style: none;
     }
 }
 
