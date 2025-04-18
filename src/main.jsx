@@ -13,6 +13,7 @@ import SashimiMenu from './pages/SashimiMenu.jsx'
 import DrinksMenu from './pages/DrinksMenu.jsx'
 import Cart from './components/Cart.jsx'
 import OrderOnline from './pages/OrderOnline.jsx'
+import AdminStart from './components/AdminStart.jsx'
 // import { HashRouter } from 'react-router'
 
 
@@ -57,6 +58,10 @@ const router = createHashRouter(
         { 
           path: 'pages/login/:loginId?', 
           Component: InLogg 
+        },
+        { 
+          path: 'components/admin/:adminId?', 
+          Component: AdminStart
         },
         { 
           path: 'components/cart/:cartId?', 

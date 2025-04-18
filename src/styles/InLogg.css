@@ -1,8 +1,12 @@
 .blurp {
     background-image: url('blossom.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
     margin: 0;
     padding: 10px;
-    height: 500px;
+
 }
 
 .sign-section {
@@ -70,8 +74,6 @@
 }
 
 .employee-section {
-    color: white;
-    background-color: rgb(86, 86, 86);
-    padding: 10px;
-    width: 300px;
+    width: 100%;
+    color: #e6d6b2;
 }

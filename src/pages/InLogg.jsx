@@ -1,7 +1,10 @@
 // import { useNavigate } from 'react-router-dom'
 import Joi from 'joi'
 import '../styles/InLogg.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import AdminStart from '../components/AdminStart'
+
+
 
 
 
@@ -59,44 +62,41 @@ function InLogg() {
         }, 1000000000) 
         
 
-    }       
+    }
+   
 
 
     return (
-        <section className='blurp'> 
-        <div className='sign-section'>
-            <section className='form'>
-                {error && <p className='error'>{error}</p>}
+        <section className='blurp' > 
+            <div className='sign-section' style={ isLoggedIn ? { display: 'none' } : { display: 'block' }}>
+                <section className='form'>
+                    {error && <p className='error'>{error}</p>}
 
-                <p className="error"> </p> 
-            
-                    <p>Ange ditt lösenord för att logga in</p>
-                    <input className={
-                    `input-box ${isvalid === true ? 
-                    'input-success' : isvalid === false ? 
-                    'input-error' : ''}`}
-
-                    type="password" 
-                    placeholder='Lösenord'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    />
-                <p> &nbsp; </p> 
+                    <p className="error"> </p> 
                 
-                 <button className='ghost-button' onClick={handleSubmit} type='submit'>Logga In</button>
-            </section>
-        </div>
+                        <p>Ange ditt lösenord för att logga in</p>
+                        <input className={
+                        `input-box ${isvalid === true ? 
+                        'input-success' : isvalid === false ? 
+                        'input-error' : ''}`}
 
-                {isLoggedIn && (
-                    <section className="employee-section">
-                        <h2>Välkommen! Du är nu inloggad!</h2>
-                        <p>
-                         Detta är endast en test sida/section för att se så att knappen fungerar fram tills vi routar och lägger ihop våra sidor
-                        </p>
-                    </section>
+                        type="password" 
+                        placeholder='Lösenord'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        />
+                    <p> &nbsp; </p> 
+                    
+                    <button className='ghost-button' onClick={handleSubmit} type='submit'>Logga In</button>
+                </section>
+            </div> 
+            {isLoggedIn && (
+                <section className="employee-section">
+                    <AdminStart/>
+                </section>
             )}
 
-    </section>
+        </section>
 
     
     )
