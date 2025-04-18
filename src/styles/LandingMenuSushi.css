@@ -47,7 +47,9 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+
+
+@media screen and (max-width: 950px) {
     .landing-menu-sushi {
       .sushi-section,
       .sashimi-section {
@@ -83,5 +85,29 @@
         }
       }
     }
-  }
+}
+
+@media screen and (max-width: 320px) {
+    img {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    h1 {
+      font-size: 1em;
+    }
+
+    p {
+      font-size: 0.6em;
+    }
+
+    li {
+      font-size: 0.3em;
+    }
+
+    .sushi-button {
+      font-size: 0.7em;
+    }
+}
+
   

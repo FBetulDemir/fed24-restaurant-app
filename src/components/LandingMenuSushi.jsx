@@ -19,8 +19,8 @@ const LandingMenuSushi = () => {
             <img src={sushiMenu} alt="Different kind of sushi on a plate with soy souce and chopsticks on the side." />
             <div className="sushi-info">
                 <h1>SUSHI MENU</h1>
-                <p>Upptäck vår noggrant utvalda sushimeny med klassiska favoriter och moderna smaker. Från delikat nigiri till kreativa makirullar – 
-                    varje bit är tillagad med färska råvaror och hantverksskicklighet.
+                <p>Upptäck vår noggrant utvalda sushimeny med klassiska favoriter
+                     och moderna smaker. Från delikat nigiri till kreativa makirullar – varje bit är tillagad med färska råvaror och hantverksskicklighet.
                 </p>
                 <div className="sushi-preview">
                     <h3 className="subtitle-menu-fav">Gästers Favoriter</h3>

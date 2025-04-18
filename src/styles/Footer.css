@@ -3,6 +3,10 @@
     display: flex;
     flex-direction: column;
     color: #e6d6b2;
+    position: relative;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 .footer-content {
@@ -18,3 +22,26 @@
         color: #D9BF77;
     }
 }
+
+
+@media screen and (max-width: 768px) {
+    .footer-section:first-child {
+      display: none;
+    }
+  
+    .footer-content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .footer-section {
+      margin-bottom: 1.5em;
+    }
+  
+    .footer-bottom {
+      text-align: center;
+      padding: 1em;
+    }
+}
+  

@@ -14,6 +14,7 @@ import DrinksMenu from './pages/DrinksMenu.jsx'
 import Cart from './components/Cart.jsx'
 import OrderOnline from './pages/OrderOnline.jsx'
 import AdminStart from './components/AdminStart.jsx'
+import AdminDishForm from './components/AdminDishForm.jsx'
 // import { HashRouter } from 'react-router'
 
 
@@ -62,6 +63,10 @@ const router = createHashRouter(
         { 
           path: 'components/admin/:adminId?', 
           Component: AdminStart
+        },
+        { 
+          path: 'components/adminNewDish/:adminNewDishId?', 
+          Component: AdminDishForm
         },
         { 
           path: 'components/cart/:cartId?', 
