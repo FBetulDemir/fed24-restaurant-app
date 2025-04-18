@@ -25,7 +25,6 @@ const Receipt = () => {
 
     <div className="receipt-layout">
       <div className="receipt-wrapper">
-			{receiptId ? <p> kvitto </p> : <p>Page not found</p>}
 			<img src={receiptImg} alt="receipt" className="receipt-bg" />
 			<section className="receipt-container"> 
 				<h2> Tack för din beställning! </h2>
