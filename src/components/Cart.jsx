@@ -2,9 +2,12 @@
 // import "./CartFunctions";
 // import { decreaseNumber, increaseNumber, numbers } from "./CartFunctions";
 
+import { NavLink } from "react-router";
+
+
 const Cart = () => {
   return (
-    <main>
+    <div>
       <header></header>
       <h1 id="your-order">Din Beställning</h1>
       <section className="box">
@@ -35,9 +38,8 @@ const Cart = () => {
         </div>
       </section>
 
-      <button id="processBtn">GÅ VIDARE</button>
-      <footer></footer>
-    </main>
+      <NavLink to="/pages/receipt/:receiptId?"><button id="processBtn">GÅ VIDARE</button></NavLink>
+    </div>
   );
 };
 

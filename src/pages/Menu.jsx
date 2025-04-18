@@ -10,7 +10,6 @@ const Menu = () => {
     const { menuId } = useParams()
     return (
         <div className="menu">
-            <MakiSushi />
             <SushiMenu />
             <SashimiMenu />
             <DrinksMenu />

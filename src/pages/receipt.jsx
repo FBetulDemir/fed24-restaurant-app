@@ -25,26 +25,26 @@ const Receipt = () => {
 
     <div className="receipt-layout">
       <div className="receipt-wrapper">
-	  { receiptId ? <p> kvitto </p> : <p>Page not found</p>}
-        <img src={receiptImg} alt="receipt" className="receipt-bg" />
-        <section className="receipt-container"> 
-        	<h2> Tack för din beställning! </h2>
-		  	<div className="receipt-divider"></div>
-          	<p className="order-number">Order nummer: #1235566</p>
-          	<div className="receipt-items">
-				{testCart.map((item, index) => (
-				<div className="receipt-item" key={index}>
-				<p>{item.name}</p>
-				<p>x{item.quantity}</p>
-				<p>{item.price}kr</p>
+			{receiptId ? <p> kvitto </p> : <p>Page not found</p>}
+			<img src={receiptImg} alt="receipt" className="receipt-bg" />
+			<section className="receipt-container"> 
+				<h2> Tack för din beställning! </h2>
+				<div className="receipt-divider"></div>
+				<p className="order-number">Order nummer: #1235566</p>
+				<div className="receipt-items">
+					{testCart.map((item, index) => (
+					<div className="receipt-item" key={index}>
+					<p>{item.name}</p>
+					<p>x{item.quantity}</p>
+					<p>{item.price}kr</p>
+					</div>
+					))}
 				</div>
-				))}
-			</div>
-		  	<div className="receipt-divider"></div>
-		  	<p className="receipt-moms">Moms (25%): {moms.toFixed(2)} kr</p>
-			<p className="receipt-total-incl">Totalt inkl. moms: {totalMedMoms.toFixed(2)} kr</p>
-          	<button className="new-order">Ny beställning</button>
-        </section>
+				<div className="receipt-divider"></div>
+				<p className="receipt-moms">Moms (25%): {moms.toFixed(2)} kr</p>
+				<p className="receipt-total-incl">Totalt inkl. moms: {totalMedMoms.toFixed(2)} kr</p>
+				<button className="new-order">Ny beställning</button>
+			</section>
       </div>
     </div>
   );

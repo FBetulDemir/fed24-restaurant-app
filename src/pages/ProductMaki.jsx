@@ -1,9 +1,7 @@
 import '../styles/ProductPage.css';	
 import React from 'react';
 import { sushiMenu, makiMenuList } from '../data/produktLists.js';
-import Receipt from './receipt.jsx';
-import InLogg from './InLogg.jsx';
-import Cart from '../components/Cart.jsx';
+import { useParams } from 'react-router-dom';
 
 const MakiSushi = () => {
 
@@ -40,12 +38,6 @@ const MakiSushi = () => {
                 ))}
 
             </div>
-                
-                <Receipt />
-				<InLogg />
-				<Cart />
-				
-        
         </section>
     );
 };
