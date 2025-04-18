@@ -15,8 +15,9 @@
             color: #EFE7D2;
             text-decoration: none;
             cursor: pointer;
-            &:hover{
-                color: #D9BF77;
+            &:hover {
+                background-color: #D9BF77;
+                color: #2a2a2a;
             }
         }
     }
@@ -44,8 +45,9 @@
         color: #EFE7D2;
         text-decoration: none;
         cursor: pointer;
-        &:hover{
-            color: #D9BF77;
+        &:hover {
+            background-color: #D9BF77;
+            color: #2a2a2a;
         }
     }
 }
