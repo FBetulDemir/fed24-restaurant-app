@@ -7,12 +7,12 @@ const AdminStart = () => {
     <div className="sidebar">
         <h2>Välkommen tillbaka!</h2>
         <NavLink to="/components/adminNewDish">
-            <button className="form-btn">Ny meny</button>
+            <button className="form-btn">Lägg till ny maträtt</button>
         </NavLink>
         <NavLink to="/components/adminNewDish">
             <button className="form-btn">Redigera/Ta bort meny</button>
         </NavLink>
-        <NavLink to="/components/adminNewDish">
+        <NavLink to="/">
             <button className="form-btn">Logga ut</button>
         </NavLink>
   </div>
