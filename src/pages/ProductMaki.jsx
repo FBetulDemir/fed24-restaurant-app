@@ -2,6 +2,7 @@ import '../styles/ProductPage.css';
 import React from 'react';
 import { sushiMenu, makiMenuList } from '../data/produktLists.js';
 import { useParams } from 'react-router-dom';
+import makiSushiImg from "../assets/maki_sushi.jpg"
 
 const MakiSushi = () => {
 
@@ -12,7 +13,7 @@ const MakiSushi = () => {
             
 
             <div className="product-img-sides-container">
-                <img src={makiSushi.image} alt={makiSushi.name} className="product-image" />
+                <img src={makiSushiImg} alt={makiSushi.name} className="product-image" />
                 <p className="product-sides">{makiSushi.sides}</p>
             </div>
             
