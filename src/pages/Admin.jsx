@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuForm from '../components/MenuForm.jsx';
 import MenuList from '../components/MenuList.jsx';
-import { saveData, loadData } from '../api.js'; // นำเข้าฟังก์ชันจาก api.js
+import { saveData, loadData } from '../api.js';
 import '../styles/Admin.css';
 
 const Admin = () => {
@@ -13,7 +13,7 @@ const Admin = () => {
     description: '',
     price: '',
     ingredients: [],
-    image: '',
+    image: '', // จะเก็บ Base64 string ของรูปภาพ
   });
   const navigate = useNavigate();
 
@@ -21,11 +21,10 @@ const Admin = () => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const data = await loadData('menu'); // ใช้ key 'menu' เพื่อโหลดข้อมูล
+        const data = await loadData('menu');
         if (data) {
-          // แปลงข้อมูลให้อยู่ในรูปแบบที่มี id
           const menuWithIds = data.map((item, index) => ({
-            id: item.id || index + 1, // หากไม่มี id ให้สร้างจาก index
+            id: item.id || index + 1,
             ...item,
           }));
           setMenu(menuWithIds);
@@ -57,17 +56,16 @@ const Admin = () => {
       setError('At least one ingredient is required.');
       return;
     }
-    if (!newMenuItem.image || !newMenuItem.image.startsWith('http')) {
-      setError('Image must be a valid URL.');
+    if (!newMenuItem.image) {
+      setError('An image is required.');
       return;
     }
 
     try {
-      // สร้าง ID ใหม่โดยใช้เลขลำดับ (เพราะ API ไม่จัดการ ID ให้)
       const newId = menu.length > 0 ? Math.max(...menu.map(item => item.id)) + 1 : 1;
       const newItem = { id: newId, ...newMenuItem };
       const updatedMenu = [...menu, newItem];
-      const success = await saveData('menu', updatedMenu); // บันทึกข้อมูลทั้งหมด
+      const success = await saveData('menu', updatedMenu);
       if (!success) {
         throw new Error('Failed to add menu item.');
       }
@@ -82,7 +80,7 @@ const Admin = () => {
   const handleDeleteMenuItem = async (id) => {
     try {
       const updatedMenu = menu.filter((item) => item.id !== id);
-      const success = await saveData('menu', updatedMenu); // บันทึกข้อมูลทั้งหมด
+      const success = await saveData('menu', updatedMenu);
       if (!success) {
         throw new Error('Failed to delete menu item.');
       }
@@ -109,8 +107,8 @@ const Admin = () => {
       setError('At least one ingredient is required.');
       return;
     }
-    if (!updatedItem.image || !updatedItem.image.startsWith('http')) {
-      setError('Image must be a valid URL.');
+    if (!updatedItem.image) {
+      setError('An image is required.');
       return;
     }
 
@@ -118,7 +116,7 @@ const Admin = () => {
       const updatedMenu = menu.map((item) =>
         item.id === id ? { id, ...updatedItem } : item
       );
-      const success = await saveData('menu', updatedMenu); // บันทึกข้อมูลทั้งหมด
+      const success = await saveData('menu', updatedMenu);
       if (!success) {
         throw new Error('Failed to update menu item.');
       }
@@ -141,7 +139,6 @@ const Admin = () => {
           </button>
         </div>
         <h1 className="logo">ISUSHI</h1>
-        <div className="profile-icon"></div>
       </header>
 
       <div className="admin-container">
