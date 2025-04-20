@@ -18,6 +18,17 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
     });
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setMenuItem({ ...menuItem, image: reader.result }); // เก็บ Base64 string
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <form onSubmit={onSubmit} className="menu-form">
       <div>
@@ -62,16 +73,16 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
           </div>
         ))}
         <button type="button" onClick={addIngredient} className="add-ingredient">
-          Add ingredient
+          Add Ingredient
         </button>
       </div>
       <div className="image-group">
         <div>
-          <label>Add Picture</label>
+          <label>Upload Picture</label>
           <input
-            type="url"
-            value={menuItem.image}
-            onChange={(e) => setMenuItem({ ...menuItem, image: e.target.value })}
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
             required
           />
         </div>

@@ -12,7 +12,7 @@ const MenuList = ({ menu, onDelete, onEdit }) => {
 
   return (
     <div>
-      {menu.length === 0 && <p className="menu-empty">ไม่มีรายการเมนู</p>}
+      {menu.length === 0 && <p className="menu-empty">No menu items available.</p>}
       {menu.map((item, index) => (
         <div key={item.id} className="menu-item">
           {editingItem && editingItem.id === item.id ? (
@@ -25,8 +25,13 @@ const MenuList = ({ menu, onDelete, onEdit }) => {
               />
             </div>
           ) : (
-            <>
-              <span>Menu {index + 1}: {item.name}</span>
+            <div className="menu-item-content">
+              <div className="menu-item-details">
+                <span>Menu {index + 1}: {item.name}</span>
+                {item.image && (
+                  <img src={item.image} alt={item.name} className="menu-item-image" />
+                )}
+              </div>
               <div className="actions">
                 <button onClick={() => setEditingItem(item)}>
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,7 +54,7 @@ const MenuList = ({ menu, onDelete, onEdit }) => {
                   </svg>
                 </button>
               </div>
-            </>
+            </div>
           )}
         </div>
       ))}
