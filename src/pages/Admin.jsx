@@ -1,41 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Joi from 'joi';
 import MenuForm from '../components/MenuForm.jsx';
 import MenuList from '../components/MenuList.jsx';
+import { saveData, loadData } from '../api.js'; // นำเข้าฟังก์ชันจาก api.js
 import '../styles/Admin.css';
 
-// Mock Data สำหรับเริ่มต้น
-const initialMenu = [
-  { id: 1, name: "Sushi Roll", description: "Classic sushi roll with fresh fish", price: 150, ingredients: ["fish", "rice", "seaweed"], image: "https://via.placeholder.com/150" },
-  { id: 2, name: "Tempura", description: "Crispy fried shrimp tempura", price: 200, ingredients: ["shrimp", "flour", "oil"], image: "https://via.placeholder.com/150" },
-];
-
-const menuSchema = Joi.object({
-  name: Joi.string().min(3).required().messages({
-    'string.min': 'ชื่อต้องมีอย่างน้อย 3 ตัวอักษร',
-    'any.required': 'ต้องกรอกชื่อ',
-  }),
-  description: Joi.string().min(10).required().messages({
-    'string.min': 'คำอธิบายต้องมีอย่างน้อย 10 ตัวอักษร',
-    'any.required': 'ต้องกรอกคำอธิบาย',
-  }),
-  price: Joi.number().min(0).required().messages({
-    'number.min': 'ราคาต้องเป็นจำนวนบวก',
-    'any.required': 'ต้องกรอกราคา',
-  }),
-  ingredients: Joi.array().items(Joi.string()).min(1).required().messages({
-    'array.min': 'ต้องมีส่วนผสมอย่างน้อย 1 รายการ',
-    'any.required': 'ต้องกรอกส่วนผสม',
-  }),
-  image: Joi.string().uri().required().messages({
-    'string.uri': 'รูปภาพต้องเป็น URL ที่ถูกต้อง',
-    'any.required': 'ต้องกรอก URL รูปภาพ',
-  }),
-});
-
 const Admin = () => {
-  const [menu, setMenu] = useState(initialMenu); // ใช้ mock data
+  const [menu, setMenu] = useState([]);
   const [error, setError] = useState('');
   const [newMenuItem, setNewMenuItem] = useState({
     name: '',
@@ -46,34 +17,115 @@ const Admin = () => {
   });
   const navigate = useNavigate();
 
-  const handleAddMenuItem = (e) => {
+  // Fetch menu data from API on page load
+  useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const data = await loadData('menu'); // ใช้ key 'menu' เพื่อโหลดข้อมูล
+        if (data) {
+          // แปลงข้อมูลให้อยู่ในรูปแบบที่มี id
+          const menuWithIds = data.map((item, index) => ({
+            id: item.id || index + 1, // หากไม่มี id ให้สร้างจาก index
+            ...item,
+          }));
+          setMenu(menuWithIds);
+        } else {
+          setMenu([]);
+        }
+      } catch (err) {
+        setError('Failed to load menu data.');
+      }
+    };
+    fetchMenu();
+  }, []);
+
+  const handleAddMenuItem = async (e) => {
     e.preventDefault();
-    const { error } = menuSchema.validate(newMenuItem, { abortEarly: false });
-    if (error) {
-      setError(error.details.map((err) => err.message).join(', '));
+    if (!newMenuItem.name || newMenuItem.name.length < 3) {
+      setError('Name must be at least 3 characters long.');
+      return;
+    }
+    if (!newMenuItem.description || newMenuItem.description.length < 10) {
+      setError('Description must be at least 10 characters long.');
+      return;
+    }
+    if (!newMenuItem.price || newMenuItem.price < 0) {
+      setError('Price must be a positive number.');
+      return;
+    }
+    if (!newMenuItem.ingredients || newMenuItem.ingredients.length === 0) {
+      setError('At least one ingredient is required.');
+      return;
+    }
+    if (!newMenuItem.image || !newMenuItem.image.startsWith('http')) {
+      setError('Image must be a valid URL.');
       return;
     }
 
-    // สร้าง ID ใหม่โดยใช้ timestamp หรือเลขลำดับ
-    const newId = menu.length > 0 ? Math.max(...menu.map(item => item.id)) + 1 : 1;
-    const newItem = { id: newId, ...newMenuItem };
-    setMenu([...menu, newItem]);
-    setNewMenuItem({ name: '', description: '', price: '', ingredients: [], image: '' });
-    setError('');
+    try {
+      // สร้าง ID ใหม่โดยใช้เลขลำดับ (เพราะ API ไม่จัดการ ID ให้)
+      const newId = menu.length > 0 ? Math.max(...menu.map(item => item.id)) + 1 : 1;
+      const newItem = { id: newId, ...newMenuItem };
+      const updatedMenu = [...menu, newItem];
+      const success = await saveData('menu', updatedMenu); // บันทึกข้อมูลทั้งหมด
+      if (!success) {
+        throw new Error('Failed to add menu item.');
+      }
+      setMenu(updatedMenu);
+      setNewMenuItem({ name: '', description: '', price: '', ingredients: [], image: '' });
+      setError('');
+    } catch (err) {
+      setError(err.message || 'Failed to add menu item.');
+    }
   };
 
-  const handleDeleteMenuItem = (id) => {
-    setMenu(menu.filter((item) => item.id !== id));
+  const handleDeleteMenuItem = async (id) => {
+    try {
+      const updatedMenu = menu.filter((item) => item.id !== id);
+      const success = await saveData('menu', updatedMenu); // บันทึกข้อมูลทั้งหมด
+      if (!success) {
+        throw new Error('Failed to delete menu item.');
+      }
+      setMenu(updatedMenu);
+    } catch (err) {
+      setError(err.message || 'Failed to delete menu item.');
+    }
   };
 
-  const handleEditMenuItem = (id, updatedItem) => {
-    const { error } = menuSchema.validate(updatedItem, { abortEarly: false });
-    if (error) {
-      setError(error.details.map((err) => err.message).join(', '));
+  const handleEditMenuItem = async (id, updatedItem) => {
+    if (!updatedItem.name || updatedItem.name.length < 3) {
+      setError('Name must be at least 3 characters long.');
+      return;
+    }
+    if (!updatedItem.description || updatedItem.description.length < 10) {
+      setError('Description must be at least 10 characters long.');
+      return;
+    }
+    if (!updatedItem.price || updatedItem.price < 0) {
+      setError('Price must be a positive number.');
+      return;
+    }
+    if (!updatedItem.ingredients || updatedItem.ingredients.length === 0) {
+      setError('At least one ingredient is required.');
+      return;
+    }
+    if (!updatedItem.image || !updatedItem.image.startsWith('http')) {
+      setError('Image must be a valid URL.');
       return;
     }
 
-    setMenu(menu.map((item) => (item.id === id ? { id, ...updatedItem } : item)));
+    try {
+      const updatedMenu = menu.map((item) =>
+        item.id === id ? { id, ...updatedItem } : item
+      );
+      const success = await saveData('menu', updatedMenu); // บันทึกข้อมูลทั้งหมด
+      if (!success) {
+        throw new Error('Failed to update menu item.');
+      }
+      setMenu(updatedMenu);
+    } catch (err) {
+      setError(err.message || 'Failed to update menu item.');
+    }
   };
 
   return (
