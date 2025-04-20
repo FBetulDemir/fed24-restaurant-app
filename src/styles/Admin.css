@@ -49,6 +49,13 @@ body {
   padding: 0.5rem 1rem;
 }
 
+.admin-header .profile-icon {
+  width: 2rem;
+  height: 2rem;
+  background-color: #F4A7B9;
+  border-radius: 50%;
+}
+
 /* Main Layout */
 .admin-container {
   display: flex;
@@ -96,11 +103,55 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: center; /* Center the form */
 }
 
-.admin-menu-form-centered {
+.admin-menu-list {
   width: 50%;
+  padding-right: 1rem;
+}
+
+.admin-menu-form {
+  width: 50%;
+  padding-left: 1rem;
+}
+
+/* Menu List */
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.menu-item span {
+  font-size: 1rem;
+}
+
+.menu-item .actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.menu-item .actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-item .actions svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #666;
+}
+
+.menu-item .actions button:hover svg {
+  color: #333;
+}
+
+.menu-empty {
+  color: #666;
+  font-style: italic;
 }
 
 /* Menu Form */

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuForm from '../components/MenuForm.jsx';
-import { saveData } from '../api.js';
+import MenuList from '../components/MenuList.jsx';
+import { saveData, loadData } from '../api.js'; // นำเข้าฟังก์ชันจาก api.js
 import '../styles/Admin.css';
 
 const Admin = () => {
+  const [menu, setMenu] = useState([]);
   const [error, setError] = useState('');
   const [newMenuItem, setNewMenuItem] = useState({
     name: '',
@@ -14,6 +16,28 @@ const Admin = () => {
     image: '',
   });
   const navigate = useNavigate();
+
+  // Fetch menu data from API on page load
+  useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const data = await loadData('menu'); // ใช้ key 'menu' เพื่อโหลดข้อมูล
+        if (data) {
+          // แปลงข้อมูลให้อยู่ในรูปแบบที่มี id
+          const menuWithIds = data.map((item, index) => ({
+            id: item.id || index + 1, // หากไม่มี id ให้สร้างจาก index
+            ...item,
+          }));
+          setMenu(menuWithIds);
+        } else {
+          setMenu([]);
+        }
+      } catch (err) {
+        setError('Failed to load menu data.');
+      }
+    };
+    fetchMenu();
+  }, []);
 
   const handleAddMenuItem = async (e) => {
     e.preventDefault();
@@ -33,20 +57,74 @@ const Admin = () => {
       setError('At least one ingredient is required.');
       return;
     }
-    if (!newMenuItem.image) {
-      setError('An image is required.');
+    if (!newMenuItem.image || !newMenuItem.image.startsWith('http')) {
+      setError('Image must be a valid URL.');
       return;
     }
 
     try {
-      const success = await saveData('menu', [newMenuItem]);
+      // สร้าง ID ใหม่โดยใช้เลขลำดับ (เพราะ API ไม่จัดการ ID ให้)
+      const newId = menu.length > 0 ? Math.max(...menu.map(item => item.id)) + 1 : 1;
+      const newItem = { id: newId, ...newMenuItem };
+      const updatedMenu = [...menu, newItem];
+      const success = await saveData('menu', updatedMenu); // บันทึกข้อมูลทั้งหมด
       if (!success) {
         throw new Error('Failed to add menu item.');
       }
+      setMenu(updatedMenu);
       setNewMenuItem({ name: '', description: '', price: '', ingredients: [], image: '' });
       setError('');
     } catch (err) {
       setError(err.message || 'Failed to add menu item.');
+    }
+  };
+
+  const handleDeleteMenuItem = async (id) => {
+    try {
+      const updatedMenu = menu.filter((item) => item.id !== id);
+      const success = await saveData('menu', updatedMenu); // บันทึกข้อมูลทั้งหมด
+      if (!success) {
+        throw new Error('Failed to delete menu item.');
+      }
+      setMenu(updatedMenu);
+    } catch (err) {
+      setError(err.message || 'Failed to delete menu item.');
+    }
+  };
+
+  const handleEditMenuItem = async (id, updatedItem) => {
+    if (!updatedItem.name || updatedItem.name.length < 3) {
+      setError('Name must be at least 3 characters long.');
+      return;
+    }
+    if (!updatedItem.description || updatedItem.description.length < 10) {
+      setError('Description must be at least 10 characters long.');
+      return;
+    }
+    if (!updatedItem.price || updatedItem.price < 0) {
+      setError('Price must be a positive number.');
+      return;
+    }
+    if (!updatedItem.ingredients || updatedItem.ingredients.length === 0) {
+      setError('At least one ingredient is required.');
+      return;
+    }
+    if (!updatedItem.image || !updatedItem.image.startsWith('http')) {
+      setError('Image must be a valid URL.');
+      return;
+    }
+
+    try {
+      const updatedMenu = menu.map((item) =>
+        item.id === id ? { id, ...updatedItem } : item
+      );
+      const success = await saveData('menu', updatedMenu); // บันทึกข้อมูลทั้งหมด
+      if (!success) {
+        throw new Error('Failed to update menu item.');
+      }
+      setMenu(updatedMenu);
+    } catch (err) {
+      setError(err.message || 'Failed to update menu item.');
     }
   };
 
@@ -63,6 +141,7 @@ const Admin = () => {
           </button>
         </div>
         <h1 className="logo">ISUSHI</h1>
+        <div className="profile-icon"></div>
       </header>
 
       <div className="admin-container">
@@ -77,8 +156,16 @@ const Admin = () => {
         {/* Main Content */}
         <main className="admin-main">
           <div className="admin-content">
+            {/* Menu List */}
+            <div className="admin-menu-list">
+              <MenuList
+                menu={menu}
+                onDelete={handleDeleteMenuItem}
+                onEdit={handleEditMenuItem}
+              />
+            </div>
             {/* Menu Form */}
-            <div className="admin-menu-form-centered">
+            <div className="admin-menu-form">
               <MenuForm
                 menuItem={newMenuItem}
                 setMenuItem={setNewMenuItem}
