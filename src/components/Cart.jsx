@@ -1,25 +1,19 @@
 import "./cart.css";
-import {
-  ButtonClickUp,
-  ButtonClickDown,
-  CounterDisplay,
-} from "./CartFunctions.jsx";
+import Buttons from "./CartFunctions.jsx";
 const Cart = () => {
   return (
     <main>
       <header></header>
-      <h1 id="your-order">Din Beställning</h1>
+      <h1 id="yourOrder">Din Beställning</h1>
       <section className="box">
-        <div id="produkt1">
+        <div id="product1">
           <h2 id="title">Sushi 1</h2>
           <div className="desPic">
             <img id="pics" src="-" alt="Bild på sushi" />
             <p id="description"> {"beskrivning"} </p>
           </div>
           <div className="btns">
-            <ButtonClickUp />
-            <CounterDisplay />
-            <ButtonClickDown />
+            <Buttons />
           </div>
         </div>
       </section>

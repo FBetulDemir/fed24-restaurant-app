@@ -1,25 +1,18 @@
 //3.  och även en lägg till/ta bort funktion, med en counter därtill.
-import setState, { useState } from "react";
+import React, { useState } from "react";
 
-function ButtonClickUp() {
-  let count = useState;
-  const handleClick = () => (
-    (count = +1), console.log("Du har tryckt på Lägg till")
-  );
-  return <button onClick={handleClick}>LÄGG TILL</button>;
-}
-function ButtonClickDown() {
-  let count = useState;
-  const handleClick2 = () => (
-    (count = -1), console.log("Du har klickat ta bort")
-  );
-  return <button onClick={handleClick2}>TA BORT</button>;
-}
+function Buttons() {
+  const [count, setCount] = useState(0);
+  const handleClickUp = () => setCount(count + 1);
+  const handleClickDown = () =>
+    setCount((prevCount) => Math.max(prevCount - 1, 0));
 
-function CounterDisplay() {
- 
   return (
-
+    <div>
+      <button onClick={handleClickUp}>LÄGG TILL</button>
+      <div>{count}</div>
+      <button onClick={handleClickDown}>TA BORT</button>
+    </div>
+  );
 }
-
-export { ButtonClickUp, ButtonClickDown, CounterDisplay };
+export default Buttons;
