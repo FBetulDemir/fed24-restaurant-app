@@ -1,7 +1,8 @@
 import { NavLink } from "react-router";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "../styles/Header.css";
 import { useCartStore } from '../stores/cartStore'
+import useOutsideClick from "./useOutsideClick";
 
 
 
@@ -13,7 +14,10 @@ const Header = () => {
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
     const cart = useCartStore((state) => state.cart)
     const cartCount = cart.length
+    const dropdownRef = useRef(null);
     
+
+
 
     const toggleDropdown = () => {
         setIsOpen((prev) => {
@@ -28,6 +32,10 @@ const Header = () => {
           return !prev
         })
     }
+
+    useOutsideClick(dropdownRef, () => {
+        setIsOpen(false);
+      });
       
 
     return (
@@ -59,7 +67,7 @@ const Header = () => {
 
 
                         {isOpen && (
-                            <div className="dropdown-content">
+                            <div className="dropdown-content" ref={dropdownRef}>
                                 <NavLink to="/pages/menu/sushi/:sushiId?" className="navlink" onClick={() => setIsOpen(false)}>Sushi</NavLink>
                                 <NavLink to="/pages/menu/sashimi/:sashimiId?" className="navlink" onClick={() => setIsOpen(false)}>Sashimi</NavLink>
                                 <NavLink to="/pages/menu/drinks/:drinksId?" className="navlink" onClick={() => setIsOpen(false)}>Drycker</NavLink> 
