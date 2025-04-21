@@ -1,8 +1,14 @@
+import Awards from "../components/Awards";
+import LandingMenuSushi from "../components/LandingMenuSushi";
+import MainBanner from "../components/MainBanner";
+
 const Home = () => {
   return (
     <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the home page of ISushi.</p>
+      <MainBanner />
+      <Awards />
+      <LandingMenuSushi />
+      
     </div>
   );
 }

@@ -1,0 +1,80 @@
+.blurp {
+    background-image: url('../assets/receipt.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 10px;
+
+}
+
+.sign-section {
+    background-color: #403b3bd6;
+    color: white;
+    margin: 10px;
+    padding: 30px;
+    width: 300px;
+    margin-left: 50px;
+    margin-top: 50px;
+    border-radius: 5px;
+    border: 2px 2px 3px solid rgb(255, 255, 255);
+    justify-content: center;
+    color: rgb(255, 255, 255);
+}
+
+
+.input-box {
+    background-color: #292828;
+    width: 200px;
+}
+
+.input-error {
+    border: 2px solid red;
+    background-color: #ffe5e5;
+    text-shadow: 2px 2px 4px solid black;
+    color: black;
+  }
+
+.success {
+    color: greenyellow;
+}
+
+
+.input-success {
+    border: 2px solid green;
+    background-color: #e5ffe5;
+  }
+  
+  .error {
+    color: red;
+    text-shadow: 2px 2px 4px solid black;
+  }
+
+  .input-box {
+    border: 2px solid transparent;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 4px;
+  }
+  
+.ghost-button {
+    color: white;
+    width: 110px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ghost-button:hover {
+    color: grey;
+    border: 2px solid grey;
+}
+
+.employee-section {
+    width: 100%;
+    color: #e6d6b2;
+}

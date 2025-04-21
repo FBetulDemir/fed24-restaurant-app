@@ -1,0 +1,36 @@
+.main-banner{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    .video-background{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        object-fit: cover;
+        object-position: center;
+    }
+    .video-overlay{
+        position: absolute;
+        bottom: 5em;
+        left: 50%;
+        display: flex;
+        gap: 2em;
+        transform: translateX(-50%);
+    }
+    .btn-hero{
+        background-color: #181818;
+        border: 4px solid #b8ae97;
+        border-radius: 8px;
+        padding: 1em 1.5em;
+        color: #EFE7D2;
+        cursor: pointer;
+        
+        &:hover{
+            color: #D9BF77;
+        }
+    }
+      
+}

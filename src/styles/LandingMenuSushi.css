@@ -1,0 +1,113 @@
+.landing-menu-sushi{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: #EFE7D2;
+    .sushi-section, .sashimi-section{
+        display: flex;
+    }
+    .sushi-info {
+        padding: 3em 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        line-height: 1.5;
+        li{
+            list-style: none;
+            margin: 0.5em 0;
+            font-size: 1.2em;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            font-size: 1.5em;
+            margin-bottom: 1em;
+        }
+        .subtitle-menu-fav{
+            font-size: 1.2em;
+            margin-bottom: 1em;
+            text-decoration: underline;
+        }
+        .sushi-button{
+            background-color: transparent;
+            border: 2px solid #EFE7D2;
+            border-radius: 8px;
+            padding: 1em 1.5em;
+            color: #EFE7D2;
+            text-decoration: none;
+            cursor: pointer;
+            &:hover{
+                color: #D9BF77;
+            }
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 950px) {
+    .landing-menu-sushi {
+      .sushi-section,
+      .sashimi-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+  
+        img {
+          width: 100%;
+          max-width: 400px;
+          margin-bottom: 1rem;
+        }
+      }
+  
+      .sushi-info {
+        padding: 2em 1em;
+  
+        h1 {
+          font-size: 2em;
+        }
+  
+        p {
+          font-size: 1.1em;
+        }
+  
+        li {
+          font-size: 1em;
+        }
+  
+        .sushi-button {
+          font-size: 1em;
+          padding: 0.75em 1em;
+        }
+      }
+    }
+}
+
+@media screen and (max-width: 320px) {
+    img {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    h1 {
+      font-size: 1em;
+    }
+
+    p {
+      font-size: 0.6em;
+    }
+
+    li {
+      font-size: 0.3em;
+    }
+
+    .sushi-button {
+      font-size: 0.7em;
+    }
+}
+
+  

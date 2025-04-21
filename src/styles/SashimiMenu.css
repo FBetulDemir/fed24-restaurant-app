@@ -1,0 +1,35 @@
+.sashimi-menu {
+    padding: 3rem 2rem;
+    background-color: #121212;
+    color: #EFE7D2;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+
+    h3 {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+        color: #e6d6b2;
+        letter-spacing: 0.05em;
+
+    }
+    .sashimi-item {
+        border: 1px solid #e6d6b2;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        background-color: rgba(255, 255, 255, 0.03);
+        transition: transform 0.2s ease;
+        h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #EFE7D2;
+        }
+        p {
+            font-size: 1rem;
+            margin: 0.3rem 0;
+            color: #ccc;
+        }
+    }
+
+}

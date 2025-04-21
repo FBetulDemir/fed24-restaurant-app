@@ -1,0 +1,40 @@
+.sidebar {
+    width: 30%;
+    background-color: #2a2a2a;
+    border-right: 1px solid #e6d6b2;
+    padding: 3em 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    h2 {
+        font-size: 1.8em;
+        text-align: center;
+        margin-bottom: 1em;
+    }
+
+}
+
+.form-btn{
+    width: 100%
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        border-right: none;
+        border-bottom: 1px solid #e6d6b2;
+    }
+
+    .sidebar h2 {
+        width: 100%;
+        font-size: 1.4em;
+        margin-bottom: 0.5em;
+    }
+
+    .form-btn {
+        margin: 0.5em;
+    }
+}
