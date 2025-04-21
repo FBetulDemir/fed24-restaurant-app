@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import MenuForm from '../components/MenuForm.jsx';
 import MenuList from '../components/MenuList.jsx';
 import { saveData, loadData } from '../api.js';
+import Header from '../components/Header.jsx'; // เพิ่ม Header
 import '../styles/Admin.css';
 
 const Admin = () => {
@@ -13,11 +14,10 @@ const Admin = () => {
     description: '',
     price: '',
     ingredients: [],
-    image: '', // จะเก็บ Base64 string ของรูปภาพ
+    image: '',
   });
   const navigate = useNavigate();
 
-  // Fetch menu data from API on page load
   useEffect(() => {
     const fetchMenu = async () => {
       try {
@@ -128,19 +128,7 @@ const Admin = () => {
 
   return (
     <div>
-      {/* Header */}
-      <header className="admin-header">
-        <div className="menu-dropdown">
-          <button>
-            <span>MENU</span>
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-        </div>
-        <h1 className="logo">ISUSHI</h1>
-      </header>
-
+      <Header /> {/* ใช้ Header Component */}
       <div className="admin-container">
         {/* Sidebar */}
         <aside className="admin-sidebar">

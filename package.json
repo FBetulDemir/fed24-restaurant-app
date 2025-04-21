@@ -12,6 +12,7 @@
   "dependencies": {
     "joi": "^17.13.3",
     "react": "^19.0.0",
+    "react-devtools": "^6.1.1",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.5.0",
     "zustand": "^5.0.3"
