@@ -80,10 +80,17 @@ function InLogg() {
                     placeholder='Lösenord'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                        handleSubmit(e)
+                    }}
+                     }
                     />
                 <p> &nbsp; </p> 
-                
-                 <button className='ghost-button' onClick={handleSubmit} type='submit'>Logga In</button>
+                <form onSubmit={handleSubmit}>
+
+                 <button className='ghost-button' type='submit'>Logga In</button>
+                </form>
             </section>
         </div>
 

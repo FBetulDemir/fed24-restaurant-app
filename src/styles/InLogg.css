@@ -18,6 +18,7 @@
 
 .input-box {
     background-color: #292828;
+    color: white;
     width: 200px;    
     border: 2px solid rgb(255, 255, 255);
 
@@ -27,7 +28,6 @@
     border: 2px solid red;
     background-color: #ffe5e5;
     text-shadow: 2px 2px 4px solid black;
-    color: black;
   }
 
 .success {
@@ -38,6 +38,7 @@
 .input-success {
     border: 2px solid green;
     background-color: #e5ffe5;
+    color: black;
   }
   
   .error {
@@ -81,7 +82,6 @@
     font-size: 19px;
     margin-bottom: 4px;
 }
-
 
 
 @media (max-width: 480px) {
