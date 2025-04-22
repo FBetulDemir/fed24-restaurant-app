@@ -9,7 +9,7 @@ export async function saveData(key, value) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        key,
+        key: key,
         value: JSON.stringify(value)
       })
     });
@@ -25,6 +25,7 @@ export async function loadData(key) {
   try {
     const response = await fetch(`${API_URL}?method=load&key=${key}`);
     const data = await response.json();
+    console.log(data)
     return data ? JSON.parse(data) : null;
   } catch (error) {
     console.error("Load error:", error);

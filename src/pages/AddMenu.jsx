@@ -49,6 +49,7 @@ const AddMenu = () => {
       if (!success) {
         throw new Error('Failed to add menu item.');
       }
+      console.log(updatedMenu)
       setMenu(updatedMenu);
       setNewMenuItem({ name: '', description: '', price: '', ingredients: [], image: '' });
       setError('');
