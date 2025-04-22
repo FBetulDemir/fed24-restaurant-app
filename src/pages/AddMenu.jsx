@@ -6,14 +6,12 @@ import { saveData, loadData } from '../api.js';
 import '../styles/Admin.css';
 
 const AddMenu = () => {
-  const [menu, setMenu] = useState([]);
   const [error, setError] = useState('');
   const [newMenuItem, setNewMenuItem] = useState({
     name: '',
     description: '',
     price: '',
     ingredients: [],
-    image: '',
   });
   const navigate = useNavigate();
 
@@ -35,28 +33,32 @@ const AddMenu = () => {
       setError('At least one ingredient is required.');
       return;
     }
-    if (!newMenuItem.image) {
-      setError('An image is required.');
-      return;
-    }
 
     try {
-      const existingMenu = await loadData('menu') || [];
+      const existingMenu = (await loadData('menu')) || [];
+      console.log('Existing menu before adding:', existingMenu);
+
       const newId = existingMenu.length > 0 ? Math.max(...existingMenu.map(item => item.id)) + 1 : 1;
       const newItem = { id: newId, ...newMenuItem };
       const updatedMenu = [...existingMenu, newItem];
+      console.log('New menu to save:', updatedMenu);
+
       const success = await saveData('menu', updatedMenu);
       if (!success) {
-        throw new Error('Failed to add menu item.');
+        throw new Error('Failed to add menu item. The API may be unavailable or reached its limit.');
       }
-      console.log(updatedMenu)
-      setMenu(updatedMenu);
-      setNewMenuItem({ name: '', description: '', price: '', ingredients: [], image: '' });
+
+      // ดีบั๊ก: โหลดข้อมูลทันทีหลังบันทึกเพื่อตรวจสอบ
+      const updatedData = await loadData('menu');
+      console.log('Data after saving:', updatedData);
+
+      setNewMenuItem({ name: '', description: '', price: '', ingredients: [] });
       setError('');
       alert('Menu item added successfully!');
-      navigate('/admin/edit'); // นำทางไปยังหน้า Edit/Remove Menu เพื่อให้เห็นเมนูใหม่ทันที
+      navigate('/admin/edit');
     } catch (err) {
       setError(err.message || 'Failed to add menu item.');
+      console.error('Error adding menu item:', err);
     }
   };
 

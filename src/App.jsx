@@ -23,7 +23,6 @@ const MenuPage = ({ menu, refreshMenu }) => (
       ) : (
         menu.map(item => (
           <div key={item.id} className="menu-card">
-            <img src={item.image} alt={item.name} className="menu-image" />
             <h3>{item.name}</h3>
             <p>{item.description}</p>
             <p>Price: ฿{item.price}</p>
@@ -40,11 +39,12 @@ const MenuPage = ({ menu, refreshMenu }) => (
 
 const App = () => {
   const [menu, setMenu] = useState([]);
-  const location = useLocation(); // ใช้ useLocation เพื่อตรวจจับการเปลี่ยนหน้า
+  const location = useLocation();
 
   const loadMenu = async () => {
     try {
       const data = await loadData('menu');
+      console.log('Loaded menu in App:', data);
       if (data) {
         setMenu(data);
       } else {
@@ -57,8 +57,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    loadMenu(); // โหลดข้อมูลเมื่อหน้าเปลี่ยน
-  }, [location]); // เรียกใช้เมื่อ location เปลี่ยน (เช่น จาก /admin/add กลับมาที่ /menu)
+    loadMenu();
+  }, [location]);
 
   return (
     <div className="app-container">
