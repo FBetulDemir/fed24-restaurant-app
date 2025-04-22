@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { loadData } from './api.js';
 import Admin from './pages/Admin.jsx';
+import AddMenu from './pages/AddMenu.jsx';
+import EditMenu from './pages/EditMenu.jsx';
 import Header from './components/Header.jsx';
 import './App.css';
 
@@ -59,6 +61,8 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/add" element={<AddMenu />} />
+          <Route path="/admin/edit" element={<EditMenu />} />
           <Route path="/menu" element={<MenuPage menu={menu} />} />
           <Route path="/" element={<HomePage />} />
         </Routes>
