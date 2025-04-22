@@ -15,6 +15,10 @@ import Cart from './components/Cart.jsx'
 import OrderOnline from './pages/OrderOnline.jsx'
 import AdminStart from './components/AdminStart.jsx'
 import AdminDishForm from './components/AdminDishForm.jsx'
+import ProductDrinks from './pages/ProductDrinks.jsx'
+import ProductMaki from './pages/ProductMaki.jsx'
+import ProductNigiri from './pages/ProductNigiri.jsx'
+import ProductSashimi from './pages/ProductSashimi.jsx'
 // import { HashRouter } from 'react-router'
 
 
@@ -37,12 +41,18 @@ const router = createHashRouter(
           Component: Menu,
         },
         {
-        path: '/pages/menu/sushi/:sushiId?',
-        Component: SushiMenu,
+        path: '/pages/menu/sushi/:makiId?',
+        // Component: SushiMenu,
+        Component: ProductMaki,
+        },
+        {
+        path: '/pages/menu/sushi/:nigiriId?',
+        Component: ProductNigiri,
         },
         {
           path: '/pages/menu/sashimi/:sashimiId?',
-          Component: SashimiMenu,
+          // Component: SashimiMenu,
+          Component: ProductSashimi,
         },
         {
           path: '/pages/orderOnline/:orderId?',
@@ -50,7 +60,8 @@ const router = createHashRouter(
         },
         {
           path: '/pages/menu/drinks/:drinksId?',
-          Component: DrinksMenu,
+          // Component: DrinksMenu,
+          Component: ProductDrinks,
         },
         {
           path: '/pages/receipt/:receiptId?',
