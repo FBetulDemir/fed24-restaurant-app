@@ -3,7 +3,8 @@ import receiptImg from "../assets/receipt.png";
 import "../styles/receipt.css";
 
 const Receipt = ({ cart }) => {
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const items = Array.isArray(cart) ? cart : [];
+  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const moms = total * 0.25;
   const totalMedMoms = total + moms;
 
@@ -16,7 +17,7 @@ const Receipt = ({ cart }) => {
           <div className="receipt-divider"></div>
           <p className="order-number">Order nummer: #1235566</p>
           <div className="receipt-items">
-            {cart.map((item, index) => (
+            {items.map((item, index) => (
               <div className="receipt-item" key={index}>
                 <p>{item.name}</p>
                 <p>x{item.quantity}</p>

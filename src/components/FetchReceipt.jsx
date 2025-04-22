@@ -2,23 +2,41 @@ import React, { useEffect, useState } from "react";
 import Receipt from "./receipt"; 
 import { loadData } from "./api.js";
 
+const testCart = [
+  { name: "Maki roll", quantity: 12, price: 45 },
+  { name: "Sushi mega", quantity: 9, price: 50 },
+  { name: "Sushi oma", quantity: 15, price: 68 },
+];
+
 const FetchReceipt = () => {
   const [cart, setCart] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCart = async () => {
-      const data = await loadData("temporary-test-cart"); // ändra KEY sen
-      if (data) {
-        setCart(JSON.parse(data));
+      try {
+        const data = await loadData("temporary-test-cart");
+        if (data) {
+          setCart(JSON.parse(data));
+        }
+      } catch (err) {
+        console.error("Kunde inte hämta kundvagnen:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchCart();
   }, []);
 
-  if (!cart) return <p>Laddar kvitto...</p>;
+  const cartToUse = cart || testCart;
+  
+  console.log("cart:", cart);
+  console.log("cartToUse:", cartToUse);
 
-  return <Receipt cart={cart} />;
+  if (loading) return <p>Laddar kvitto...</p>;
+
+  return <Receipt cart={cartToUse} />;
 };
 
 export default FetchReceipt;

@@ -1,4 +1,5 @@
 import './App.css'
+import FetchReceipt from './components/FetchReceipt'
 import Receipt from './components/receipt'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       </header>
       <main>
 	  	<Receipt />
+		<FetchReceipt />
 
       </main>
       <footer>
