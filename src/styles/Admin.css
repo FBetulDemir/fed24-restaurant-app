@@ -1,0 +1,278 @@
+/* Reset Basic CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #1F2525;
+  color: #333;
+}
+
+/* Header */
+.admin-header {
+  background-color: #2E3535;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-header .logo {
+  width: 100px;
+  height: 100px;
+}
+
+/* Main Layout */
+.admin-container {
+  display: flex;
+  min-height: calc(100vh - 116px);
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 20%;
+  background-color: #D3D3D3;
+  padding: 1rem;
+}
+
+.admin-sidebar h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.admin-sidebar button {
+  width: 100%;
+  background-color: #A9A9A9;
+  color: white;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.admin-sidebar button:hover {
+  background-color: #8B8B8B;
+}
+
+/* Main Content */
+.admin-main {
+  width: 80%;
+  padding: 1rem;
+}
+
+.admin-content {
+  background-color: #E8ECEF;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* ปรับให้เนื้อหาเรียงในแนวตั้ง */
+  align-items: center;
+}
+
+.admin-content h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.admin-content p {
+  color: #666;
+}
+
+/* ปรับให้ใช้ความกว้างเต็มในหน้า AddMenu และ EditMenu */
+.admin-menu-list.full-width,
+.admin-menu-form.full-width {
+  width: 100%;
+  padding: 0;
+}
+
+/* Menu List */
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.menu-item-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-item-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-item-details span {
+  font-size: 1rem;
+}
+
+.menu-item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.menu-item .actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.menu-item .actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-item .actions svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #666;
+}
+
+.menu-item .actions button:hover svg {
+  color: #333;
+}
+
+.menu-empty {
+  color: #666;
+  font-style: italic;
+}
+
+/* Menu Form */
+.menu-form {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* ให้ฟอร์มใช้ความกว้างเต็ม */
+  max-width: 600px; /* จำกัดความกว้างสูงสุดเพื่อความสวยงาม */
+}
+
+.menu-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.menu-form input,
+.menu-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.menu-form textarea {
+  height: 80px;
+  resize: none;
+}
+
+.menu-form .ingredient-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.menu-form .ingredient-group input {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.menu-form .ingredient-group button {
+  margin-left: 0.5rem;
+  background-color: #A9A9A9;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.menu-form .ingredient-group button:hover {
+  background-color: #8B8B8B;
+}
+
+.menu-form .add-ingredient {
+  background-color: #A9A9A9;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.menu-form .add-ingredient:hover {
+  background-color: #8B8B8B;
+}
+
+.menu-form .image-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.menu-form .image-group input {
+  width: 75%;
+  margin-bottom: 0;
+}
+
+.menu-form .image-group .image-preview {
+  width: 25%;
+  margin-left: 1rem;
+}
+
+.menu-form .image-group .image-preview img,
+.menu-form .image-group .image-placeholder {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+}
+
+.menu-form .image-group .image-placeholder {
+  background-color: #E0E0E0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-form .image-group .image-placeholder svg {
+  width: 32px;
+  height: 32px;
+  color: #A9A9A9;
+}
+
+.menu-form button[type="submit"] {
+  width: 100%;
+  background-color: #A9A9A9;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.menu-form button[type="submit"]:hover {
+  background-color: #8B8B8B;
+}
+
+.menu-form-error {
+  color: #e53e3e;
+  margin-top: 1rem;
+  text-align: center;
+}
