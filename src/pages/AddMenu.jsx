@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuForm from '../components/MenuForm.jsx';
-import Header from '../components/Header.jsx'; // เพิ่ม Header
+import Header from '../components/Header.jsx';
 import { saveData, loadData } from '../api.js';
 import '../styles/Admin.css';
 
@@ -53,6 +53,7 @@ const AddMenu = () => {
       setNewMenuItem({ name: '', description: '', price: '', ingredients: [], image: '' });
       setError('');
       alert('Menu item added successfully!');
+      navigate('/admin/edit'); // นำทางไปยังหน้า Edit/Remove Menu เพื่อให้เห็นเมนูใหม่ทันที
     } catch (err) {
       setError(err.message || 'Failed to add menu item.');
     }
@@ -60,17 +61,14 @@ const AddMenu = () => {
 
   return (
     <div>
-      <Header /> {/* เพิ่ม Header */}
+      <Header />
       <div className="admin-container">
-        {/* Sidebar */}
         <aside className="admin-sidebar">
           <h2>Welcome Employee!</h2>
           <button onClick={() => navigate('/admin/add')}>NEW MENU</button>
           <button onClick={() => navigate('/admin/edit')}>EDIT/REMOVE MENU</button>
           <button onClick={() => navigate('/')}>SIGN OUT</button>
         </aside>
-
-        {/* Main Content */}
         <main className="admin-main">
           <div className="admin-content">
             <div className="admin-menu-form full-width">

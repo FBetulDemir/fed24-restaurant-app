@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { loadData } from './api.js';
 import Admin from './pages/Admin.jsx';
 import AddMenu from './pages/AddMenu.jsx';
@@ -14,7 +14,7 @@ const HomePage = () => (
   </main>
 );
 
-const MenuPage = ({ menu }) => (
+const MenuPage = ({ menu, refreshMenu }) => (
   <main className="app-main">
     <h2>Menu</h2>
     <div className="menu-grid">
@@ -32,43 +32,55 @@ const MenuPage = ({ menu }) => (
         ))
       )}
     </div>
+    <button onClick={refreshMenu} style={{ marginTop: '1rem', padding: '0.5rem 1rem' }}>
+      Refresh Menu
+    </button>
   </main>
 );
 
 const App = () => {
   const [menu, setMenu] = useState([]);
+  const location = useLocation(); // ใช้ useLocation เพื่อตรวจจับการเปลี่ยนหน้า
 
-  useEffect(() => {
-    const loadMenu = async () => {
-      try {
-        const data = await loadData('menu');
-        if (data) {
-          setMenu(data);
-        } else {
-          setMenu([]);
-        }
-      } catch (err) {
-        console.error('Failed to load menu:', err);
+  const loadMenu = async () => {
+    try {
+      const data = await loadData('menu');
+      if (data) {
+        setMenu(data);
+      } else {
         setMenu([]);
       }
-    };
-    loadMenu();
-  }, []);
+    } catch (err) {
+      console.error('Failed to load menu:', err);
+      setMenu([]);
+    }
+  };
+
+  useEffect(() => {
+    loadMenu(); // โหลดข้อมูลเมื่อหน้าเปลี่ยน
+  }, [location]); // เรียกใช้เมื่อ location เปลี่ยน (เช่น จาก /admin/add กลับมาที่ /menu)
 
   return (
-    <Router>
-      <div className="app-container">
-        <Header />
-        <Routes>
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/add" element={<AddMenu />} />
-          <Route path="/admin/edit" element={<EditMenu />} />
-          <Route path="/menu" element={<MenuPage menu={menu} />} />
-          <Route path="/" element={<HomePage />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="app-container">
+      <Header />
+      <Routes>
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/add" element={<AddMenu />} />
+        <Route path="/admin/edit" element={<EditMenu />} />
+        <Route
+          path="/menu"
+          element={<MenuPage menu={menu} refreshMenu={loadMenu} />}
+        />
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </div>
   );
 };
 
-export default App;
+const AppWrapper = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default AppWrapper;

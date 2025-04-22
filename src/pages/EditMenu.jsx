@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuList from '../components/MenuList.jsx';
-import Header from '../components/Header.jsx'; // เพิ่ม Header
+import Header from '../components/Header.jsx';
 import { saveData, loadData } from '../api.js';
 import '../styles/Admin.css';
 
@@ -28,7 +28,7 @@ const EditMenu = () => {
       }
     };
     fetchMenu();
-  }, []);
+  }, []); // useEffect ทำงานเมื่อหน้าโหลด ดังนั้นจะดึงข้อมูลเมนูใหม่
 
   const handleDeleteMenuItem = async (id) => {
     try {
@@ -81,17 +81,14 @@ const EditMenu = () => {
 
   return (
     <div>
-      <Header /> {/* เพิ่ม Header */}
+      <Header />
       <div className="admin-container">
-        {/* Sidebar */}
         <aside className="admin-sidebar">
           <h2>Welcome Employee!</h2>
           <button onClick={() => navigate('/admin/add')}>NEW MENU</button>
           <button onClick={() => navigate('/admin/edit')}>EDIT/REMOVE MENU</button>
           <button onClick={() => navigate('/')}>SIGN OUT</button>
         </aside>
-
-        {/* Main Content */}
         <main className="admin-main">
           <div className="admin-content">
             <div className="admin-menu-list full-width">
