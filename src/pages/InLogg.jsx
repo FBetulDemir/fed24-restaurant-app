@@ -54,9 +54,9 @@ function InLogg() {
         setError
         setIsValid(true)
 
-        setTimeout(() => { 
-            window.location.href = '/employee'
-        }, 1000000000) 
+        // setTimeout(() => { 
+        //     window.location.href = '/employee'
+        // }, 1000000000) 
         
 
     }       
@@ -94,14 +94,14 @@ function InLogg() {
             </section>
         </div>
 
-                {isLoggedIn && (
+                {/* {isLoggedIn && (
                     <section className="employee-section">
                         <h2>Välkommen! Du är nu inloggad!</h2>
                         <p>
                          Detta är endast en test sida/section för att se så att knappen fungerar fram tills vi routar och lägger ihop våra sidor
                         </p>
                     </section>
-            )}
+            )} */}
 
     </section>
 
