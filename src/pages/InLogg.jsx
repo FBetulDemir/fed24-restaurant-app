@@ -57,9 +57,9 @@ function InLogg() {
         setError
         setIsValid(true)
 
-        setTimeout(() => { 
-            window.location.href = '/employee'
-        }, 1000000000) 
+        // setTimeout(() => { 
+        //     window.location.href = '/employee'
+        // }, 1000000000) 
         
 
     }
@@ -72,29 +72,40 @@ function InLogg() {
                 <section className='form'>
                     {error && <p className='error'>{error}</p>}
 
-                    <p className="error"> </p> 
-                
-                        <p>Ange ditt lösenord för att logga in</p>
-                        <input className={
-                        `input-box ${isvalid === true ? 
-                        'input-success' : isvalid === false ? 
-                        'input-error' : ''}`}
+                <p className="error"> </p> 
+                    <p className='admin'>Admin</p>
+                    {/* <p>Ange ditt lösenord för att logga in</p> */}
+                    <input className={
+                    `input-box ${isvalid === true ? 
+                    'input-success' : isvalid === false ? 
+                    'input-error' : ''}`}
 
-                        type="password" 
-                        placeholder='Lösenord'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        />
-                    <p> &nbsp; </p> 
-                    
-                    <button className='ghost-button' onClick={handleSubmit} type='submit'>Logga In</button>
-                </section>
-            </div> 
-            {isLoggedIn && (
-                <section className="employee-section">
-                    <AdminStart/>
-                </section>
-            )}
+                    type="password" 
+                    placeholder='Lösenord'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                        handleSubmit(e)
+                    }}
+                     }
+                    />
+                <p> &nbsp; </p> 
+                <form onSubmit={handleSubmit}>
+
+                 <button className='ghost-button' type='submit'>Logga In</button>
+                </form>
+            </section>
+        </div>
+
+                {/* {isLoggedIn && (
+                    <section className="employee-section">
+                        <h2>Välkommen! Du är nu inloggad!</h2>
+                        <p>
+                         Detta är endast en test sida/section för att se så att knappen fungerar fram tills vi routar och lägger ihop våra sidor
+                        </p>
+                    </section>
+            )} */}
 
         </section>
 
