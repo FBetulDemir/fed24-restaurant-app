@@ -1,184 +1,93 @@
 .blurp {
-    background-image: url('../assets/receipt.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-    padding: 10px;
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-image: url('../assets/receipt.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 10px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sign-section {
-    background-color: #403b3bd6;
-    color: white;
-    padding: 30px;
-    width: 300px;
+  background-color: #403b3bd6;
+  color: white;
+  padding: 30px;
+  width: 400px;
 }
 
 
 .input-box {
-    background-color: #292828;
-    color: white;
-    width: 200px;    
-    border: 2px solid rgb(255, 255, 255);
-
+  background-color: #292828;
+  color: white;
+  width: 100%; 
+  border: 2px solid rgb(255, 255, 255);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  box-sizing: border-box; 
 }
 
 .input-error {
-    border: 2px solid red;
-    background-color: #ffe5e5;
-    text-shadow: 2px 2px 4px solid black;
+  border: 2px solid red;
+  background-color: #ffe5e5;
+  text-shadow: 2px 2px 4px solid black;
+  color: black;
   }
 
+.error {
+  color: red;
+  text-shadow: 2px 2px 4px solid black;
+}
+
 .success {
-    color: greenyellow;
+  color: greenyellow;
 }
 
 
 .input-success {
-    border: 2px solid green;
-    background-color: #e5ffe5;
-    color: black;
-  }
-  
-  .error {
-    color: red;
-    text-shadow: 2px 2px 4px solid black;
-  }
-
-  .input-box {
-    border: 2px solid transparent;
-    padding: 8px;
-    margin: 5px 0;
-    border-radius: 4px;
-  }
+  border: 2px solid green;
+  background-color: #e5ffe5;
+  color: black;
+}
   
 .ghost-button {
-    color: white;
-    width: 110px;
-    height: 40px;
-    background: transparent;
-    border: 2px solid white;
-    border-radius: 5px;
-       width: 100%;
-    color: #e6d6b2;
+  display: block;
+  margin: 20px auto 0 auto; 
+  width: 150px; 
+  max-width: 200px; 
+  color: #e6d6b2;
+  height: 40px;
+  background: transparent;
+  border: 2px solid white;
+  border-radius: 5px;
 }
 
 .admin {
-    color: lightgray;
-    font-style: italic;
-    font-size: 19px;
-    margin-bottom: 4px;
+  color: lightgray;
+  font-style: italic;
+  font-size: 19px;
+  margin-bottom: 4px;
 }
-
 
 @media (max-width: 480px) {
-  .sign-section,
-  .employee-section {
-    width: 90%;
-    margin: 20px auto;
-    padding: 20px;
-  }
-
-  .input-box {
-    width: 90%;
-    margin-left: -5px;
-  }
-
-  .ghost-button {
-    width: 50%;
-  }
-
-  .blurp {
-    height: auto;
-    padding: 20px;
-    background-size: cover;
-  }
-}
-
-/* Mellanstor (tablet, ca 750px) */
-@media (min-width: 481px) and (max-width: 900px) {
-  .sign-section,
-  .employee-section {
-    width: 80%;
-    margin: 30px auto;
-  }
-
-  .input-box {
-    width: 90%;
-  }
-
-  .ghost-button {
-    width: 150px;
-  }
-
-  .blurp {
-    height: auto;
-    padding: 30px;
-    background-size: cover;
-  }
-}
-
-/* Större skärmar (minst 1100px) */
-@media (min-width: 1100px) {
-  .sign-section,
-  .employee-section {
-    width: 400px;
-    margin-left: 100px;
-  }
-
-  .ghost-button {
-    width: 150px;
-  }
-
-  .blurp {
-    height: 500px;
-    background-size: cover;
-  }
- cursor: pointer;
-    align-items: center;
-}
-
-.ghost-button:hover {
-    color: grey;
-    border: 2px solid grey;
-}
-
-.employee-section {
-	color: white;
-    background-color: rgb(86, 86, 86);
-    padding: 10px;
+  .sign-section {
     width: 300px;
-}
-
-.admin {
-    color: lightgray;
-    font-style: italic;
-    font-size: 19px;
-    margin-bottom: 4px;
-}
-
-
-@media (max-width: 480px) {
-  .sign-section,
-  .employee-section {
-    width: 90%;
     margin: 20px auto;
     padding: 20px;
   }
 
   .input-box {
     width: 90%;
-    margin-left: -5px;
+    /* margin-left: -5px; */
   }
 
   .ghost-button {
-    width: 50%;
+    width: 150px;
   }
 
   .blurp {
@@ -188,16 +97,14 @@
   }
 }
 
-/* Mellanstor (tablet, ca 750px) */
 @media (min-width: 481px) and (max-width: 900px) {
-  .sign-section,
-  .employee-section {
-    width: 80%;
+  .sign-section {
+    width: 400px;
     margin: 30px auto;
   }
 
   .input-box {
-    width: 90%;
+    width: 100%;
   }
 
   .ghost-button {
@@ -208,23 +115,37 @@
     height: auto;
     padding: 30px;
     background-size: cover;
+    height: 500px;
   }
 }
 
-/* Större skärmar (minst 1100px) */
 @media (min-width: 1100px) {
-  .sign-section,
-  .employee-section {
+  .sign-section {
     width: 400px;
-    margin-left: 100px;
+    /* margin-left: 100px; */
   }
 
   .ghost-button {
     width: 150px;
+    cursor: pointer;
+    align-items: center;
   }
 
   .blurp {
     height: 500px;
     background-size: cover;
   }
+}
+
+/* Hover */
+.ghost-button:hover {
+  color: grey;
+  border: 2px solid grey;
+}
+
+.admin {
+  color: lightgray;
+  font-style: italic;
+  font-size: 19px;
+  margin-bottom: 4px;
 }

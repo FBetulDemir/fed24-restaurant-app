@@ -1,4 +1,4 @@
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Joi from 'joi'
 import '../styles/InLogg.css'
 import { useState, useEffect } from 'react'
@@ -17,7 +17,7 @@ function InLogg() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     const schema = Joi.object({
         password: Joi.string().min(4).required(),
@@ -53,14 +53,11 @@ function InLogg() {
             setIsValid(true)
             setIsLoggedIn(true)
         }
-
-        setError
+        // setError
         setIsValid(true)
 
-        // setTimeout(() => { 
-        //     window.location.href = '/employee'
-        // }, 1000000000) 
-        
+        navigate('/components/admin')
+
 
     }
    
@@ -97,15 +94,6 @@ function InLogg() {
                 </form>
             </section>
         </div>
-
-                {/* {isLoggedIn && (
-                    <section className="employee-section">
-                        <h2>Välkommen! Du är nu inloggad!</h2>
-                        <p>
-                         Detta är endast en test sida/section för att se så att knappen fungerar fram tills vi routar och lägger ihop våra sidor
-                        </p>
-                    </section>
-            )} */}
 
         </section>
 

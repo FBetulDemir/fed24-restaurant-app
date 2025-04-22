@@ -73,7 +73,7 @@ const router = createHashRouter(
         },
         { 
           path: 'components/admin/:adminId?', 
-          Component: AdminStart
+          Component: AdminStart 
         },
         { 
           path: 'components/adminNewDish/:adminNewDishId?', 
