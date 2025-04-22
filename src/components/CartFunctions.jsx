@@ -1,20 +1,18 @@
 //3.  och även en lägg till/ta bort funktion, med en counter därtill.
 import React, { useState } from "react";
-export function increaseNumber(number) {
-  return number + 1;
-}
 
-export function decreaseNumber(number) {
-  return number - 1;
-}
-
-export function numbers() {
-  const [number, setNumber] = useState(0);
+function Buttons() {
+  const [count, setCount] = useState(0);
+  const handleClickUp = () => setCount(count + 1);
+  const handleClickDown = () =>
+    setCount((prevCount) => Math.max(prevCount - 1, 0));
 
   return (
     <div>
-      <button onClick={() => setNumber(increaseNumber(number))}></button>
-      <button onClick={() => setNumber(decreaseNumber(number))}></button>
+      <button onClick={handleClickUp}>LÄGG TILL</button>
+      <div>{count}</div>
+      <button onClick={handleClickDown}>TA BORT</button>
     </div>
   );
 }
+export default Buttons;
