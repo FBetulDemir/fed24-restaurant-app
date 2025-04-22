@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Receipt from "./receipt"; 
 import { loadData } from "../api/api"; 
 
-const ReceiptPage = () => {
+const FetchReceipt = () => {
   const [cart, setCart] = useState(null);
 
   useEffect(() => {
@@ -21,4 +21,4 @@ const ReceiptPage = () => {
   return <Receipt cart={cart} />;
 };
 
-export default ReceiptPage;
+export default FetchReceipt;
