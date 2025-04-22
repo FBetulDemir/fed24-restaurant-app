@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Receipt from "./receipt"; 
-import { loadData } from "../api/api"; 
+import { loadData } from "./api.js";
 
 const FetchReceipt = () => {
   const [cart, setCart] = useState(null);
