@@ -21,13 +21,14 @@ const Drinks = () => {
                 <h2 className="product-title">Beverages</h2>
                 <p className="product-description">{drinks.description}</p>
                 {drinksMenuList.map((drink, index) => (
-                    <div key={index} className="product-price">
+                    <div key={index} className="product-price-drinks-nigiri">
                         <p className="product-name">
+                            <button className="product-buy-btn">Lägg till</button>
                             {drink.name} <span className="product-space-price">{drink.price}:-</span>
                             {drink.volume && (
                                 <>
                                 <span className="product-volume"> (volym {drink.volume})</span>
-                                <button className="product-buy-btn">Lägg till</button>
+                                
                                 </>
                             )}
                         </p>

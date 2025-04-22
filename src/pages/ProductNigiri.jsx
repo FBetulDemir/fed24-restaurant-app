@@ -18,18 +18,18 @@ const NigiriSushi = () => {
             
             <div className="product-price-descrip-container">
                 
-                <h2 className="product-title">Nigiri Sushi (2 bitar)</h2>
+                <h2 className="product-title">Nigiri Sushi</h2>
                 <p className="product-description">{nigiriSushi.description}</p>
                 {nigiriMenuList.map((nigiri, index) => (
-                    <div key={index} className="product-price">
+                    <div key={index} className="product-price-drinks-nigiri">
                         <p className="product-name">
                             <button className="product-buy-btn">Lägg till</button>
-                             {nigiri.name} {nigiri.price}:- 
-                            {nigiri.extra && (
+                            <span className="product-length">2 bitar {nigiri.name} {nigiri.price}:-</span> 
+                            {/* {nigiri.extra && (
                                 <>
                                      <button className="product-extra-btn">extra bit +{nigiri.extra}:-</button>
-                                </>
-                            )}</p>
+                                </>)} */}
+                        </p>
                             {nigiri.ingredients && (
                                 <p className="product-ingredients">({nigiri.ingredients.join(", ")})</p>
                         )}

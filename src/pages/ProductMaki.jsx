@@ -20,13 +20,13 @@ const MakiSushi = () => {
             
             <div className="product-price-descrip-container">
                 
-                <h2 className="product-title">Maki Sushi (8 bitar)</h2>
+                <h2 className="product-title">Maki Sushi</h2>
                 <p className="product-description">{makiSushi.description}</p>
                 {makiMenuList.map((maki, index) => (
                     <div key={index} className="product-price">
                         <p className="product-name">
                             <button className="product-buy-btn">Lägg till</button>
-                             {maki.name} {maki.price}:- 
+                             <span className="product-length">8 bitar {maki.name} {maki.price}:-</span> 
                             {maki.extra && (
                                 <>
                                      <button className="product-extra-btn">extra bit +{maki.extra}:-</button>
