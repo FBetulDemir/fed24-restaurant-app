@@ -9,11 +9,9 @@ const Footer = () => {
             <div className="footer-section">
                 <h4>Snabblänkar</h4>
                 <ul>
+
                     <li>
-                        <NavLink to="/" className="navlink-footer">Hem</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/pages/menu/menu/"     className="navlink-footer">Meny
+                        <NavLink to="/pages/menu/menu/" className="navlink-footer">Meny
                         </NavLink>
                     </li>
                     <li>

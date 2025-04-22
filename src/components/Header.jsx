@@ -42,7 +42,6 @@ const Header = () => {
         <header className="header">
             <nav className="nav">
                 <ul className="nav-left">
-                    <li><NavLink to="/" className="navlink">HEM</NavLink></li>
                     {/* <li><NavLink to='/pages/about' className="navlink">OM</NavLink></li> */}
                     <li className="dropdown">
                         <button onClick={toggleDropdown} className="dropbtn btn-dark">
@@ -75,7 +74,9 @@ const Header = () => {
                         )}
                     </li>
                 </ul>
-                <div className="logo">ISUSHI</div>
+                <div className="logo-container">
+                   <NavLink to='/' className="logo">ISUSHI</NavLink>
+                </div>
 
                 <button className="hamburger-button" onClick={toggleHamburger}>
                     <span className="hamburger-line"></span>
@@ -85,7 +86,7 @@ const Header = () => {
 
                 <div className="dropdown-content" style={{ display: hamburgerOpen ? 'block' : 'none' }}>
                     
-                    <NavLink to="/" className="navlink" onClick={() => setHamburgerOpen(false)}>HEM</NavLink>
+                    <NavLink to="/" className="navlink" onClick={() => setHamburgerOpen(false)}></NavLink>
                     <NavLink to="/pages/about" className="navlink" onClick={() => setHamburgerOpen(false)}>OM</NavLink>
                     <NavLink to="/pages/login" className="navlink" onClick={() => setHamburgerOpen(false)}>
                         <button className="btn-dark">LOGGA IN</button>
@@ -97,11 +98,6 @@ const Header = () => {
                 </div>
                             
                 <ul className="nav-right">
-                    <li>
-                        <NavLink to="/pages/login" className="navlink">
-                            <button className="btn-dark">LOGGA IN</button>
-                        </NavLink>
-                    </li>
                     <li className="cart-icon-wrapper">
                         <NavLink to="components/cart/:cartId?" className="navlink">
                             <button className="btn-dark cart-button">

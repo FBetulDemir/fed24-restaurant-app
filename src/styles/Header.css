@@ -31,6 +31,12 @@
     padding: 0.2rem 1.2rem;
     letter-spacing: 0.15rem;
     background-color: transparent;
+    text-decoration: none;
+}
+
+.logo:hover {
+    background-color: #D9BF77;
+    color: #2A2828;
 }
 
 .nav-right, .nav-left{
@@ -47,7 +53,7 @@
         cursor: pointer;
         &:hover {
             background-color: #D9BF77;
-            color: #2a2a2a;
+            color:  rgba(42, 40, 40, 0.551);
         }
     }
 }
