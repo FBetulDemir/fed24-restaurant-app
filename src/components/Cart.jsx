@@ -1,4 +1,4 @@
-import "./cart.css";
+import "../styles/Cart.css"
 import Buttons from "./CartFunctions.jsx";
 // import "../styles/cart.css";
 // import "./CartFunctions";
