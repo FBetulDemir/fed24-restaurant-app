@@ -28,6 +28,7 @@ const MenuList = ({ menu, onDelete, onEdit }) => {
             <div className="menu-item-content">
               <div className="menu-item-details">
                 <span>Menu {index + 1}: {item.name} ({item.group})</span>
+                {item.extraPrice && <span>Extra Price: {item.extraPrice} kr</span>}
               </div>
               <div className="actions">
                 <button onClick={() => setEditingItem(item)}>

@@ -65,10 +65,6 @@ const EditMenu = () => {
       setError('Price must be a positive number.');
       return;
     }
-    if (!updatedItem.ingredients || updatedItem.ingredients.length === 0) {
-      setError('At least one ingredient is required.');
-      return;
-    }
 
     try {
       const updatedMenu = menu.map((item) =>

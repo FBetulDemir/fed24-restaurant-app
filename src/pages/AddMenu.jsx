@@ -12,7 +12,8 @@ const AddMenu = () => {
     description: '',
     price: '',
     ingredients: [],
-    group: '', // เพิ่มฟิลด์ group
+    group: '',
+    extraPrice: '', // เพิ่มฟิลด์ extraPrice
   });
   const navigate = useNavigate();
 
@@ -34,10 +35,6 @@ const AddMenu = () => {
       setError('Price must be a positive number.');
       return;
     }
-    if (!newMenuItem.ingredients || newMenuItem.ingredients.length === 0) {
-      setError('At least one ingredient is required.');
-      return;
-    }
 
     try {
       const existingMenu = (await loadData('menu')) || [];
@@ -53,7 +50,7 @@ const AddMenu = () => {
         throw new Error('Failed to add menu item. Please try again.');
       }
 
-      setNewMenuItem({ name: '', description: '', price: '', ingredients: [], group: '' });
+      setNewMenuItem({ name: '', description: '', price: '', ingredients: [], group: '', extraPrice: '' });
       setError('');
       alert('Menu item added successfully!');
       navigate('/admin/edit');

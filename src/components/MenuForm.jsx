@@ -52,7 +52,7 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
         />
       </div>
       <div>
-        <label>Price</label>
+        <label>Price (kr)</label>
         <input
           type="number"
           value={menuItem.price}
@@ -61,14 +61,21 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
         />
       </div>
       <div>
-        <label>Ingredients</label>
+        <label>Extra Price (kr) (optional)</label>
+        <input
+          type="number"
+          value={menuItem.extraPrice || ''}
+          onChange={(e) => setMenuItem({ ...menuItem, extraPrice: e.target.value })}
+        />
+      </div>
+      <div>
+        <label>Ingredients (optional)</label>
         {menuItem.ingredients.map((ingredient, index) => (
           <div key={index} className="ingredient-group">
             <input
               type="text"
               value={ingredient}
               onChange={(e) => handleIngredientChange(index, e.target.value)}
-              required
             />
             <button type="button" onClick={() => removeIngredient(index)}>
               Remove
