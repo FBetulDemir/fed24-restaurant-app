@@ -1,3 +1,4 @@
+// src/components/MenuForm.jsx
 import React from 'react';
 
 const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
@@ -16,17 +17,6 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
       ...menuItem,
       ingredients: menuItem.ingredients.filter((_, i) => i !== index),
     });
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setMenuItem({ ...menuItem, image: reader.result }); // เก็บ Base64 string
-      };
-      reader.readAsDataURL(file);
-    }
   };
 
   return (
@@ -75,28 +65,6 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
         <button type="button" onClick={addIngredient} className="add-ingredient">
           Add Ingredient
         </button>
-      </div>
-      <div className="image-group">
-        <div>
-          <label>Upload Picture</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            required
-          />
-        </div>
-        <div className="image-preview">
-          {menuItem.image ? (
-            <img src={menuItem.image} alt="Preview" />
-          ) : (
-            <div className="image-placeholder">
-              <svg fill="currentColor" viewBox="0 0 24 24">
-                <path d="M4 4h16v16H4V4zm2 2v12h12V6H6zm2 2h8v8H8V8zm2 2v4h4v-4h-4z" />
-              </svg>
-            </div>
-          )}
-        </div>
       </div>
       <button type="submit">{buttonText}</button>
     </form>
