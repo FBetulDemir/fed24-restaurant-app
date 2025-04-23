@@ -3,9 +3,9 @@ import Receipt from "./receipt";
 import { loadData } from "./Api.js";
 
 const testCart = [
-  { name: "Maki roll", quantity: 12, price: 45 },
-  { name: "Sushi mega", quantity: 9, price: 50 },
-  { name: "Sushi oma", quantity: 15, price: 68 },
+  { name: "Maki roll", quantity: 1, price: 45 },
+  { name: "Sushi mega", quantity: 1, price: 50 },
+  { name: "Sushi oma", quantity: 1, price: 68 },
 ];
 
 const FetchReceipt = () => {
