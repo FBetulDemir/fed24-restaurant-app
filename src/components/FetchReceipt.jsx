@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Receipt from "./receipt"; 
-import { loadData } from "./api.js";
+import { loadData } from "./Api.js";
 
 const testCart = [
   { name: "Maki roll", quantity: 12, price: 45 },
