@@ -21,6 +21,20 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
   return (
     <form onSubmit={onSubmit} className="menu-form">
       <div>
+        <label>Group</label>
+        <select
+          value={menuItem.group || ''}
+          onChange={(e) => setMenuItem({ ...menuItem, group: e.target.value })}
+          required
+        >
+          <option value="" disabled>Select a group</option>
+          <option value="Maki">Maki</option>
+          <option value="Nigiri">Nigiri</option>
+          <option value="Sashimi">Sashimi</option>
+          <option value="Drinks">Drinks</option>
+        </select>
+      </div>
+      <div>
         <label>Add Title</label>
         <input
           type="text"

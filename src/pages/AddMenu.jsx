@@ -12,11 +12,16 @@ const AddMenu = () => {
     description: '',
     price: '',
     ingredients: [],
+    group: '', // เพิ่มฟิลด์ group
   });
   const navigate = useNavigate();
 
   const handleAddMenuItem = async (e) => {
     e.preventDefault();
+    if (!newMenuItem.group) {
+      setError('Please select a group.');
+      return;
+    }
     if (!newMenuItem.name || newMenuItem.name.length < 3) {
       setError('Name must be at least 3 characters long.');
       return;
@@ -48,7 +53,7 @@ const AddMenu = () => {
         throw new Error('Failed to add menu item. Please try again.');
       }
 
-      setNewMenuItem({ name: '', description: '', price: '', ingredients: [] });
+      setNewMenuItem({ name: '', description: '', price: '', ingredients: [], group: '' });
       setError('');
       alert('Menu item added successfully!');
       navigate('/admin/edit');

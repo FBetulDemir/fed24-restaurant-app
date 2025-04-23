@@ -49,6 +49,10 @@ const EditMenu = () => {
   };
 
   const handleEditMenuItem = async (id, updatedItem) => {
+    if (!updatedItem.group) {
+      setError('Please select a group.');
+      return;
+    }
     if (!updatedItem.name || updatedItem.name.length < 3) {
       setError('Name must be at least 3 characters long.');
       return;

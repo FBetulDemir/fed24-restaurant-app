@@ -23,7 +23,7 @@ const MenuPage = ({ menu, refreshMenu }) => (
       ) : (
         menu.map(item => (
           <div key={item.id} className="menu-card">
-            <h3>{item.name}</h3>
+            <h3>{item.name} ({item.group})</h3>
             <p>{item.description}</p>
             <p>Price: ฿{item.price}</p>
             <p>Ingredients: {item.ingredients.join(', ')}</p>
