@@ -25,11 +25,12 @@ const Sashimi = () => {
                         <p className="product-name">
                             <button className="product-buy-btn">Lägg till </button> 
                             <span className="product-length">5 bitar {sashimi.name} {sashimi.price}:-</span> 
-                            {sashimi.extra && (
+                            {/* {sashimi.extra && (
                                 <>
                                      <button className="product-extra-btn">extra bit +{sashimi.extra}:-</button>
                                 </>
-                            )}</p>
+                            )} */}
+                        </p>
                             {sashimi.ingredients && (
                                 <p className="product-ingredients">({sashimi.ingredients.join(", ")})</p>
                         )}

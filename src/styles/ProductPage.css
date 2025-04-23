@@ -36,9 +36,12 @@
     margin: 2em 0 2em 0;
 }
 .product-description {
+    display: flex;
+    justify-content: center;
     margin-bottom: 3em;
     font-size: 1.2em;
     padding: 0 1em 0 1em;
+    max-width: 40em;
 }
 
 .product-columns {
@@ -58,7 +61,7 @@
     flex-direction: column;
     align-items: start;
     margin: 1em;
-    width: 28em;
+    width: 26em;
 }
 
 .product-sides {
@@ -67,8 +70,10 @@
 }
 
 .product-ingredients {
+    display: flex;
+    justify-content: center;
     font-style: italic;
-    width: 27em;
+    /* width: 27em; */
 }
 
 .product-buy-btn, .product-extra-btn {
@@ -98,6 +103,7 @@
 .product-name {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .product-volume {
     display: flex;
@@ -126,7 +132,7 @@
   }
   
 
-  @media (max-width: 1090px) {
+  @media (max-width: 1111px) {
     .product-image {
       width: 70vw;
     }

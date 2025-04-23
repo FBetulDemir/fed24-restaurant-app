@@ -10,10 +10,10 @@ const API_KEY = "isushi-menu";
 const AdminDishForm = () => {
   const [formData, setFormData] = useState({
     name: "",
-    description: "",
+    // description: "",
     price: "",
     ingredients: "",
-    image: ""
+    // image: ""
   });
 
   const [menuList, setMenuList] = useState([]);
@@ -45,10 +45,10 @@ const AdminDishForm = () => {
     const newDish = {
       id: crypto.randomUUID(),
       name: formData.name,
-      description: formData.description,
+      // description: formData.description,
       price: parseFloat(formData.price),
       ingredients: formData.ingredients.split(",").map(s => s.trim()),
-      image: formData.image,
+      // image: formData.image,
       category: formData.category
     };
 
@@ -79,10 +79,10 @@ const AdminDishForm = () => {
         setMenuList(updatedMenu);
         setFormData({
           name: "",
-          description: "",
+          // description: "",
           price: "",
           ingredients: "",
-          image: ""
+          // image: ""
         });
         setSuccess("Maträtten har lagts till!");
         setError("");
@@ -104,14 +104,15 @@ const AdminDishForm = () => {
         <h1>Lägg till en ny maträtt</h1>
         <form className="dish-form" onSubmit={handleSubmit}>
             <input name="name" value={formData.name} onChange={handleChange} placeholder="Namn" />
-            <input name="description" value={formData.description} onChange={handleChange} placeholder="Beskrivning" />
+            {/* <input name="description" value={formData.description} onChange={handleChange} placeholder="Beskrivning" /> */}
             <input name="price" type="number" value={formData.price} onChange={handleChange} placeholder="Pris" />
             <input name="ingredients" value={formData.ingredients} onChange={handleChange} placeholder="Ingredienser (komma-separerat)" />
-            <input name="image" value={formData.image} onChange={handleChange} placeholder="https://yourdomain.com/assets/image.png" />
+            {/* <input name="image" value={formData.image} onChange={handleChange} placeholder="https://yourdomain.com/assets/image.png" /> */}
             <select name="category" value={formData.category} onChange={handleChange}>
-                <option value="sushi">Sushi</option>
+                <option value="maki">Maki</option>
                 <option value="sashimi">Sashimi</option>
                 <option value="drinks">Drycker</option>
+                <option value="nigiri">Nigiri</option>
             </select>
             <button type="submit" className="form-btn">Lägg till</button>
         </form>
