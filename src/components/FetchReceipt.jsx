@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Receipt from "../pages/receipt.jsx";
 import { loadData } from "./Api.js";
 
+const testCart = [];
+
 
 const FetchReceipt = () => {
   const [cart, setCart] = useState(null);
