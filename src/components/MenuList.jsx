@@ -28,6 +28,9 @@ const MenuList = ({ menu, onDelete, onEdit }) => {
             <div className="menu-item-content">
               <div className="menu-item-details">
                 <span>Menu {index + 1}: {item.name}</span>
+                {item.image && (
+                  <img src={item.image} alt={item.name} className="menu-item-image" />
+                )}
               </div>
               <div className="actions">
                 <button onClick={() => setEditingItem(item)}>

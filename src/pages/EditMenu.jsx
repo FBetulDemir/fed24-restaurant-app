@@ -10,28 +10,25 @@ const EditMenu = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const fetchMenu = async () => {
-    try {
-      const data = await loadData('menu');
-      console.log('Loaded menu in EditMenu:', data);
-      if (data) {
-        const menuWithIds = data.map((item, index) => ({
-          id: item.id || index + 1,
-          ...item,
-        }));
-        setMenu(menuWithIds);
-      } else {
-        setMenu([]);
-      }
-    } catch (err) {
-      setError('Failed to load menu data.');
-      console.error('Error loading menu:', err);
-    }
-  };
-
   useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const data = await loadData('menu');
+        if (data) {
+          const menuWithIds = data.map((item, index) => ({
+            id: item.id || index + 1,
+            ...item,
+          }));
+          setMenu(menuWithIds);
+        } else {
+          setMenu([]);
+        }
+      } catch (err) {
+        setError('Failed to load menu data.');
+      }
+    };
     fetchMenu();
-  }, []);
+  }, []); // useEffect ทำงานเมื่อหน้าโหลด ดังนั้นจะดึงข้อมูลเมนูใหม่
 
   const handleDeleteMenuItem = async (id) => {
     try {
@@ -41,10 +38,8 @@ const EditMenu = () => {
         throw new Error('Failed to delete menu item.');
       }
       setMenu(updatedMenu);
-      console.log('Menu after delete:', updatedMenu);
     } catch (err) {
       setError(err.message || 'Failed to delete menu item.');
-      console.error('Error deleting menu item:', err);
     }
   };
 
@@ -65,6 +60,10 @@ const EditMenu = () => {
       setError('At least one ingredient is required.');
       return;
     }
+    if (!updatedItem.image) {
+      setError('An image is required.');
+      return;
+    }
 
     try {
       const updatedMenu = menu.map((item) =>
@@ -75,10 +74,8 @@ const EditMenu = () => {
         throw new Error('Failed to update menu item.');
       }
       setMenu(updatedMenu);
-      console.log('Menu after update:', updatedMenu);
     } catch (err) {
       setError(err.message || 'Failed to update menu item.');
-      console.error('Error updating menu item:', err);
     }
   };
 
@@ -95,12 +92,6 @@ const EditMenu = () => {
         <main className="admin-main">
           <div className="admin-content">
             <div className="admin-menu-list full-width">
-              <button
-                onClick={fetchMenu}
-                style={{ marginBottom: '1rem', padding: '0.5rem 1rem' }}
-              >
-                Refresh Menu
-              </button>
               <MenuList
                 menu={menu}
                 onDelete={handleDeleteMenuItem}
