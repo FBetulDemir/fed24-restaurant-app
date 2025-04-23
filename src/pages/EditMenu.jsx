@@ -1,4 +1,3 @@
-// src/pages/EditMenu.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuList from '../components/MenuList.jsx';

@@ -1,4 +1,3 @@
-// src/components/MenuList.jsx
 import React, { useState } from 'react';
 import MenuForm from './MenuForm.jsx';
 

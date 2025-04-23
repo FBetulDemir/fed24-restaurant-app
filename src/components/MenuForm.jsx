@@ -1,4 +1,3 @@
-// src/components/MenuForm.jsx
 import React from 'react';
 
 const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {

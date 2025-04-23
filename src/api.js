@@ -1,4 +1,3 @@
-// src/api.js
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
 
 export async function saveData(key, value) {

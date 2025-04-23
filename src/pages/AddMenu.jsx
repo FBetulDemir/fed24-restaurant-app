@@ -1,4 +1,3 @@
-// src/pages/AddMenu.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuForm from '../components/MenuForm.jsx';
