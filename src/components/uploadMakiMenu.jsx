@@ -10,6 +10,7 @@ const makiMenuList = [
     price: 95,
     ingredients: [],
     category: "maki",
+    extraBitPrice: 15
   },
   {
     id: crypto.randomUUID(),
@@ -17,6 +18,7 @@ const makiMenuList = [
     ingredients: ["Krabba", "avokado", "gurka"],
     price: 85,
     category: "maki",
+    extraBitPrice: 12
   },
   {
     id: crypto.randomUUID(),
@@ -24,6 +26,7 @@ const makiMenuList = [
     ingredients: ["Räkor i tempura", "kryddig majonnäs"],
     price: 99,
     category: "maki",
+    extraBitPrice: 16
   },
   {
     id: crypto.randomUUID(),
@@ -31,6 +34,7 @@ const makiMenuList = [
     price: 75,
     ingredients: [],
     category: "maki",
+    extraBitPrice: 11
   },
   {
     id: crypto.randomUUID(),
@@ -38,6 +42,7 @@ const makiMenuList = [
     price: 70,
     ingredients: [],
     category: "maki",
+    extraBitPrice: 10
   },
 ];
 

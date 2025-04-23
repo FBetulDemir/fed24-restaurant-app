@@ -25,10 +25,10 @@ const NigiriSushi = () => {
                         <p className="product-name">
                             <button className="product-buy-btn">Lägg till</button>
                             <span className="product-length">2 bitar {nigiri.name} {nigiri.price}:-</span> 
-                            {/* {nigiri.extra && (
+                            {nigiri.extra && (
                                 <>
                                      <button className="product-extra-btn">extra bit +{nigiri.extra}:-</button>
-                                </>)} */}
+                                </>)}
                         </p>
                             {nigiri.ingredients && (
                                 <p className="product-ingredients">({nigiri.ingredients.join(", ")})</p>

@@ -48,6 +48,10 @@ const MakiSushi = () => {
               <p className="product-name">
                 <button className="product-buy-btn">Lägg till</button>
                 <span className="product-length">8 bitar {maki.name} {maki.price}:-</span>
+                {maki.extraBitPrice && (
+                     <>
+                        <button className="product-extra-btn">extra bit +{maki.extraBitPrice}:-</button>
+                    </>)}
               </p>
               {maki.ingredients && (
                 <p className="product-ingredients">{maki.ingredients.join(', ')}</p>
