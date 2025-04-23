@@ -84,13 +84,13 @@ const EditMenu = () => {
 
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       <div className="admin-container">
         <aside className="admin-sidebar">
-          <h2>Välkommen Tillbaka!</h2>
-          <button onClick={() => navigate('/admin/add')}>Ny Meny</button>
-          <button onClick={() => navigate('/admin/edit')}>Ändra/Ta bort Meny</button>
-          <button onClick={() => navigate('/')}>Logga ut</button>
+          <h2>Welcome Employee!</h2>
+          <button onClick={() => navigate('/admin/add')}>NEW MENU</button>
+          <button onClick={() => navigate('/admin/edit')}>EDIT/REMOVE MENU</button>
+          <button onClick={() => navigate('/')}>SIGN OUT</button>
         </aside>
         <main className="admin-main">
           <div className="admin-content">
@@ -116,6 +116,3 @@ const EditMenu = () => {
 };
 
 export default EditMenu;
-
-
-// Todo AdminDishForm
