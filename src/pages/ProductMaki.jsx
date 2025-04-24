@@ -42,8 +42,8 @@ const MakiSushi = () => {
 
   return (
     <section className="product-page">
-      <UploadMakiMenu />
-      {error && <p className="error">{error}</p>}
+      {/* <UploadMakiMenu />
+      {error && <p className="error">{error}</p>} */}
       <div className="product-img-sides-container">
         <img src={makiSushi.image} alt={makiSushi.name} className="product-image" />
         <p className="product-sides">{makiSushi.sides}</p>
