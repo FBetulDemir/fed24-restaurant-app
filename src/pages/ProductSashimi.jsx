@@ -21,22 +21,22 @@ const Sashimi = () => {
           const sashimiItems = data.filter((item) => item.category === "sashimi");
           setSashimiMenuList(sashimiItems);
           if (sashimiItems.length === 0) {
-            setError("No sashimi items found in the API response.");
+            setError("Inga sashimi-objekt hittades i API-svaret.");
           }
         } else {
-          setError("API response is not a list of menu items.");
+          setError("API-svaret är inte en lista över menyobjekt.");
         }
       } catch (err) {
-        console.error("Failed to load menu", err);
-        setError("Could not load the menu.");
+        console.error("Misslyckades med att ladda menyn", err);
+        setError("Kunde inte ladda menyn.");
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchMenu();
   }, []);
-
+  
   return (
     <section className="product-page">
       <UploadAllMenus />
@@ -49,7 +49,7 @@ const Sashimi = () => {
         <h2 className="product-title">Sashimi</h2>
         <p className="product-description">{sashimi.description}</p>
         {loading ? (
-          <p>Loading menu...</p>
+          <p>Laddar meny...</p>
         ) : sashimiMenuList.length > 0 ? (
           sashimiMenuList.map((sashimi, index) => (
             <div key={sashimi.id || index} className="product-price">
@@ -64,19 +64,19 @@ const Sashimi = () => {
                   </button>
                 )}
               </p>
-              {sashimi.ingredients && 
+              {sashimi.ingredients && (
                 <p className="product-ingredients">
                   {sashimi.ingredients.join(", ")}
                 </p>
-              }
+              )}
             </div>
           ))
         ) : (
-          <p>No sashimi items available at the moment.</p>
+          <p>Inga sashimi-objekt tillgängliga för tillfället.</p>
         )}
       </div>
     </section>
   );
-};
-
-export default Sashimi;
+  };
+  
+  export default Sashimi;
