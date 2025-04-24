@@ -2,6 +2,7 @@ import "../styles/ProductPage.css";
 import React, { useState, useEffect } from "react";
 import { sushiMenu } from "../data/produktLists.js";
 import UploadAllMenus from "../components/uploadAllMenus.jsx";
+import { useCart } from "../components/CartFunctions.jsx";
 
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
 const API_KEY = "isushi-menu";
@@ -11,6 +12,7 @@ const MakiSushi = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const makiSushi = sushiMenu[0];
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -37,6 +39,18 @@ const MakiSushi = () => {
     fetchMenu();
   }, []);
 
+// Function to handle adding item to cart
+const handleAddToCart = (maki) => {
+  addToCart({
+    id: maki.id,
+    name: maki.name,
+    price: maki.price,
+    quantity: 8,
+    ingredients: maki.ingredients || [],
+  });
+};
+
+
   return (
     <section className="product-page">
       <UploadAllMenus />
@@ -54,7 +68,12 @@ const MakiSushi = () => {
           makiMenuList.map((maki, index) => (
             <div key={maki.id || index} className="product-price">
               <p className="product-name">
-                <button className="product-buy-btn">Lägg till 8 bitar</button>
+              <button
+                  className="product-buy-btn"
+                  onClick={() => handleAddToCart(maki)}
+                >
+                  Lägg till 8 bitar
+                </button>
                 <span className="product-length">
                   {maki.name} {maki.price}:-
                 </span>
