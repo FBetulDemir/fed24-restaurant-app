@@ -22,16 +22,22 @@ export function useCart() {
   }, [cart]);
 
   const addToCart = (item) => {
-    setCart(prev => {
-      const existing = prev.find(p => p.id === item.id);
-      if (existing) {
-        return prev.map(p => p.id === item.id
-          ? { ...p, quantity: p.quantity + 1 }
-          : p);
-      }
-      return [...prev, { ...item, quantity: 1 }];
-    });
+	setCart(prev => {
+	  const existing = prev.find(p => p.id === item.id);
+	  const qtyToAdd = item.quantity || 1;
+  
+	  if (existing) {
+		return prev.map(p =>
+		  p.id === item.id
+			? { ...p, quantity: p.quantity + qtyToAdd }
+			: p
+		);
+	  }
+  
+	  return [...prev, { ...item, quantity: qtyToAdd }];
+	});
   };
+  
 
   const removeFromCart = (id) => {
     setCart(prev => prev.filter(p => p.id !== id));
