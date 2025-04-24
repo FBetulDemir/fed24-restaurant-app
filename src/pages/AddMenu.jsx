@@ -13,7 +13,7 @@ const AddMenu = () => {
     price: '',
     ingredients: [],
     group: '',
-    extraPrice: '', // เพิ่มฟิลด์ extraPrice
+    extraPrice: '',
   });
   const navigate = useNavigate();
 
@@ -47,8 +47,12 @@ const AddMenu = () => {
 
       const success = await saveData('menu', updatedMenu);
       if (!success) {
-        throw new Error('Failed to add menu item. Please try again.');
+        throw new Error('Failed to add menu item. The API may be unavailable or reached its limit.');
       }
+
+      // ดีบั๊ก: โหลดข้อมูลหลังบันทึกเพื่อยืนยัน
+      const updatedData = await loadData('menu');
+      console.log('Data after saving:', updatedData);
 
       setNewMenuItem({ name: '', description: '', price: '', ingredients: [], group: '', extraPrice: '' });
       setError('');

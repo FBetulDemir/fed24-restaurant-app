@@ -14,9 +14,19 @@ export async function saveData(key, value) {
         value: JSON.stringify(value)
       })
     });
-    const result = await response.json();
-    console.log(`saveData response for key ${uniqueKey}:`, result); // ดีบั๊ก: ดูผลลัพธ์การบันทึก
-    return response.ok;
+
+    // ตรวจสอบว่า response เป็น JSON หรือไม่
+    const contentType = response.headers.get("content-type");
+    let result;
+    if (contentType && contentType.includes("application/json")) {
+      result = await response.json();
+      console.log(`saveData response for key ${uniqueKey}:`, result);
+    } else {
+      result = await response.text();
+      console.log(`saveData response (text) for key ${uniqueKey}:`, result);
+    }
+
+    return response.ok; // คืนค่า true หากการบันทึกสำเร็จ
   } catch (error) {
     console.error(`Save error for key ${uniqueKey}:`, error);
     return false;
@@ -28,7 +38,7 @@ export async function loadData(key) {
   try {
     const response = await fetch(`${API_URL}?method=load&key=${uniqueKey}`);
     const data = await response.json();
-    console.log(`loadData response for key ${uniqueKey}:`, data); // ดีบั๊ก: ดูข้อมูลที่โหลดมา
+    console.log(`loadData response for key ${uniqueKey}:`, data);
     return data ? JSON.parse(data) : null;
   } catch (error) {
     console.error(`Load error for key ${uniqueKey}:`, error);

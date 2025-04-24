@@ -33,7 +33,6 @@ const EditMenu = () => {
     fetchMenu();
   }, []);
 
-  // จัดกลุ่มเมนูตาม group
   const groupedMenu = menu.reduce((acc, item) => {
     const group = item.group || 'Other';
     if (!acc[group]) {
@@ -43,7 +42,6 @@ const EditMenu = () => {
     return acc;
   }, {});
 
-  // กำหนดหมวดหมู่ที่ต้องการแสดง (เรียงตามที่ต้องการ)
   const groups = ['Maki', 'Nigiri', 'Sashimi', 'Drinks'];
 
   const handleDeleteMenuItem = async (id) => {
@@ -85,9 +83,15 @@ const EditMenu = () => {
       );
       const success = await saveData('menu', updatedMenu);
       if (!success) {
-        throw new Error('Failed to update menu item.');
+        throw new Error('Failed to update menu item. The API may be unavailable or reached its limit.');
       }
+
+      // ดีบั๊ก: โหลดข้อมูลหลังบันทึกเพื่อยืนยัน
+      const updatedData = await loadData('menu');
+      console.log('Data after updating:', updatedData);
+
       setMenu(updatedMenu);
+      setError(''); // ล้างข้อความ error หากบันทึกสำเร็จ
       console.log('Menu after update:', updatedMenu);
     } catch (err) {
       setError(err.message || 'Failed to update menu item.');
