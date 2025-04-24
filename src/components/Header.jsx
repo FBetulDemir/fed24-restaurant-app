@@ -93,9 +93,9 @@ const Header = () => {
                 <div className="dropdown-content" style={{ display: hamburgerOpen ? 'block' : 'none' }}>
                     
                     <NavLink to="/" className="navlink" onClick={() => setHamburgerOpen(false)}></NavLink>
-                    <NavLink to="/pages/about" className="navlink" onClick={() => setHamburgerOpen(false)}>OM</NavLink>
+                    {/* <NavLink to="/pages/about" className="navlink" onClick={() => setHamburgerOpen(false)}>OM</NavLink> */}
                     <NavLink to="/pages/login" className="navlink" onClick={() => setHamburgerOpen(false)}>
-                        <button className="btn-dark">LOGGA IN</button>
+                        {/* <button className="btn-dark">LOGGA IN</button> */}
                     </NavLink>
                     <NavLink to="/pages/orderOnline" className="navlink" onClick={() => setHamburgerOpen(false)}>
                         <button className="btn-dark">BESTÄLL ONLINE</button>
