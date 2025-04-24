@@ -20,6 +20,7 @@ import ProductMaki from './pages/ProductMaki.jsx'
 import ProductNigiri from './pages/ProductNigiri.jsx'
 import ProductSashimi from './pages/ProductSashimi.jsx'
 import FetchReceipt from './components/FetchReceipt.jsx'
+import EditMenu from './pages/EditMenu.jsx'
 // import { HashRouter } from 'react-router'
 
 
@@ -81,10 +82,18 @@ const router = createHashRouter(
           path: 'components/adminNewDish/:adminNewDishId?', 
           Component: AdminDishForm
         },
+        {
+          path: '/admin/add',
+          Component: AdminDishForm,
+        },
         { 
           path: 'components/cart/:cartId?', 
           Component: Cart 
         },
+        {
+          path: 'pages/editmenu/:menuId?',
+          Component: EditMenu
+        }
         
       ]
    }

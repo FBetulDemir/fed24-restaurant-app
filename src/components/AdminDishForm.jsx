@@ -118,12 +118,16 @@ const AdminDishForm = () => {
             <option value="sashimi">Sashimi</option>
             <option value="drinks">Drycker</option>
           </select>
+          {error.category && <p className='error'>{error.category}</p>}
+
           <input
             name="name"
             value={formData.name}
             onChange={handleChange}
             placeholder="Namn"
           />
+          {error.name && <p className="error">{error.name}</p>}
+
           <input
             name="price"
             type="number"
@@ -131,12 +135,16 @@ const AdminDishForm = () => {
             onChange={handleChange}
             placeholder="Pris"
           />
+          {error.price && <p className="error">{error.price}</p>}
+
           <input
             name="ingredients"
             value={formData.ingredients}
             onChange={handleChange}
             placeholder="Ingredienser (komma-separerat)"
           />
+          {error.ingredients && <p className="error">{error.ingredients}</p>}
+
           {/* Conditionally render extra bit price field for maki or sashimi */}
           {(formData.category === "maki" || formData.category === "sashimi") && (
             <input
@@ -146,6 +154,7 @@ const AdminDishForm = () => {
               onChange={handleChange}
               placeholder="Pris för extra bit"
             />
+            
           )}
           {/* Conditionally render volume field for drinks */}
           {formData.category === "drinks" && (
