@@ -1,18 +1,43 @@
-//3.  och även en lägg till/ta bort funktion, med en counter därtill.
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { saveData, loadData } from "./Api";
 
-function Buttons() {
-  const [count, setCount] = useState(0);
-  const handleClickUp = () => setCount(count + 1);
-  const handleClickDown = () =>
-    setCount((prevCount) => Math.max(prevCount - 1, 0));
+const CART_KEY = "temporary-test-cart";
 
-  return (
-    <div>
-      <button onClick={handleClickUp}>LÄGG TILL</button>
-      <div>{count}</div>
-      <button onClick={handleClickDown}>TA BORT</button>
-    </div>
-  );
+export function useCart() {
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      const data = await loadData(CART_KEY);
+      if (data) {
+        const parsed = typeof data === "string" ? JSON.parse(data) : data;
+        setCart(parsed);
+      }
+    };
+    fetchCart();
+  }, []);
+
+  useEffect(() => {
+    saveData(CART_KEY, cart);
+  }, [cart]);
+
+  const addToCart = (item) => {
+    setCart(prev => {
+      const existing = prev.find(p => p.id === item.id);
+      if (existing) {
+        return prev.map(p => p.id === item.id
+          ? { ...p, quantity: p.quantity + 1 }
+          : p);
+      }
+      return [...prev, { ...item, quantity: 1 }];
+    });
+  };
+
+  const removeFromCart = (id) => {
+    setCart(prev => prev.filter(p => p.id !== id));
+  };
+
+  const clearCart = () => setCart([]);
+
+  return { cart, addToCart, removeFromCart, clearCart };
 }
-export default Buttons;

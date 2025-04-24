@@ -1,1 +1,128 @@
-
+body {
+	background-color: #0e0e0e; /* mörk bakgrund */
+	color: #fff;
+	font-family: 'Helvetica Neue', sans-serif;
+	margin: 0;
+	padding: 0;
+  }
+  
+  h1#yourOrder {
+	text-align: center;
+	font-size: 2.2rem;
+	margin-top: 2rem;
+	letter-spacing: 0.2rem;
+  }
+  
+  .box {
+	display: flex;
+	justify-content: center;
+	gap: 3rem;
+	margin: 2rem auto;
+	max-width: 1200px;
+	flex-wrap: wrap;
+  }
+  
+  #product-0, #product-1, #product-2, .product {
+	background-color: #1c1c1c;
+	border: 1px solid #555;
+	border-radius: 12px;
+	padding: 1rem;
+	width: 280px;
+	box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+  }
+  
+  #title {
+	font-size: 1.5rem;
+	text-align: center;
+	color: #f0d88f;
+  }
+  
+  .desPic {
+	text-align: center;
+	margin: 1rem 0;
+  }
+  
+  #pics {
+	width: 100%;
+	max-width: 200px;
+	border-radius: 8px;
+  }
+  
+  #description {
+	font-style: italic;
+	font-size: 0.95rem;
+	color: #ccc;
+  }
+  
+  .btns {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 1rem;
+  }
+  
+  .btns p {
+	margin: 0;
+  }
+  
+  .btns button {
+	background-color: #f0d88f;
+	border: none;
+	color: #000;
+	padding: 0.5rem 1rem;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+  }
+  
+  .btns button:hover {
+	background-color: #ffd700;
+  }
+  
+  #priceOrder {
+	display: flex;
+	justify-content: space-around;
+	margin: 2rem auto;
+	padding: 2rem;
+	max-width: 1000px;
+	border-top: 1px solid #444;
+	border-bottom: 1px solid #444;
+  }
+  
+  .prices, .orderNr {
+	text-align: center;
+	color: #f0d88f;
+  }
+  
+  #processBtn {
+	display: block;
+	margin: 2rem auto;
+	padding: 1rem 2rem;
+	background-color: #f0d88f;
+	color: #000;
+	font-weight: bold;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+  }
+  
+  #processBtn:hover {
+	background-color: #ffd700;
+  }
+  
+  #cancelOrdBtn {
+	background: transparent;
+	color: #ccc;
+	border: 1px solid #555;
+	padding: 0.5rem 1rem;
+	margin-top: 1rem;
+	border-radius: 6px;
+	cursor: pointer;
+  }
+  
+  #cancelOrdBtn:hover {
+	border-color: red;
+	color: red;
+  }
+  

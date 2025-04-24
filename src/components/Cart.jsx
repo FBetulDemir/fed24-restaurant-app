@@ -1,39 +1,43 @@
-import "../styles/Cart.css"
-import Buttons from "./CartFunctions.jsx";
-// import "../styles/cart.css";
-// import "./CartFunctions";
-// import { decreaseNumber, increaseNumber, numbers } from "./CartFunctions";
-
+import "../styles/Cart.css";
+// import Buttons from "./CartFunctions.jsx";
+import "./CartFunctions";
 import { NavLink } from "react-router";
+import { CartItemControls } from "./CartFunctions";
 
 const Cart = () => {
+  const { cart, removeFromCart, clearCart } = useCart();
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
   return (
     <div>
       <header></header>
       <h1 id="yourOrder">Din Beställning</h1>
-      <section className="box">
-        <div id="product1">
-          <h2 id="title">Sushi 1</h2>
-          <div className="desPic">
-            <img id="pics" src="-" alt="Bild på sushi" />
-            <p id="description"> {"beskrivning"} </p>
+
+      {cart.map((item, index) => (
+        <section className="box" key={item.id || index}> 
+          <div id={`product-${index}`}>
+            <h2 id="title">{item.name}</h2>
+            <div className="desPic">
+              <img id="pics" src="-" alt={`Bild på ${item.name}`} />
+              <p id="description">{"beskrivning"}</p>
+            </div>
+            <div className="btns">
+              <p>x{item.quantity}</p>
+              <p>{item.price} kr</p>
+              <button onClick={() => removeFromCart(item.id)}>Ta bort</button>
+            </div> 
           </div>
-          <div className="btns">
-            <Buttons />
-          </div>
-        </div>
-      </section>
+        </section>
+      ))}
 
       <section id="priceOrder">
         <div className="prices">
-          <div id="price-numbers">{"PRIS EX MOMS"} KR</div>
-          <p> 25% {"moms-priset"}</p>
-          <div id="totalPrice">Totalt: {"PRIS INK MOMS"} KR</div>
+          <div id="totalPrice">Totalt: {total.toFixed(2)} KR</div>
         </div>
 
         <div className="orderNr">
-          <p id="numbers"> ORDERNUMMER# {123456}</p>
-          <button id="cancelOrdBtn"> ÅNGRA </button>
+          <p id="numbers">ORDERNUMMER# {Math.floor(Math.random() * 1000000)}</p>
+          <button id="cancelOrdBtn" onClick={clearCart}>ÅNGRA</button>
         </div>
       </section>
 
