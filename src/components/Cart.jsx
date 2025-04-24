@@ -36,7 +36,6 @@ const Cart = () => {
         </div>
 
         <div className="orderNr">
-          <p id="numbers">ORDERNUMMER# {Math.floor(Math.random() * 1000000)}</p>
           <button id="cancelOrdBtn" onClick={clearCart}>ÅNGRA</button>
         </div>
       </section>

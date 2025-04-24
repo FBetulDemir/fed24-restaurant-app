@@ -15,7 +15,6 @@ return (
 			<section className="receipt-container"> 
 			<h2>Tack för din beställning!</h2>
 			<div className="receipt-divider"></div>
-			<p className="order-number">Order nummer: #1235566</p>
 			<div className="receipt-items">
 				{items.map((item, index) => (
 				<div className="receipt-item" key={index}>
