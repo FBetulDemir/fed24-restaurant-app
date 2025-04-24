@@ -2,7 +2,7 @@ import "../styles/Cart.css";
 // import Buttons from "./CartFunctions.jsx";
 import "./CartFunctions";
 import { NavLink } from "react-router";
-import { CartItemControls } from "./CartFunctions";
+// import { CartItemControls } from "./CartFunctions";
 
 const Cart = () => {
   const { cart, removeFromCart, clearCart } = useCart();
