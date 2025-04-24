@@ -16,4 +16,4 @@ function App() {
   );
 }
 
-export default AppWrapper;
+export default App;
