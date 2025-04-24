@@ -20,8 +20,6 @@ const Menu = () => {
             <NigiriSushi />
             <Sashimi />
             <Drinks />
-            
-
         </div>
     )
   }

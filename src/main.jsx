@@ -41,12 +41,13 @@ const router = createHashRouter(
           Component: Menu,
         },
         {
-        path: '/pages/menu/sushi/:makiId?',
+        path: '/pages/menu/sushi/:sushiId?',
         // Component: SushiMenu,
         Component: ProductMaki,
         },
         {
-        path: '/pages/menu/sushi/:nigiriId?',
+        path: '/pages/menu/sushi/:sushiId?',
+        // Component: SushiMenu,
         Component: ProductNigiri,
         },
         {

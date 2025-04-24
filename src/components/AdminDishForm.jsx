@@ -12,7 +12,8 @@ const AdminDishForm = () => {
     name: "",
     price: "",
     ingredients: "",
-    extraBitPrice: "", // Added new field for extra bit price
+    extraBitPrice: "",
+    volume: "",
   });
 
   const [menuList, setMenuList] = useState([]);
@@ -48,10 +49,14 @@ const AdminDishForm = () => {
         ? formData.ingredients.split(",").map((s) => s.trim()).filter((s) => s)
         : [],
       category: formData.category,
-      extraBitPrice:
-        formData.category === "maki" || formData.category === "nigiri"
-          ? parseFloat(formData.extraBitPrice) || 0
-          : undefined, // Include extraBitPrice only for maki or nigiri
+      ...(formData.category === "maki" || formData.category === "sashimi"
+        ? { extraBitPrice: parseFloat(formData.extraBitPrice) || 0 }
+        : {}),
+      ...(formData.category === "drinks"
+        ? {
+            volume: formData.volume ? parseFloat(formData.volume) : null, // Parse as single number
+          }
+        : {}),
     };
 
     const { error } = dishSchema.validate(newDish);
@@ -132,14 +137,23 @@ const AdminDishForm = () => {
             onChange={handleChange}
             placeholder="Ingredienser (komma-separerat)"
           />
-          {/* Conditionally render extra bit price field for maki or nigiri */}
-          {(formData.category === "maki" || formData.category === "nigiri") && (
+          {/* Conditionally render extra bit price field for maki or sashimi */}
+          {(formData.category === "maki" || formData.category === "sashimi") && (
             <input
               name="extraBitPrice"
               type="number"
               value={formData.extraBitPrice}
               onChange={handleChange}
               placeholder="Pris för extra bit"
+            />
+          )}
+          {/* Conditionally render volume field for drinks */}
+          {formData.category === "drinks" && (
+            <input
+              name="volume"
+              value={formData.volume}
+              onChange={handleChange}
+              placeholder="Volym (t.ex. 0.33)"
             />
           )}
           <button type="submit" className="form-btn">

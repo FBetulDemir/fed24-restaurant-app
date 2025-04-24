@@ -43,7 +43,7 @@ const Header = () => {
             <nav className="nav">
                 <ul className="nav-left">
                     {/* <li><NavLink to='/pages/about' className="navlink">OM</NavLink></li> */}
-                    <li className="dropdown">
+                    {/* <li className="dropdown">
                         <button onClick={toggleDropdown} className="dropbtn btn-dark">
                             MENY 
                             <svg
@@ -72,6 +72,12 @@ const Header = () => {
                                 <NavLink to="/pages/menu/drinks/:drinksId?" className="navlink" onClick={() => setIsOpen(false)}>Drycker</NavLink> 
                             </div>
                         )}
+                    </li> */}
+                    <li>
+                        <button className="dropbtn btn-dark">
+                            <NavLink to="/pages/menu/menu/" className="navlink-footer">Meny
+                            </NavLink>
+                        </button>
                     </li>
                 </ul>
                 <div className="logo-container">

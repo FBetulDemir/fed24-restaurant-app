@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { makiMenuList } from "../data/produktLists";
+import { drinksMenuList } from "../data/produktLists";
 
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
 const API_KEY = "isushi-menu";
 
 
-const uploadMakiMenuList = async () => {
+const uploadDrinkMenuList = async () => {
   try {
    
     const response = await fetch(`${API_URL}?method=load&key=${API_KEY}`);
@@ -16,8 +16,8 @@ const uploadMakiMenuList = async () => {
     }
 
 
-    const updatedMenu = [...currentMenu, ...makiMenuList]; // lägga till men inte radera nuvarande meny
-    // const updatedMenu = [...makiMenuList] // - radera nuvarande meny och lägga till default meny
+    const updatedMenu = [...currentMenu, ...drinksMenuList]; // lägga till men inte radera nuvarande meny
+    // const updatedMenu = [...drinksMenuList] // - radera nuvarande meny och lägga till default meny
 
 
     const saveResponse = await fetch(`${API_URL}?method=save`, {
@@ -33,7 +33,7 @@ const uploadMakiMenuList = async () => {
     });
 
     if (saveResponse.ok) {
-      console.log("Alla maki-rätter har lagts till i API:t!");
+      console.log("Alla drycker har lagts till i API:t!");
     } else {
       console.error("Misslyckades med att spara menyn.");
     }
@@ -42,17 +42,17 @@ const uploadMakiMenuList = async () => {
   }
 };
 
-const UploadMakiMenu = () => {
+const UploadDrinkMenu = () => {
   useEffect(() => {
-    uploadMakiMenuList();
+    uploadDrinkMenuList();
   }, []); 
 
   return (
     <div>
-      <h2>Laddar upp maki-rätter...</h2>
+      <h2 >Laddar upp drycker...</h2>
       <p>Kontrollera konsolen för status.</p>
     </div>
   );
 };
 
-export default UploadMakiMenu;
+export default UploadDrinkMenu;

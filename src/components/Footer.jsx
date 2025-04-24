@@ -64,7 +64,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-            <p>© 2025 ISushi. Alla rättigheter förbehållna. Integritetspolicy | Användarvillkor</p>
+            <p>© 2025 iSushi. Alla rättigheter förbehållna. Integritetspolicy | Användarvillkor</p>
         </div>
     </footer>
   )
