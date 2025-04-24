@@ -14,31 +14,53 @@ const HomePage = () => (
   </main>
 );
 
-const MenuPage = ({ menu, refreshMenu }) => (
-  <main className="app-main">
-    <h2>Menu</h2>
-    <div className="menu-grid">
+const MenuPage = ({ menu, refreshMenu }) => {
+  // จัดกลุ่มเมนูตาม group
+  const groupedMenu = menu.reduce((acc, item) => {
+    const group = item.group || 'Other'; // หากไม่มี group ให้จัดเป็น "Other"
+    if (!acc[group]) {
+      acc[group] = [];
+    }
+    acc[group].push(item);
+    return acc;
+  }, {});
+
+  // กำหนดหมวดหมู่ที่ต้องการแสดง (เรียงตามที่ต้องการ)
+  const groups = ['Maki', 'Nigiri', 'Sashimi', 'Drinks'];
+
+  return (
+    <main className="app-main">
+      <h2>Menu</h2>
       {menu.length === 0 ? (
         <p>No menu items available.</p>
       ) : (
-        menu.map(item => (
-          <div key={item.id} className="menu-card">
-            <h3>{item.name} ({item.group})</h3>
-            <p>{item.description}</p>
-            <p>Price: {item.price} kr</p>
-            {item.extraPrice && <p>Extra Price: {item.extraPrice} kr</p>}
-            {item.ingredients && item.ingredients.length > 0 && (
-              <p>Ingredients: {item.ingredients.join(', ')}</p>
-            )}
-          </div>
+        groups.map(group => (
+          groupedMenu[group] && (
+            <div key={group} className="menu-group">
+              <h3>{group}</h3>
+              <div className="menu-grid">
+                {groupedMenu[group].map(item => (
+                  <div key={item.id} className="menu-card">
+                    <h4>{item.name}</h4>
+                    <p>{item.description}</p>
+                    <p>Price: {item.price} kr</p>
+                    {item.extraPrice && <p>Extra Price: {item.extraPrice} kr</p>}
+                    {item.ingredients && item.ingredients.length > 0 && (
+                      <p>Ingredients: {item.ingredients.join(', ')}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
         ))
       )}
-    </div>
-    <button onClick={refreshMenu} style={{ marginTop: '1rem', padding: '0.5rem 1rem' }}>
-      Refresh Menu
-    </button>
-  </main>
-);
+      <button onClick={refreshMenu} style={{ marginTop: '1rem', padding: '0.5rem 1rem' }}>
+        Refresh Menu
+      </button>
+    </main>
+  );
+};
 
 const App = () => {
   const [menu, setMenu] = useState([]);
