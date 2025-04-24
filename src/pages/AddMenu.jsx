@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuForm from '../components/MenuForm.jsx';
 import Header from '../components/Header.jsx';
@@ -16,6 +16,14 @@ const AddMenu = () => {
     extraPrice: '',
   });
   const navigate = useNavigate();
+  const abortController = new AbortController(); // สร้าง AbortController
+
+  // Cleanup function เพื่อยกเลิกคำขอเมื่อคอมโพเนนต์ถูก unmount
+  useEffect(() => {
+    return () => {
+      abortController.abort();
+    };
+  }, []);
 
   const handleAddMenuItem = async (e) => {
     e.preventDefault();
@@ -37,7 +45,7 @@ const AddMenu = () => {
     }
 
     try {
-      const existingMenu = (await loadData('menu')) || [];
+      const existingMenu = (await loadData('menu', abortController.signal)) || [];
       console.log('Existing menu before adding:', existingMenu);
 
       const newId = existingMenu.length > 0 ? Math.max(...existingMenu.map(item => item.id)) + 1 : 1;
@@ -45,20 +53,23 @@ const AddMenu = () => {
       const updatedMenu = [...existingMenu, newItem];
       console.log('New menu to save:', updatedMenu);
 
-      const success = await saveData('menu', updatedMenu);
+      const success = await saveData('menu', updatedMenu, abortController.signal);
       if (!success) {
         throw new Error('Failed to add menu item. The API may be unavailable or reached its limit.');
       }
 
-      // ดีบั๊ก: โหลดข้อมูลหลังบันทึกเพื่อยืนยัน
-      const updatedData = await loadData('menu');
+      const updatedData = await loadData('menu', abortController.signal);
       console.log('Data after saving:', updatedData);
 
       setNewMenuItem({ name: '', description: '', price: '', ingredients: [], group: '', extraPrice: '' });
       setError('');
       alert('Menu item added successfully!');
-      navigate('/admin/edit');
+      navigate('/admin/edit'); // เรียก navigate หลังจาก promise เสร็จสิ้น
     } catch (err) {
+      if (err.name === 'AbortError') {
+        console.log('AddMenu request aborted');
+        return;
+      }
       setError(err.message || 'Failed to add menu item.');
       console.error('Error adding menu item:', err);
     }

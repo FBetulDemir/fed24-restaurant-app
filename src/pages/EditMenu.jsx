@@ -9,10 +9,11 @@ const EditMenu = () => {
   const [menu, setMenu] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const abortController = new AbortController(); // สร้าง AbortController
 
   const fetchMenu = async () => {
     try {
-      const data = await loadData('menu');
+      const data = await loadData('menu', abortController.signal);
       console.log('Loaded menu in EditMenu:', data);
       if (data) {
         const menuWithIds = data.map((item, index) => ({
@@ -24,6 +25,10 @@ const EditMenu = () => {
         setMenu([]);
       }
     } catch (err) {
+      if (err.name === 'AbortError') {
+        console.log('fetchMenu request aborted');
+        return;
+      }
       setError('Failed to load menu data.');
       console.error('Error loading menu:', err);
     }
@@ -31,6 +36,11 @@ const EditMenu = () => {
 
   useEffect(() => {
     fetchMenu();
+
+    // Cleanup function เพื่อยกเลิกคำขอเมื่อคอมโพเนนต์ถูก unmount
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   const groupedMenu = menu.reduce((acc, item) => {
@@ -47,13 +57,17 @@ const EditMenu = () => {
   const handleDeleteMenuItem = async (id) => {
     try {
       const updatedMenu = menu.filter((item) => item.id !== id);
-      const success = await saveData('menu', updatedMenu);
+      const success = await saveData('menu', updatedMenu, abortController.signal);
       if (!success) {
         throw new Error('Failed to delete menu item.');
       }
       setMenu(updatedMenu);
       console.log('Menu after delete:', updatedMenu);
     } catch (err) {
+      if (err.name === 'AbortError') {
+        console.log('handleDeleteMenuItem request aborted');
+        return;
+      }
       setError(err.message || 'Failed to delete menu item.');
       console.error('Error deleting menu item:', err);
     }
@@ -81,19 +95,22 @@ const EditMenu = () => {
       const updatedMenu = menu.map((item) =>
         item.id === id ? { id, ...updatedItem } : item
       );
-      const success = await saveData('menu', updatedMenu);
+      const success = await saveData('menu', updatedMenu, abortController.signal);
       if (!success) {
         throw new Error('Failed to update menu item. The API may be unavailable or reached its limit.');
       }
 
-      // ดีบั๊ก: โหลดข้อมูลหลังบันทึกเพื่อยืนยัน
-      const updatedData = await loadData('menu');
+      const updatedData = await loadData('menu', abortController.signal);
       console.log('Data after updating:', updatedData);
 
       setMenu(updatedMenu);
-      setError(''); // ล้างข้อความ error หากบันทึกสำเร็จ
+      setError('');
       console.log('Menu after update:', updatedMenu);
     } catch (err) {
+      if (err.name === 'AbortError') {
+        console.log('handleEditMenuItem request aborted');
+        return;
+      }
       setError(err.message || 'Failed to update menu item.');
       console.error('Error updating menu item:', err);
     }
