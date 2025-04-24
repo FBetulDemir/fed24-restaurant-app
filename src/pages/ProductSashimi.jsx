@@ -60,7 +60,7 @@ const Sashimi = () => {
                 </span>
                 {sashimi.extraBitPrice && (
                   <button className="product-extra-btn">
-                    extra piece +{sashimi.extraBitPrice}:-
+                    extra bit +{sashimi.extraBitPrice}:-
                   </button>
                 )}
               </p>

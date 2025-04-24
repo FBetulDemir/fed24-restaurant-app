@@ -60,7 +60,7 @@ const MakiSushi = () => {
                 </span>
                 {maki.extraBitPrice && (
                   <button className="product-extra-btn">
-                    extra piece +{maki.extraBitPrice}:-
+                    extra bit +{maki.extraBitPrice}:-
                   </button>
                 )}
               </p>
