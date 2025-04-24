@@ -67,10 +67,11 @@ function InLogg() {
         <section className='blurp' > 
             <div className='sign-section' style={ isLoggedIn ? { display: 'none' } : { display: 'block' }}>
                 <section className='form'>
+
+                    <p className='admin'>Admin</p>
                     {error && <p className='error'>{error}</p>}
 
-                <p className="error"> </p> 
-                    <p className='admin'>Admin</p>
+                    <p className="error"> </p> 
                     {/* <p>Ange ditt lösenord för att logga in</p> */}
                     <input className={
                     `input-box ${isvalid === true ? 
