@@ -33,6 +33,19 @@ const EditMenu = () => {
     fetchMenu();
   }, []);
 
+  // จัดกลุ่มเมนูตาม group
+  const groupedMenu = menu.reduce((acc, item) => {
+    const group = item.group || 'Other';
+    if (!acc[group]) {
+      acc[group] = [];
+    }
+    acc[group].push(item);
+    return acc;
+  }, {});
+
+  // กำหนดหมวดหมู่ที่ต้องการแสดง (เรียงตามที่ต้องการ)
+  const groups = ['Maki', 'Nigiri', 'Sashimi', 'Drinks'];
+
   const handleDeleteMenuItem = async (id) => {
     try {
       const updatedMenu = menu.filter((item) => item.id !== id);
@@ -101,11 +114,22 @@ const EditMenu = () => {
               >
                 Refresh Menu
               </button>
-              <MenuList
-                menu={menu}
-                onDelete={handleDeleteMenuItem}
-                onEdit={handleEditMenuItem}
-              />
+              {menu.length === 0 ? (
+                <p className="menu-empty">No menu items available.</p>
+              ) : (
+                groups.map(group => (
+                  groupedMenu[group] && (
+                    <div key={group} className="menu-group">
+                      <h3>{group}</h3>
+                      <MenuList
+                        menu={groupedMenu[group]}
+                        onDelete={handleDeleteMenuItem}
+                        onEdit={handleEditMenuItem}
+                      />
+                    </div>
+                  )
+                ))
+              )}
               {error && <p className="menu-form-error">{error}</p>}
             </div>
           </div>

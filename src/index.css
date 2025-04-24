@@ -10,4 +10,8 @@ body {
   background-color: #1F2525;
   color: #333;
 }
+
+h3 {
+  color: inherit; /* ให้ h3 ใช้สีจาก parent เพื่อป้องกันการทับสี */
+}
   
