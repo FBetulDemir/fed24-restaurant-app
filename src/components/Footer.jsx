@@ -19,9 +19,9 @@ const Footer = () => {
                     <li>
                         <NavLink to="/pages/login" className="navlink-footer">Admin login</NavLink>
                     </li>
-                    <li>
+                    {/* <li>
                         <NavLink to="/pages/orderOnline" className="navlink-footer">Beställ nu</NavLink>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
             <div className="footer-section">
