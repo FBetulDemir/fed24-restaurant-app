@@ -19,6 +19,7 @@ import ProductDrinks from './pages/ProductDrinks.jsx'
 import ProductMaki from './pages/ProductMaki.jsx'
 import ProductNigiri from './pages/ProductNigiri.jsx'
 import ProductSashimi from './pages/ProductSashimi.jsx'
+import FetchReceipt from './components/FetchReceipt.jsx'
 // import { HashRouter } from 'react-router'
 
 
@@ -66,7 +67,7 @@ const router = createHashRouter(
         },
         {
           path: '/pages/receipt/:receiptId?',
-          Component: receipt,
+          Component: FetchReceipt,
         },
         { 
           path: 'pages/login/:loginId?', 

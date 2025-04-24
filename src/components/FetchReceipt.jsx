@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Receipt from "./receipt"; 
+import Receipt from "../pages/receipt.jsx";
 import { loadData } from "./Api.js";
 
-const testCart = [
-  { name: "Maki roll", quantity: 1, price: 45 },
-  { name: "Sushi mega", quantity: 1, price: 50 },
-  { name: "Sushi oma", quantity: 1, price: 68 },
-];
+const testCart = [];
+
 
 const FetchReceipt = () => {
   const [cart, setCart] = useState(null);
@@ -17,8 +14,9 @@ const FetchReceipt = () => {
       try {
         const data = await loadData("temporary-test-cart");
         if (data) {
-          setCart(JSON.parse(data));
-        }
+			const parsed = typeof data === "string" ? JSON.parse(data) : data;
+			setCart(parsed);
+		  }
       } catch (err) {
         console.error("Kunde inte hämta kundvagnen:", err);
       } finally {
@@ -29,10 +27,8 @@ const FetchReceipt = () => {
     fetchCart();
   }, []);
 
-  const cartToUse = cart || testCart;
-  
-  console.log("cart:", cart);
-  console.log("cartToUse:", cartToUse);
+//   const cartToUse = cart || testCart;
+	const cartToUse = (Array.isArray(cart) && cart.length > 0) ? cart : testCart;
 
   if (loading) return <p>Laddar kvitto...</p>;
 

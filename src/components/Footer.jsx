@@ -24,14 +24,6 @@ const Footer = () => {
                     </li>
                 </ul>
             </div>
-
-            <div className="footer-section">
-                <h4>Öppettider</h4>
-                <p>Mån–Fre: 11:00–21:00</p>
-                <p>Lör: 12:00–22:00</p>
-                <p>Sön: 12:00–20:00</p>
-            </div>
-
             <div className="footer-section">
                 <h4>Kontaktinformation</h4>
                 <p>Sushigatan 12, 123 45 Stockholm</p>
@@ -60,6 +52,14 @@ const Footer = () => {
                     </a>
                 </div>
             </div>
+            <div className="footer-section">
+                <h4>Öppettider</h4>
+                <p>Mån–Fre: 11:00–21:00</p>
+                <p>Lör: 12:00–22:00</p>
+                <p>Sön: 12:00–20:00</p>
+            </div>
+
+
 
         </div>
 

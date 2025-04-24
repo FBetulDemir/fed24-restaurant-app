@@ -23,6 +23,7 @@ body {
 	display: block;
 }
 .receipt-container {
+	padding-top: 1em;
 	position: absolute;
 	top: 50%;
 	left: 50%;
