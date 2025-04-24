@@ -18,6 +18,15 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
     });
   };
 
+  // ฟังก์ชันสำหรับจัดการการป้อนเฉพาะตัวเลข
+  const handleNumberInput = (e, field) => {
+    const value = e.target.value;
+    // อนุญาตให้เป็นตัวเลขเท่านั้น (รวมถึงช่องว่างเพื่อให้สามารถลบได้)
+    if (/^\d*$/.test(value)) {
+      setMenuItem({ ...menuItem, [field]: value });
+    }
+  };
+
   return (
     <form onSubmit={onSubmit} className="menu-form">
       <div>
@@ -54,18 +63,20 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
       <div>
         <label>Price (kr)</label>
         <input
-          type="number"
+          type="text"
           value={menuItem.price}
-          onChange={(e) => setMenuItem({ ...menuItem, price: e.target.value })}
+          onChange={(e) => handleNumberInput(e, 'price')}
+          pattern="\d*"
           required
         />
       </div>
       <div>
         <label>Extra Price (kr) (optional)</label>
         <input
-          type="number"
+          type="text"
           value={menuItem.extraPrice || ''}
-          onChange={(e) => setMenuItem({ ...menuItem, extraPrice: e.target.value })}
+          onChange={(e) => handleNumberInput(e, 'extraPrice')}
+          pattern="\d*"
         />
       </div>
       <div>

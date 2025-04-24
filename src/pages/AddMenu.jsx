@@ -16,9 +16,8 @@ const AddMenu = () => {
     extraPrice: '',
   });
   const navigate = useNavigate();
-  const abortController = new AbortController(); // สร้าง AbortController
+  const abortController = new AbortController();
 
-  // Cleanup function เพื่อยกเลิกคำขอเมื่อคอมโพเนนต์ถูก unmount
   useEffect(() => {
     return () => {
       abortController.abort();
@@ -39,9 +38,23 @@ const AddMenu = () => {
       setError('Description must be at least 10 characters long.');
       return;
     }
-    if (!newMenuItem.price || newMenuItem.price < 0) {
-      setError('Price must be a positive number.');
+    if (!newMenuItem.price) {
+      setError('Price is required.');
       return;
+    }
+    // ตรวจสอบว่า price เป็นตัวเลขที่ถูกต้องและมากกว่าหรือเท่ากับ 0
+    const priceValue = parseFloat(newMenuItem.price);
+    if (isNaN(priceValue) || priceValue < 0) {
+      setError('Price must be a valid number greater than or equal to 0.');
+      return;
+    }
+    // ตรวจสอบ extraPrice ถ้ามีค่า
+    if (newMenuItem.extraPrice) {
+      const extraPriceValue = parseFloat(newMenuItem.extraPrice);
+      if (isNaN(extraPriceValue) || extraPriceValue < 0) {
+        setError('Extra Price must be a valid number greater than or equal to 0.');
+        return;
+      }
     }
 
     try {
@@ -64,7 +77,7 @@ const AddMenu = () => {
       setNewMenuItem({ name: '', description: '', price: '', ingredients: [], group: '', extraPrice: '' });
       setError('');
       alert('Menu item added successfully!');
-      navigate('/admin/edit'); // เรียก navigate หลังจาก promise เสร็จสิ้น
+      navigate('/admin/edit');
     } catch (err) {
       if (err.name === 'AbortError') {
         console.log('AddMenu request aborted');

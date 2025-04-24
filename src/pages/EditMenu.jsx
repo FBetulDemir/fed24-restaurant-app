@@ -9,7 +9,7 @@ const EditMenu = () => {
   const [menu, setMenu] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const abortController = new AbortController(); // สร้าง AbortController
+  const abortController = new AbortController();
 
   const fetchMenu = async () => {
     try {
@@ -36,8 +36,6 @@ const EditMenu = () => {
 
   useEffect(() => {
     fetchMenu();
-
-    // Cleanup function เพื่อยกเลิกคำขอเมื่อคอมโพเนนต์ถูก unmount
     return () => {
       abortController.abort();
     };
@@ -86,9 +84,23 @@ const EditMenu = () => {
       setError('Description must be at least 10 characters long.');
       return;
     }
-    if (!updatedItem.price || updatedItem.price < 0) {
-      setError('Price must be a positive number.');
+    if (!updatedItem.price) {
+      setError('Price is required.');
       return;
+    }
+    // ตรวจสอบว่า price เป็นตัวเลขที่ถูกต้องและมากกว่าหรือเท่ากับ 0
+    const priceValue = parseFloat(updatedItem.price);
+    if (isNaN(priceValue) || priceValue < 0) {
+      setError('Price must be a valid number greater than or equal to 0.');
+      return;
+    }
+    // ตรวจสอบ extraPrice ถ้ามีค่า
+    if (updatedItem.extraPrice) {
+      const extraPriceValue = parseFloat(updatedItem.extraPrice);
+      if (isNaN(extraPriceValue) || extraPriceValue < 0) {
+        setError('Extra Price must be a valid number greater than or equal to 0.');
+        return;
+      }
     }
 
     try {
