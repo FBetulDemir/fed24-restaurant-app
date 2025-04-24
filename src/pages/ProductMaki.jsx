@@ -41,14 +41,14 @@ const MakiSushi = () => {
 
 // Function to handle adding item to cart
 const handleAddToCart = (maki) => {
-  addToCart({
-    id: maki.id,
-    name: maki.name,
-    price: maki.price,
-    quantity: 8,
-    ingredients: maki.ingredients || [],
-  });
-};
+	addToCart({
+	  id: maki.id,
+	  name: maki.name,
+	  price: maki.price,
+	  quantity: 8,
+	  ingredients: maki.ingredients || [],
+	});
+  };
 
 
   return (
