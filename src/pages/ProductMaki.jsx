@@ -23,34 +23,33 @@ const MakiSushi = () => {
           const makiItems = data.filter((item) => item.category === "maki");
           setMakiMenuList(makiItems);
           if (makiItems.length === 0) {
-            setError("No maki items found in the API response.");
+            setError("Inga maki-objekt hittades i API-svaret.");
           }
         } else {
-          setError("API response is not a list of menu items.");
+          setError("API-svaret är inte en lista över menyobjekt.");
         }
       } catch (err) {
-        console.error("Failed to load menu", err);
-        setError("Could not load the menu.");
+        console.error("Misslyckades med att ladda menyn", err);
+        setError("Kunde inte ladda menyn.");
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchMenu();
   }, []);
-
-// Function to handle adding item to cart
-const handleAddToCart = (maki) => {
-	addToCart({
-	  id: maki.id,
-	  name: maki.name,
-	  price: maki.price,
-	  quantity: 8,
-	  ingredients: maki.ingredients || [],
-	});
+  
+  // Function to handle adding item to cart
+  const handleAddToCart = (maki) => {
+    addToCart({
+      id: maki.id,
+      name: maki.name,
+      price: maki.price,
+      quantity: 8,
+      ingredients: maki.ingredients || [],
+    });
   };
-
-
+  
   return (
     <section className="product-page">
       <UploadAllMenus />
@@ -63,12 +62,12 @@ const handleAddToCart = (maki) => {
         <h2 className="product-title">Maki Sushi</h2>
         <p className="product-description">{makiSushi.description}</p>
         {loading ? (
-          <p>Loading menu...</p>
+          <p>Laddar meny...</p>
         ) : makiMenuList.length > 0 ? (
           makiMenuList.map((maki, index) => (
             <div key={maki.id || index} className="product-price">
               <p className="product-name">
-              <button
+                <button
                   className="product-buy-btn"
                   onClick={() => handleAddToCart(maki)}
                 >
@@ -89,11 +88,11 @@ const handleAddToCart = (maki) => {
             </div>
           ))
         ) : (
-          <p>No maki items available at the moment.</p>
+          <p>Inga maki-objekt tillgängliga för tillfället.</p>
         )}
       </div>
     </section>
   );
-};
-
-export default MakiSushi;
+  };
+  
+  export default MakiSushi;

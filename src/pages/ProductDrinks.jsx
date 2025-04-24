@@ -20,14 +20,14 @@ const DrinksMenu = () => {
           const drinkItems = data.filter((item) => item.category === "drink");
           setDrinkList(drinkItems);
           if (drinkItems.length === 0) {
-            setError("No drinks found in the API response.");
+            setError("Inga drycker hittades i API-svaret.");
           }
         } else {
-          setError("API response is not a list of menu items.");
+          setError("API-svaret är inte en lista över menyobjekt.");
         }
       } catch (err) {
-        console.error("Failed to load menu", err);
-        setError("Could not load the menu.");
+        console.error("Misslyckades med att ladda menyn", err);
+        setError("Kunde inte ladda menyn.");
       }
     };
 
@@ -43,10 +43,10 @@ const DrinksMenu = () => {
         <p className="product-sides">{drinks.sides}</p>
       </div>
       <div className="product-price-descrip-container">
-        <h2 className="product-title">Beverages</h2>
+        <h2 className="product-title">Drycker</h2>
         <p className="product-description">{drinks.description}</p>
         {drinkList.length === 0 && !error ? (
-          <p>Loading drinks...</p>
+          <p>Laddar drycker...</p>
         ) : (
           drinkList.map((drink, index) => (
             <div key={drink.id || index} className="product-price-drinks-nigiri">
@@ -54,7 +54,7 @@ const DrinksMenu = () => {
                 <button className="product-buy-btn">Lägg till</button>
                 {drink.name} <span className="product-space-price">{drink.price}:-</span>
                 {drink.volume && (
-                  <span className="product-volume"> (volume {drink.volume} l)</span>
+                  <span className="product-volume"> (volym {drink.volume} l)</span>
                 )}
               </p>
               {drink.ingredients && (
