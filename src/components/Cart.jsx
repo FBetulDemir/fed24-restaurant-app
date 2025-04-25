@@ -15,7 +15,7 @@ const Cart = () => {
     fetchCart();
   }, []);
 
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
 
   return (
     <div>
@@ -24,14 +24,14 @@ const Cart = () => {
 
       {cart.map((item, index) => (
         <section className="box" key={item.id || index}>
-          <div id={`product-${index}`}>
+          <div className="product">
             <h2 id="title">{item.name}</h2>
             <div className="desPic">
               <img id="pics" src="-" alt={`Bild på ${item.name}`} />
-              <p id="description">{"beskrivning"}</p>
+              <p id="description">{item.description || ""}</p>
             </div>
             <div className="btns">
-              <p>x{item.quantity}</p>
+              <p>{item.quantity}st</p>
               <p>{item.price} kr</p>
             </div>
           </div>
