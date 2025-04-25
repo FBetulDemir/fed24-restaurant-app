@@ -1,7 +1,7 @@
 import "../styles/ProductPage.css";
 import React, { useState, useEffect } from "react";
 import { sushiMenu } from "../data/produktLists";
-import UploadAllMenus from "../components/uploadAllMenus.jsx";
+import UploadAllMenus from "../components/UploadAllMenusButton.jsx";
 import { useCartStore } from "../data/CartStore.js";
 
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
@@ -52,7 +52,7 @@ const Sashimi = () => {
   
   return (
     <section className="product-page">
-      <UploadAllMenus />
+      {/* <UploadAllMenus /> */}
       {error && <p className="error">{error}</p>}
       <div className="product-img-sides-container">
         <img src={sashimi.image} alt={sashimi.name} className="product-image" />

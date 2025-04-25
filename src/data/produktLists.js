@@ -5,7 +5,8 @@ const makiMenuList = [
     price: 95,
     ingredients: [],
     category: "maki",
-    extraBitPrice: 15
+    extraBitPrice: 15,
+    description: "Smakrik maki med kryddig tonfisk, perfekt balanserad med sushi-ris."
   },
   {
     id: crypto.randomUUID(),
@@ -13,7 +14,8 @@ const makiMenuList = [
     ingredients: ["Krabba", "avokado", "gurka"],
     price: 85,
     category: "maki",
-    extraBitPrice: 12
+    extraBitPrice: 12,
+    description: "Klassisk maki med krämig krabba, len avokado och krispig gurka."
   },
   {
     id: crypto.randomUUID(),
@@ -21,7 +23,8 @@ const makiMenuList = [
     ingredients: ["Räkor i tempura", "kryddig majonnäs"],
     price: 99,
     category: "maki",
-    extraBitPrice: 16
+    extraBitPrice: 16,
+    description: "Krispig tempuraräka i maki med en klick kryddig majonnäs."
   },
   {
     id: crypto.randomUUID(),
@@ -29,7 +32,8 @@ const makiMenuList = [
     price: 75,
     ingredients: [],
     category: "maki",
-    extraBitPrice: 11
+    extraBitPrice: 11,
+    description: "Enkel och fräsch maki med krämig avokado i varje tugga."
   },
   {
     id: crypto.randomUUID(),
@@ -37,164 +41,183 @@ const makiMenuList = [
     price: 70,
     ingredients: [],
     category: "maki",
-    extraBitPrice: 10
+    extraBitPrice: 10,
+    description: "Lätt och krispig maki med färsk gurka, perfekt som tillbehör."
   },
 ];
-  
+
 const nigiriMenuList = [
-    {
-      id: crypto.randomUUID(),
-      name: "Lax Nigiri",
-      price: 42,
-      ingredients: [],
-      category: "nigiri",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Tonfisk Nigiri",
-      price: 48,
-      ingredients: [],
-      category: "nigiri",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Räka Nigiri",
-      price: 38,
-      ingredients: [],
-      category: "nigiri",
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Ål Nigiri",
-      price: 52,
-      ingredients: [],
-      category: "nigiri",
-    }
+  {
+    id: crypto.randomUUID(),
+    name: "Lax Nigiri",
+    price: 42,
+    ingredients: [],
+    category: "nigiri",
+    description: "Två bitar nigiri med färsk, smältande lax av högsta kvalitet."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Tonfisk Nigiri",
+    price: 48,
+    ingredients: [],
+    category: "nigiri",
+    description: "Två bitar nigiri med fyllig tonfisk, en smakrik delikatess."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Räka Nigiri",
+    price: 38,
+    ingredients: [],
+    category: "nigiri",
+    description: "Två bitar nigiri med färska räkor, söta och delikata."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Ål Nigiri",
+    price: 52,
+    ingredients: [],
+    category: "nigiri",
+    description: "Två bitar nigiri med smakrik ål, toppad med lätt söt sås."
+  },
 ];
-  
+
 const sashimiMenuList = [
-    {
-      id: crypto.randomUUID(),
-      name: "Lax Sashimi",
-      price: 98,
-      ingredients: [],
-      category: "sashimi",
-      extraBitPrice: 25
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Tonfisk Sashimi",
-      price: 110,
-      ingredients: [],
-      category: "sashimi",
-      extraBitPrice: 27
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Hamachi Sashimi",
-      price: 115,
-      ingredients: [],
-      category: "sashimi",
-      extraBitPrice: 28
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Hälleflundra Sashimi",
-      price: 105,
-      ingredients: [],
-      category: "sashimi",
-      extraBitPrice: 26
-    }
+  {
+    id: crypto.randomUUID(),
+    name: "Lax Sashimi",
+    price: 98,
+    ingredients: [],
+    category: "sashimi",
+    extraBitPrice: 25,
+    description: "Färska skivor lax, smältande mjuk med ren smak."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Tonfisk Sashimi",
+    price: 110,
+    ingredients: [],
+    category: "sashimi",
+    extraBitPrice: 27,
+    description: "Premium tonfisk i tunna skivor, fyllig och smakrik."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Hamachi Sashimi",
+    price: 115,
+    ingredients: [],
+    category: "sashimi",
+    extraBitPrice: 28,
+    description: "Delikat hamachi sashimi, len med en lätt nötig ton."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Hälleflundra Sashimi",
+    price: 105,
+    ingredients: [],
+    category: "sashimi",
+    extraBitPrice: 26,
+    description: "Färsk hälleflundra i skivor, mild och elegant i smaken."
+  },
 ];
-  
 
 const drinksMenuList = [
-    {
-      id: crypto.randomUUID(), 
-      name: "Pepsi Max", 
-      price: 20,
-      ingredients: [],
-      category: "drinks",
-      volume: "0,33"
-    },
-    { 
-      id: crypto.randomUUID(), 
-      name: "Coca-Cola", 
-      price: 20,
-      ingredients: [],
-      category: "drinks", 
-      volume: "0,33"
-    },   
-    { 
-      id: crypto.randomUUID(), 
-      name: "Sprite", 
-      price: 20,
-      ingredients: [],
-      category: "drinks",
-      volume: "0,33"
-    },
-    { 
-      id: crypto.randomUUID(), 
-      name: "Ramlösa Citrus", 
-      price: 25,
-      ingredients: [],
-      category: "drinks",
-      volume: "0,5"
-    },
-    { 
-      id: crypto.randomUUID(), 
-      name: "Loka Naturell", 
-      price: 25,
-      ingredients: [],
-      category: "drinks", 
-      volume: "0,5"
-    },
-    { 
-      id: crypto.randomUUID(), 
-      name: "Apelsinjuice", 
-      price: 30, 
-      volume: "0,25"
-    },
-    { 
-      id: crypto.randomUUID(),
-      name: "Äppeljuice", 
-      price: 30,
-      ingredients: [],
-      category: "drinks", 
-      volume: "0,25"
-    },
-    { 
-      id: crypto.randomUUID(), 
-      name: "Ramune Yuzu", 
-      price: 35,
-      ingredients: [],
-      category: "drinks",
-      volume: "0,2"
-    },
-    { 
-      id: crypto.randomUUID(), 
-      name: "Iskaffe", 
-      price: 40,
-      ingredients: [],
-      category: "drinks",
-      volume: "0,3"
-    },
-    { 
-      id: crypto.randomUUID(), 
-      name: "Japanskt grönt te", 
-      price: 25,
-      ingredients: [],
-      category: "drinks",
-      volume: "0,5"
-    },
-    { 
-      id: crypto.randomUUID(), 
-      name: "Kombucha Original", 
-      price: 45,
-      ingredients: [],
-      category: "drinks",
-      volume: "0,33"
-    }
+  {
+    id: crypto.randomUUID(),
+    name: "Pepsi Max",
+    price: 20,
+    ingredients: [],
+    category: "drinks",
+    volume: "0,33",
+    description: "Klassisk sockerfri Pepsi Max, krispig och uppfriskande."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Coca-Cola",
+    price: 20,
+    ingredients: [],
+    category: "drinks",
+    volume: "0,33",
+    description: "Iskall Coca-Cola, tidlös och bubblande god."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Sprite",
+    price: 20,
+    ingredients: [],
+    category: "drinks",
+    volume: "0,33",
+    description: "Frisk Sprite med citron- och limesmak, perfekt törstsläckare."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Ramlösa Citrus",
+    price: 25,
+    ingredients: [],
+    category: "drinks",
+    volume: "0,5",
+    description: "Lätt kolsyrat mineralvatten med uppfriskande citrussmak."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Loka Naturell",
+    price: 25,
+    ingredients: [],
+    category: "drinks",
+    volume: "0,5",
+    description: "Rent kolsyrat vatten, fräscht och utan tillsatser."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Apelsinjuice",
+    price: 30,
+    volume: "0,25",
+    description: "Färskpressad apelsinjuice, söt och full av vitaminer."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Äppeljuice",
+    price: 30,
+    ingredients: [],
+    category: "drinks",
+    volume: "0,25",
+    description: "Krispig äppeljuice, naturligt söt och uppfriskande."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Ramune Yuzu",
+    price: 35,
+    ingredients: [],
+    category: "drinks",
+    volume: "0,2",
+    description: "Japansk Ramune med syrlig yuzusmak, rolig och unik."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Iskaffe",
+    price: 40,
+    ingredients: [],
+    category: "drinks",
+    volume: "0,3",
+    description: "Svalkande iskaffe, krämig och uppiggande."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Japanskt grönt te",
+    price: 25,
+    ingredients: [],
+    category: "drinks",
+    volume: "0,5",
+    description: "Autentiskt grönt te, mild och aromatisk."
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Kombucha Original",
+    price: 45,
+    ingredients: [],
+    category: "drinks",
+    volume: "0,33",
+    description: "Probiotisk kombucha, fräsch med en lätt syrlighet."
+  },
 ];
   
 const sushiMenu = [

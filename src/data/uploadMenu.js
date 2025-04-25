@@ -3,7 +3,7 @@ import { drinksMenuList, makiMenuList, nigiriMenuList, sashimiMenuList } from ".
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
 const API_KEY = "isushi-menu";
 
-// Helper function to fetch current menu
+// Hjälpfunktion för att hämta nuvarande meny
 const fetchCurrentMenu = async () => {
   try {
     const response = await fetch(`${API_URL}?method=load&key=${API_KEY}`);
@@ -11,16 +11,20 @@ const fetchCurrentMenu = async () => {
       const data = await response.json();
       return Array.isArray(data) ? data : [];
     } else {
-      console.error("Failed to fetch current menu");
+      if (process.env.NODE_ENV === "development") {
+        console.error("Misslyckades med att hämta nuvarande meny");
+      }
       return [];
     }
   } catch (err) {
-    console.error("Network error fetching menu:", err);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Nätverksfel vid hämtning av meny:", err);
+    }
     return [];
   }
 };
 
-// Helper function to save menu to API
+// Hjälpfunktion för att spara meny till API
 const saveMenuToApi = async (menu) => {
   try {
     const saveResponse = await fetch(`${API_URL}?method=save`, {
@@ -35,25 +39,33 @@ const saveMenuToApi = async (menu) => {
       }),
     });
     if (saveResponse.ok) {
-      console.log("Menu saved successfully!");
+      if (process.env.NODE_ENV === "development") {
+        console.log("Menyn sparades framgångsrikt!");
+      }
       return true;
     } else {
-      console.error("Failed to save the menu.");
+      if (process.env.NODE_ENV === "development") {
+        console.error("Misslyckades med att spara menyn.");
+      }
       return false;
     }
   } catch (err) {
-    console.error("Network error saving menu:", err);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Nätverksfel vid sparande av meny:", err);
+    }
     return false;
   }
 };
 
-// Upload all menus (refactored to reuse saveMenuToApi)
+// Ladda upp alla menyer
 export const uploadAllMenus = async () => {
   try {
     const currentMenu = await fetchCurrentMenu();
-    console.log("Current menu from API:", currentMenu);
+    if (process.env.NODE_ENV === "development") {
+      console.log("Nuvarande meny från API:", currentMenu);
+    }
 
-    // Combine all menu lists with explicit category
+    // Kombinera alla menylistor med explicit kategori
     const allMenuItems = [
       ...drinksMenuList.map((item) => ({ ...item, category: "drink" })),
       ...makiMenuList.map((item) => ({ ...item, category: "maki" })),
@@ -61,7 +73,7 @@ export const uploadAllMenus = async () => {
       ...sashimiMenuList.map((item) => ({ ...item, category: "sashimi" })),
     ];
 
-    // Deduplicate allMenuItems
+    // Deduplicera allMenuItems
     const uniqueMenuItems = allMenuItems.reduce((acc, item) => {
       const exists = acc.some(
         (existing) =>
@@ -73,9 +85,11 @@ export const uploadAllMenus = async () => {
       return acc;
     }, []);
 
-    console.log("Unique menu items to process:", uniqueMenuItems);
+    if (process.env.NODE_ENV === "development") {
+      console.log("Unika menyobjekt att bearbeta:", uniqueMenuItems);
+    }
 
-    // Filter out items that already exist in currentMenu
+    // Filtrera bort objekt som redan finns i currentMenu
     const newItems = uniqueMenuItems.filter(
       (newItem) =>
         !currentMenu.some(
@@ -85,12 +99,14 @@ export const uploadAllMenus = async () => {
         )
     );
 
-    console.log("New items to add:", newItems);
+    if (process.env.NODE_ENV === "development") {
+      console.log("Nya objekt att lägga till:", newItems);
+    }
 
-    // Create updated menu
+    // Skapa uppdaterad meny
     const updatedMenu = [...currentMenu, ...newItems];
 
-    // Deduplicate updatedMenu
+    // Deduplicera updatedMenu
     const finalMenu = updatedMenu.reduce((acc, item) => {
       const exists = acc.some(
         (existing) =>
@@ -102,21 +118,25 @@ export const uploadAllMenus = async () => {
       return acc;
     }, []);
 
-    console.log("Final menu to upload:", finalMenu);
+    if (process.env.NODE_ENV === "development") {
+      console.log("Slutlig meny att ladda upp:", finalMenu);
+    }
 
-    // Save to API
+    // Spara till API
     const success = await saveMenuToApi(finalMenu);
     if (success) {
-      console.log("All menu items have been uploaded to the API!");
+      if (process.env.NODE_ENV === "development") {
+        console.log("Alla menyobjekt har laddats upp till API!");
+      }
     } else {
-      console.error("Failed to save the menu.");
+      console.error("Misslyckades med att spara menyn.");
     }
   } catch (err) {
-    console.error("Error in uploadAllMenus:", err);
+    console.error("Fel i uploadAllMenus:", err);
   }
 };
 
-// Edit an existing menu item
+// Redigera ett befintligt menyobjekt
 export const editMenuItem = async (originalItem, updatedItem) => {
   try {
     const currentMenu = await fetchCurrentMenu();
@@ -126,30 +146,40 @@ export const editMenuItem = async (originalItem, updatedItem) => {
     );
 
     if (itemIndex === -1) {
-      console.error("Item not found in current menu:", originalItem);
+      if (process.env.NODE_ENV === "development") {
+        console.error("Objektet hittades inte i nuvarande meny:", originalItem);
+      }
       return false;
     }
 
-    // Update the item
+    // Uppdatera objektet
     currentMenu[itemIndex] = { ...updatedItem, category: originalItem.category };
-    console.log("Updated menu item:", currentMenu[itemIndex]);
+    if (process.env.NODE_ENV === "development") {
+      console.log("Uppdaterat menyobjekt:", currentMenu[itemIndex]);
+    }
 
-    // Save updated menu
+    // Spara uppdaterad meny
     const success = await saveMenuToApi(currentMenu);
     if (success) {
-      console.log("Menu item updated successfully!");
+      if (process.env.NODE_ENV === "development") {
+        console.log("Menyobjekt uppdaterades framgångsrikt!");
+      }
       return true;
     } else {
-      console.error("Failed to save updated menu.");
+      if (process.env.NODE_ENV === "development") {
+        console.error("Misslyckades med att spara uppdaterad meny.");
+      }
       return false;
     }
   } catch (err) {
-    console.error("Error in editMenuItem:", err);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Fel i editMenuItem:", err);
+    }
     return false;
   }
 };
 
-// Delete a menu item
+// Ta bort ett menyobjekt
 export const deleteMenuItem = async (itemToDelete) => {
   try {
     const currentMenu = await fetchCurrentMenu();
@@ -158,24 +188,76 @@ export const deleteMenuItem = async (itemToDelete) => {
         !(item.name === itemToDelete.name && item.category === itemToDelete.category)
     );
 
-    console.log("Menu after deletion:", updatedMenu);
+    if (process.env.NODE_ENV === "development") {
+      console.log("Meny efter borttagning:", updatedMenu);
+    }
 
-    // Save updated menu
+    // Spara uppdaterad meny
     const success = await saveMenuToApi(updatedMenu);
     if (success) {
-      console.log("Menu item deleted successfully!");
+      if (process.env.NODE_ENV === "development") {
+        console.log("Menyobjekt togs bort framgångsrikt!");
+      }
       return true;
     } else {
-      console.error("Failed to save updated menu.");
+      if (process.env.NODE_ENV === "development") {
+        console.error("Misslyckades med att spara uppdaterad meny.");
+      }
       return false;
     }
   } catch (err) {
-    console.error("Error in deleteMenuItem:", err);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Fel i deleteMenuItem:", err);
+    }
     return false;
   }
 };
 
-// Fetch current menu for display
+// Rensa menyn och ladda upp endast objekt från produktLists.js
+export const clearAndResetMenu = async () => {
+  try {
+    // Kombinera alla menylistor med explicit kategori
+    const allMenuItems = [
+      ...drinksMenuList.map((item) => ({ ...item, category: "drink" })),
+      ...makiMenuList.map((item) => ({ ...item, category: "maki" })),
+      ...nigiriMenuList.map((item) => ({ ...item, category: "nigiri" })),
+      ...sashimiMenuList.map((item) => ({ ...item, category: "sashimi" })),
+    ];
+
+    // Deduplicera allMenuItems
+    const uniqueMenuItems = allMenuItems.reduce((acc, item) => {
+      const exists = acc.some(
+        (existing) =>
+          existing.name === item.name && existing.category === item.category
+      );
+      if (!exists) {
+        acc.push(item);
+      }
+      return acc;
+    }, []);
+
+    if (process.env.NODE_ENV === "development") {
+      console.log("Menyobjekt att ladda upp:", uniqueMenuItems);
+    }
+
+    // Spara den nya menyn till API (ersätter allt tidigare)
+    const success = await saveMenuToApi(uniqueMenuItems);
+    if (success) {
+      if (process.env.NODE_ENV === "development") {
+        console.log("Menyn rensades och uppdaterades framgångsrikt!");
+      }
+      return true;
+    } else {
+      console.error("Misslyckades med att rensa och uppdatera menyn.");
+      return false;
+    }
+  } catch (err) {
+    console.error("Fel i clearAndResetMenu:", err);
+    return false;
+  }
+};
+
+// Hämta nuvarande meny för visning
 export const getCurrentMenu = async () => {
   return await fetchCurrentMenu();
 };
