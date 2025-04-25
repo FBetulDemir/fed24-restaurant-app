@@ -69,7 +69,6 @@ function InLogg() {
                 <section className='form'>
 
                     <p className='admin'>Admin</p>
-                    {error && <p className='error'>{error}</p>}
 
                     <p className="error"> </p> 
                     {/* <p>Ange ditt lösenord för att logga in</p> */}
@@ -88,6 +87,8 @@ function InLogg() {
                     }}
                      }
                     />
+                     {error && <p className='error'>{error}</p>}
+               
                 <p> &nbsp; </p> 
                 <form onSubmit={handleSubmit}>
 

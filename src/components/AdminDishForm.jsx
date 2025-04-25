@@ -118,12 +118,16 @@ const AdminDishForm = () => {
             <option value="sashimi">Sashimi</option>
             <option value="drinks">Drycker</option>
           </select>
+          {error.category && <p className='error'>{error.category}</p>}
+
           <input
             name="name"
             value={formData.name}
             onChange={handleChange}
             placeholder="Namn"
           />
+          {error.name && <p className="error">{error.name}</p>}
+
           <input
             name="price"
             type="number"
@@ -131,6 +135,8 @@ const AdminDishForm = () => {
             onChange={handleChange}
             placeholder="Pris"
           />
+          {error.price && <p className="error">{error.price}</p>}
+
           <input
             name="ingredients"
             value={formData.ingredients}
@@ -146,6 +152,7 @@ const AdminDishForm = () => {
               onChange={handleChange}
               placeholder="Pris för extra bit"
             />
+            
           )}
           
           {formData.category === "drinks" && (

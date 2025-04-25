@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuList from '../components/MenuList.jsx';
 import Header from '../components/Header.jsx';
-import { saveData, loadData } from '../api.js';
+import { saveData, loadData } from '../components/Api.js';
 import '../styles/Admin.css';
+import'../styles/AdminStart.css';
+import AdminStart from '../components/AdminStart.jsx';
 
 const EditMenu = () => {
   const [menu, setMenu] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  
   const abortController = new AbortController();
 
   const fetchMenu = async () => {
@@ -130,14 +133,19 @@ const EditMenu = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <div className="admin-container">
-        <aside className="admin-sidebar">
+      <div className="sidebar">
+        <AdminStart />
+      </div>
+        {/* <aside className="sidebar">
           <h2>Welcome Employee!</h2>
-          <button onClick={() => navigate('/admin/add')}>NEW MENU</button>
-          <button onClick={() => navigate('/admin/edit')}>EDIT/REMOVE MENU</button>
-          <button onClick={() => navigate('/')}>SIGN OUT</button>
-        </aside>
+          <button onClick={() => navigate('/admin/add')}>Ny Meny</button>
+          <button onClick={() => navigate('/admin/edit')}>Ändra/Ta bort</button>
+          <button onClick={() => navigate('/')}>Logga ut</button>
+        </aside> */}
+        </div>
+        <div className='admin-container'>
         <main className="admin-main">
           <div className="admin-content">
             <div className="admin-menu-list full-width">
