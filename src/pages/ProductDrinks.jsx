@@ -2,6 +2,7 @@ import "../styles/ProductPage.css";
 import React, { useState, useEffect } from "react";
 import { sushiMenu } from "../data/produktLists.js";
 import UploadAllMenus from "../components/uploadAllMenus.jsx";
+import { useCartStore } from "../data/CartStore.js";
 
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
 const API_KEY = "isushi-menu";
@@ -10,6 +11,8 @@ const DrinksMenu = () => {
   const [drinkList, setDrinkList] = useState([]);
   const [error, setError] = useState("");
   const drinks = sushiMenu[3];
+
+  const addToCart = useCartStore((state) => state.addToCart);
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -34,6 +37,16 @@ const DrinksMenu = () => {
     fetchMenu();
   }, []);
 
+  const handleAddToCart = (drink) => {
+    addToCart({
+      id: drink.id,
+      name: drink.name,
+      price: drink.price,
+      quantity: 1,
+      ingredients: drink.ingredients || [],
+    });
+  };
+
   return (
     <section className="product-page">
       <UploadAllMenus />
@@ -51,7 +64,9 @@ const DrinksMenu = () => {
           drinkList.map((drink, index) => (
             <div key={drink.id || index} className="product-price-drinks-nigiri">
               <p className="product-name">
-                <button className="product-buy-btn">Lägg till</button>
+			  	<button className="product-buy-btn" onClick={() => handleAddToCart(drink)}>
+                  	Lägg till
+                </button>
                 {drink.name} <span className="product-space-price">{drink.price}:-</span>
                 {drink.volume && (
                   <span className="product-volume"> (volym {drink.volume} l)</span>

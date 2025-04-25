@@ -2,6 +2,7 @@ import "../styles/ProductPage.css";
 import React, { useState, useEffect } from "react";
 import { sushiMenu } from "../data/produktLists.js";
 import UploadAllMenus from "../components/uploadAllMenus.jsx";
+import { useCartStore } from "../data/CartStore.js";
 
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
 const API_KEY = "isushi-menu";
@@ -10,6 +11,8 @@ const NigiriSushi = () => {
   const [nigiriMenuList, setNigiriMenuList] = useState([]);
   const [error, setError] = useState("");
   const nigiriSushi = sushiMenu[1];
+
+  const addToCart = useCartStore((state) => state.addToCart);
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -34,6 +37,16 @@ const NigiriSushi = () => {
     fetchMenu();
   }, []);
 
+  const handleAddToCart = (nigiri) => {
+    addToCart({
+      id: nigiri.id,
+      name: nigiri.name,
+      price: nigiri.price,
+      quantity: 2,
+      ingredients: nigiri.ingredients || [],
+    });
+  };
+
   return (
     <section className="product-page">
       <UploadAllMenus />
@@ -49,7 +62,12 @@ const NigiriSushi = () => {
           nigiriMenuList.map((nigiri, index) => (
             <div key={nigiri.id || index} className="product-price">
               <p className="product-name">
-                <button className="product-buy-btn">Lägg till 2 bitar</button>
+			  <button
+                  className="product-buy-btn"
+                  onClick={() => handleAddToCart(nigiri)}
+                >
+                  Lägg till 2 bitar
+                </button>
                 <span className="product-length">
                   {nigiri.name} {nigiri.price}:-
                 </span>

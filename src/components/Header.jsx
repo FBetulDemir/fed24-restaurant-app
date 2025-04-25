@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "../styles/Header.css";
 import { useCartStore } from '../stores/cartStore'
 import useOutsideClick from "./useOutsideClick";
@@ -16,7 +16,13 @@ const Header = () => {
     const cartCount = cart.length
     const dropdownRef = useRef(null);
     
+	const initializeCart = useCartStore((state) => state.initializeCart);
 
+	useEffect(() => {
+	  if (initializeCart) {
+		initializeCart();
+	  }
+	}, [initializeCart]);
 
 
     const toggleDropdown = () => {

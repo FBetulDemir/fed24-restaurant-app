@@ -1,11 +1,20 @@
+import { useState, useEffect } from "react";
+import { loadData } from "../components/Api"; // justera sökväg
 import "../styles/Cart.css";
-// import Buttons from "./CartFunctions.jsx";
-import "./CartFunctions";
 import { NavLink } from "react-router";
-import { useCart } from "./CartFunctions";
+import { saveData } from "../components/Api";
 
 const Cart = () => {
-  const { cart, removeFromCart, clearCart } = useCart();
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      const data = await loadData("temporary-test-cart");
+      if (data) setCart(data);
+    };
+    fetchCart();
+  }, []);
+
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
@@ -14,7 +23,7 @@ const Cart = () => {
       <h1 id="yourOrder">Din Beställning</h1>
 
       {cart.map((item, index) => (
-        <section className="box" key={item.id || index}> 
+        <section className="box" key={item.id || index}>
           <div id={`product-${index}`}>
             <h2 id="title">{item.name}</h2>
             <div className="desPic">
@@ -24,8 +33,7 @@ const Cart = () => {
             <div className="btns">
               <p>x{item.quantity}</p>
               <p>{item.price} kr</p>
-              <button onClick={() => removeFromCart(item.id)}>Ta bort</button>
-            </div> 
+            </div>
           </div>
         </section>
       ))}
@@ -36,7 +44,14 @@ const Cart = () => {
         </div>
 
         <div className="orderNr">
-          <button id="cancelOrdBtn" onClick={clearCart}>ÅNGRA</button>
+		<button
+  			id="cancelOrdBtn"
+  			onClick={() => {
+    		setCart([]);
+    		saveData("temporary-test-cart", []);
+  			}}>
+  			ÅNGRA
+		</button>
         </div>
       </section>
 

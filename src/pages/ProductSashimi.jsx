@@ -2,6 +2,7 @@ import "../styles/ProductPage.css";
 import React, { useState, useEffect } from "react";
 import { sushiMenu } from "../data/produktLists";
 import UploadAllMenus from "../components/uploadAllMenus.jsx";
+import { useCartStore } from "../data/CartStore.js";
 
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
 const API_KEY = "isushi-menu";
@@ -11,6 +12,8 @@ const Sashimi = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const sashimi = sushiMenu[2];
+
+  const addToCart = useCartStore((state) => state.addToCart);
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -36,6 +39,16 @@ const Sashimi = () => {
   
     fetchMenu();
   }, []);
+
+  	const handleAddToCart = (sashimi) => {
+    addToCart({
+      id: sashimi.id,
+      name: sashimi.name,
+      price: sashimi.price,
+      quantity: 5,
+      ingredients: sashimi.ingredients || [],
+    });
+  };
   
   return (
     <section className="product-page">
@@ -54,7 +67,11 @@ const Sashimi = () => {
           sashimiMenuList.map((sashimi, index) => (
             <div key={sashimi.id || index} className="product-price">
               <p className="product-name">
-                <button className="product-buy-btn">Lägg till 5 bitar</button>
+			  	<button
+                	className="product-buy-btn"
+                	onClick={() => handleAddToCart(sashimi)}>
+                  	Lägg till 5 bitar
+                </button>
                 <span className="product-length">
                   {sashimi.name} {sashimi.price}:-
                 </span>

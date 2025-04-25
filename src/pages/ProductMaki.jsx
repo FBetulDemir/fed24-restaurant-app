@@ -2,7 +2,8 @@ import "../styles/ProductPage.css";
 import React, { useState, useEffect } from "react";
 import { sushiMenu } from "../data/produktLists.js";
 import UploadAllMenus from "../components/uploadAllMenus.jsx";
-import { useCart } from "../components/CartFunctions.jsx";
+// import { useCart } from "../components/CartFunctions.jsx";
+import { useCartStore } from "../data/CartStore.js";
 
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
 const API_KEY = "isushi-menu";
@@ -12,7 +13,7 @@ const MakiSushi = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const makiSushi = sushiMenu[0];
-  const { addToCart } = useCart();
+  const addToCart = useCartStore((state) => state.addToCart);
 
   useEffect(() => {
     const fetchMenu = async () => {
