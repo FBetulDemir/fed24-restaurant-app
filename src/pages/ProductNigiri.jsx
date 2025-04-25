@@ -20,14 +20,14 @@ const NigiriSushi = () => {
           const nigiriItems = data.filter((item) => item.category === "nigiri");
           setNigiriMenuList(nigiriItems);
           if (nigiriItems.length === 0) {
-            setError("No nigiri items found in the API response.");
+            setError("Inga nigiri-objekt hittades i API-svaret.");
           }
         } else {
-          setError("API response is not a list of menu items.");
+          setError("API-svaret är inte en lista över menyobjekt.");
         }
       } catch (err) {
-        console.error("Failed to load menu", err);
-        setError("Could not load the menu.");
+        console.error("Misslyckades med att ladda menyn", err);
+        setError("Kunde inte ladda menyn.");
       }
     };
 
@@ -60,7 +60,7 @@ const NigiriSushi = () => {
             </div>
           ))
         ) : (
-          <p>No nigiri items available at the moment.</p>
+          <p>Inga nigiri-objekt tillgängliga för tillfället.</p>
         )}
       </div>
     </section>

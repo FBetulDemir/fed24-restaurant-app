@@ -54,7 +54,7 @@ const AdminDishForm = () => {
         : {}),
       ...(formData.category === "drinks"
         ? {
-            volume: formData.volume ? parseFloat(formData.volume) : null, // Parse as single number
+            volume: formData.volume ? parseFloat(formData.volume) : null, 
           }
         : {}),
     };
@@ -90,7 +90,7 @@ const AdminDishForm = () => {
           name: "",
           price: "",
           ingredients: "",
-          extraBitPrice: "", // Reset extraBitPrice
+          extraBitPrice: "", 
         });
         setSuccess("Maträtten har lagts till!");
         setError("");
@@ -118,12 +118,16 @@ const AdminDishForm = () => {
             <option value="sashimi">Sashimi</option>
             <option value="drinks">Drycker</option>
           </select>
+          {error.category && <p className='error'>{error.category}</p>}
+
           <input
             name="name"
             value={formData.name}
             onChange={handleChange}
             placeholder="Namn"
           />
+          {error.name && <p className="error">{error.name}</p>}
+
           <input
             name="price"
             type="number"
@@ -131,13 +135,15 @@ const AdminDishForm = () => {
             onChange={handleChange}
             placeholder="Pris"
           />
+          {error.price && <p className="error">{error.price}</p>}
+
           <input
             name="ingredients"
             value={formData.ingredients}
             onChange={handleChange}
             placeholder="Ingredienser (komma-separerat)"
           />
-          {/* Conditionally render extra bit price field for maki or sashimi */}
+        
           {(formData.category === "maki" || formData.category === "sashimi") && (
             <input
               name="extraBitPrice"
@@ -146,8 +152,9 @@ const AdminDishForm = () => {
               onChange={handleChange}
               placeholder="Pris för extra bit"
             />
+            
           )}
-          {/* Conditionally render volume field for drinks */}
+          
           {formData.category === "drinks" && (
             <input
               name="volume"

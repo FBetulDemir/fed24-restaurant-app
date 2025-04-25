@@ -18,19 +18,31 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
     });
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setMenuItem({ ...menuItem, image: reader.result }); // เก็บ Base64 string
-      };
-      reader.readAsDataURL(file);
+  // ฟังก์ชันสำหรับจัดการการป้อนเฉพาะตัวเลข
+  const handleNumberInput = (e, field) => {
+    const value = e.target.value;
+    // อนุญาตให้เป็นตัวเลขเท่านั้น (รวมถึงช่องว่างเพื่อให้สามารถลบได้)
+    if (/^\d*$/.test(value)) {
+      setMenuItem({ ...menuItem, [field]: value });
     }
   };
 
   return (
     <form onSubmit={onSubmit} className="menu-form">
+      <div>
+        <label>Group</label>
+        <select
+          value={menuItem.group || ''}
+          onChange={(e) => setMenuItem({ ...menuItem, group: e.target.value })}
+          required
+        >
+          <option value="" disabled>Select a group</option>
+          <option value="Maki">Maki</option>
+          <option value="Nigiri">Nigiri</option>
+          <option value="Sashimi">Sashimi</option>
+          <option value="Drinks">Drinks</option>
+        </select>
+      </div>
       <div>
         <label>Add Title</label>
         <input
@@ -49,23 +61,32 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
         />
       </div>
       <div>
-        <label>Price</label>
+        <label>Price (kr)</label>
         <input
-          type="number"
+          type="text"
           value={menuItem.price}
-          onChange={(e) => setMenuItem({ ...menuItem, price: e.target.value })}
+          onChange={(e) => handleNumberInput(e, 'price')}
+          pattern="\d*"
           required
         />
       </div>
       <div>
-        <label>Ingredients</label>
+        <label>Extra Price (kr) (optional)</label>
+        <input
+          type="text"
+          value={menuItem.extraPrice || ''}
+          onChange={(e) => handleNumberInput(e, 'extraPrice')}
+          pattern="\d*"
+        />
+      </div>
+      <div>
+        <label>Ingredients (optional)</label>
         {menuItem.ingredients.map((ingredient, index) => (
           <div key={index} className="ingredient-group">
             <input
               type="text"
               value={ingredient}
               onChange={(e) => handleIngredientChange(index, e.target.value)}
-              required
             />
             <button type="button" onClick={() => removeIngredient(index)}>
               Remove
@@ -75,28 +96,6 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
         <button type="button" onClick={addIngredient} className="add-ingredient">
           Add Ingredient
         </button>
-      </div>
-      <div className="image-group">
-        <div>
-          <label>Upload Picture</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            required
-          />
-        </div>
-        <div className="image-preview">
-          {menuItem.image ? (
-            <img src={menuItem.image} alt="Preview" />
-          ) : (
-            <div className="image-placeholder">
-              <svg fill="currentColor" viewBox="0 0 24 24">
-                <path d="M4 4h16v16H4V4zm2 2v12h12V6H6zm2 2h8v8H8V8zm2 2v4h4v-4h-4z" />
-              </svg>
-            </div>
-          )}
-        </div>
       </div>
       <button type="submit">{buttonText}</button>
     </form>

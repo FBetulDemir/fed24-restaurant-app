@@ -9,7 +9,7 @@ const AdminStart = () => {
         <NavLink to="/components/adminNewDish">
             <button className="form-btn">Lägg till ny maträtt</button>
         </NavLink>
-        <NavLink to="/components/adminNewDish">
+        <NavLink to="/pages/EditMenu">
             <button className="form-btn">Redigera/Ta bort meny</button>
         </NavLink>
         <NavLink to="/">
