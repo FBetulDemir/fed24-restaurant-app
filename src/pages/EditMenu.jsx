@@ -138,12 +138,6 @@ const EditMenu = () => {
       <div className="sidebar">
         <AdminStart />
       </div>
-        {/* <aside className="sidebar">
-          <h2>Welcome Employee!</h2>
-          <button onClick={() => navigate('/admin/add')}>Ny Meny</button>
-          <button onClick={() => navigate('/admin/edit')}>Ändra/Ta bort</button>
-          <button onClick={() => navigate('/')}>Logga ut</button>
-        </aside> */}
         </div>
         <div className='admin-container'>
         <main className="admin-main">
