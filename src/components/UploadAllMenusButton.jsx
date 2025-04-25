@@ -20,7 +20,7 @@ const UploadAllMenusButton = () => {
 
   return (
     <div>
-      <button className="form-btn upload" onClick={handleUpload}>Ladda upp alla menyer</button>
+      <button className="form-btn upload" onClick={handleUpload}>Ladda upp nya menyer</button>
       {status && <p>{status}</p>}
     </div>
   );

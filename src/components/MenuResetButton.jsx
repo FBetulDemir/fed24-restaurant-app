@@ -26,7 +26,7 @@ const MenuResetButton = () => {
   return (
     <div>
       <button className="form-btn reset" onClick={handleResetMenu} disabled={isLoading}>
-        {isLoading ? "Resetting..." : "Reset Menu"}
+        {isLoading ? "Resetting..." : "Återställ standardmeny"}
       </button>
       {message && <p>{message}</p>}
     </div>
