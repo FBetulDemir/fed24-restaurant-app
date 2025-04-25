@@ -6,7 +6,7 @@ import { saveData } from '../components/Api';
 
 const Receipt = ({ cart }) => {
 const items = Array.isArray(cart) ? cart : [];
-const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+const total = items.reduce((sum, item) => sum + item.price, 0);
 
 const totalUtanMoms = total;
 
@@ -28,9 +28,9 @@ return (
 				{items.map((item, index) => (
 				<div className="receipt-item" key={index}>
 					<p>{item.name}</p>
-					<p>x{item.quantity}</p>
-					<p>{item.price}kr</p>
-				</div>
+					<p>{item.quantity}st</p>
+					<p>{item.price.toFixed(2)} kr</p>
+			  	</div>
 				))}
 			</div>
 			<div className="receipt-divider"></div>
