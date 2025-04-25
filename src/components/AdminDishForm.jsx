@@ -54,7 +54,7 @@ const AdminDishForm = () => {
         : {}),
       ...(formData.category === "drinks"
         ? {
-            volume: formData.volume ? parseFloat(formData.volume) : null, 
+            volume: formData.volume ? formData.volume.replace(".", ",") : null,
           }
         : {}),
     };
@@ -90,7 +90,8 @@ const AdminDishForm = () => {
           name: "",
           price: "",
           ingredients: "",
-          extraBitPrice: "", 
+          extraBitPrice: "",
+          volume: "",
         });
         setSuccess("Maträtten har lagts till!");
         setError("");
@@ -143,7 +144,7 @@ const AdminDishForm = () => {
             onChange={handleChange}
             placeholder="Ingredienser (komma-separerat)"
           />
-        
+
           {(formData.category === "maki" || formData.category === "sashimi") && (
             <input
               name="extraBitPrice"
@@ -152,15 +153,14 @@ const AdminDishForm = () => {
               onChange={handleChange}
               placeholder="Pris för extra bit"
             />
-            
           )}
-          
+
           {formData.category === "drinks" && (
             <input
               name="volume"
               value={formData.volume}
               onChange={handleChange}
-              placeholder="Volym (t.ex. 0.33)"
+              placeholder="Volym (t.ex. 0,5)"
             />
           )}
           <button type="submit" className="form-btn">

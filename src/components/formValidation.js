@@ -47,11 +47,22 @@ export const dishSchema = Joi.object({
   }),
   volume: Joi.when("category", {
     is: "drinks",
-    then: Joi.number().positive().required().messages({
-      "number.base": "Volym måste vara ett nummer.",
-      "number.positive": "Volym måste vara ett positivt nummer.",
-      "any.required": "Volym är obligatoriskt för drycker.",
-    }),
+    then: Joi.string()
+      .pattern(/^\d+(,\d+)?$/)
+      .required()
+      .custom((value, helpers) => {
+        const numericValue = parseFloat(value.replace(",", "."));
+        if (numericValue < 0.1 || numericValue > 10) {
+          return helpers.error("string.outOfRange");
+        }
+        return value;
+      })
+      .messages({
+        "string.base": "Volym måste vara en textsträng.",
+        "string.pattern.base": "Volym måste vara ett nummer med komma som decimaltecken (t.ex. 0,1 eller 1,25).",
+        "string.outOfRange": "Volym måste vara mellan 0,1 och 10.",
+        "any.required": "Volym är obligatoriskt för drycker.",
+      }),
     otherwise: Joi.any()
       .forbidden()
       .messages({
