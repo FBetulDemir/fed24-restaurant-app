@@ -21,7 +21,7 @@ export const MenuProvider = ({ children }) => {
         const response = await fetch(`${API_URL}?method=load&key=${API_KEY}`);
         const data = await response.json();
         if (Array.isArray(data)) {
-          const drinks = data.filter((item) => item.category === "drink");
+            const drinks = data.filter((item) => item.category === "drink" || item.category === "drinks");
           const maki = data.filter((item) => item.category === "maki");
           const nigiri = data.filter((item) => item.category === "nigiri");
           const sashimi = data.filter((item) => item.category === "sashimi");
