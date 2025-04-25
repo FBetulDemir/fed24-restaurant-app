@@ -107,6 +107,7 @@ const sashimiMenuList = [
     }
 ];
   
+
 const drinksMenuList = [
     {
       id: crypto.randomUUID(), 
@@ -114,7 +115,7 @@ const drinksMenuList = [
       price: 20,
       ingredients: [],
       category: "drinks",
-      volume: 0.33
+      volume: "0,33"
     },
     { 
       id: crypto.randomUUID(), 
@@ -122,7 +123,7 @@ const drinksMenuList = [
       price: 20,
       ingredients: [],
       category: "drinks", 
-      volume: 0.33
+      volume: "0,33"
     },   
     { 
       id: crypto.randomUUID(), 
@@ -130,70 +131,70 @@ const drinksMenuList = [
       price: 20,
       ingredients: [],
       category: "drinks",
-      volume: 0.33 
-     },
+      volume: "0,33"
+    },
     { 
       id: crypto.randomUUID(), 
       name: "Ramlösa Citrus", 
       price: 25,
       ingredients: [],
       category: "drinks",
-      volume: 0.5
-     },
+      volume: "0,5"
+    },
     { 
       id: crypto.randomUUID(), 
       name: "Loka Naturell", 
       price: 25,
       ingredients: [],
       category: "drinks", 
-      volume: 0.5 
+      volume: "0,5"
     },
     { 
       id: crypto.randomUUID(), 
       name: "Apelsinjuice", 
       price: 30, 
-      volume: 0.25
+      volume: "0,25"
     },
     { 
       id: crypto.randomUUID(),
-       name: "Äppeljuice", 
-       price: 30,
-       ingredients: [],
+      name: "Äppeljuice", 
+      price: 30,
+      ingredients: [],
       category: "drinks", 
-       volume: 0.25
-      },
+      volume: "0,25"
+    },
     { 
       id: crypto.randomUUID(), 
       name: "Ramune Yuzu", 
       price: 35,
       ingredients: [],
       category: "drinks",
-      volume: 0.2
-     },
+      volume: "0,2"
+    },
     { 
       id: crypto.randomUUID(), 
       name: "Iskaffe", 
       price: 40,
       ingredients: [],
       category: "drinks",
-      volume: 0.3
-     },
+      volume: "0,3"
+    },
     { 
       id: crypto.randomUUID(), 
       name: "Japanskt grönt te", 
       price: 25,
       ingredients: [],
       category: "drinks",
-      volume: 0.5
-     },
+      volume: "0,5"
+    },
     { 
       id: crypto.randomUUID(), 
       name: "Kombucha Original", 
       price: 45,
       ingredients: [],
       category: "drinks",
-      volume: 0.33
-     }
+      volume: "0,33"
+    }
 ];
   
 const sushiMenu = [
