@@ -1,12 +1,21 @@
 import React from 'react';
 import receiptImg from "../assets/receipt.png";
 import "../styles/receipt.css";
+import { useNavigate } from 'react-router';
+import { saveData } from '../components/Api';
 
 const Receipt = ({ cart }) => {
 const items = Array.isArray(cart) ? cart : [];
 const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
 const totalUtanMoms = total;
+
+const navigate = useNavigate();
+
+const handleNewOrder = async () => {
+    await saveData("temporary-test-cart", []);
+    navigate("/pages/menu/menu/");
+  };
 
 return (
 	<div className="receipt-layout">
@@ -26,7 +35,7 @@ return (
 			</div>
 			<div className="receipt-divider"></div>
 			<p className="receipt-total">Totalt: {totalUtanMoms.toFixed(2)} kr</p>
-			<button className="new-order">Ny beställning</button>
+			<button className="new-order" onClick={handleNewOrder}>Ny beställning</button>
 			</section>
 		</div>
 	</div>
