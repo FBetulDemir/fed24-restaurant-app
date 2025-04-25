@@ -27,11 +27,9 @@ export function useCart() {
 	  const qtyToAdd = item.quantity || 1;
   
 	  if (existing) {
-		return prev.map(p =>
-		  p.id === item.id
-			? { ...p, quantity: p.quantity + qtyToAdd }
-			: p
-		);
+		return prev.map(p => p.id === item.id
+		  ? { ...p, quantity: p.quantity + qtyToAdd }
+		  : p);
 	  }
   
 	  return [...prev, { ...item, quantity: qtyToAdd }];
