@@ -54,7 +54,7 @@ const AdminDishForm = () => {
         : {}),
       ...(formData.category === "drinks"
         ? {
-            volume: formData.volume ? parseFloat(formData.volume) : null, // Parse as single number
+            volume: formData.volume ? parseFloat(formData.volume) : null, 
           }
         : {}),
     };
@@ -90,7 +90,7 @@ const AdminDishForm = () => {
           name: "",
           price: "",
           ingredients: "",
-          extraBitPrice: "", // Reset extraBitPrice
+          extraBitPrice: "", 
         });
         setSuccess("Maträtten har lagts till!");
         setError("");
@@ -137,7 +137,7 @@ const AdminDishForm = () => {
             onChange={handleChange}
             placeholder="Ingredienser (komma-separerat)"
           />
-          {/* Conditionally render extra bit price field for maki or sashimi */}
+        
           {(formData.category === "maki" || formData.category === "sashimi") && (
             <input
               name="extraBitPrice"
@@ -147,7 +147,7 @@ const AdminDishForm = () => {
               placeholder="Pris för extra bit"
             />
           )}
-          {/* Conditionally render volume field for drinks */}
+          
           {formData.category === "drinks" && (
             <input
               name="volume"
