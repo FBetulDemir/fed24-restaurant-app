@@ -8,12 +8,13 @@ const AdminStart = () => {
   return (
     <div className="sidebar">
         <h2>Välkommen tillbaka!</h2>
-        <NavLink to="/components/adminNewDish">
+        <NavLink to="/admin/add">
             <button className="form-btn">Lägg till ny maträtt</button>
         </NavLink>
         <NavLink to="/pages/EditMenu">
             <button className="form-btn">Redigera/Ta bort meny</button>
         </NavLink>
+        <NavLink to="/pages/editmenu">Edit Menu</NavLink>
         
         <UploadAllMenusButton />
         <MenuResetButton />

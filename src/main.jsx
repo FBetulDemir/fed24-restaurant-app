@@ -91,9 +91,21 @@ const router = createHashRouter(
           Component: Cart 
         },
         {
+          path: 'components/admin/:adminId?',
+          Component: AdminStart,
+        },
+        {
+          path: 'components/adminNewDish/:adminNewDishId?',
+          Component: AdminDishForm,
+        },
+        {
+          path: '/admin/add',
+          Component: AdminDishForm,
+        },
+        {
           path: 'pages/editmenu/:menuId?',
-          Component: EditMenu
-        }
+          Component: EditMenu,
+        },
         
       ]
    }
