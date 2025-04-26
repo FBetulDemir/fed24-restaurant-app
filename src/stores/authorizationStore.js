@@ -1,7 +1,9 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
 
-export const useAuthStore = create((set) => ({
+const useAdminStore = create((set) => ({
   isLoggedIn: false,
-  login: (password) => set({ isLoggedIn: password === "mums" }),
-  logout: () => set({ isLoggedIn: false })
-}))
+  login: () => set({ isLoggedIn: true }),
+  logout: () => set({ isLoggedIn: false }),
+}));
+
+export default useAdminStore;
