@@ -60,7 +60,6 @@ const AdminDishForm = () => {
     };
 
     const { error } = dishSchema.validate(newDish, { abortEarly: false });
-    console.log(error);
     if (error) {
       const fieldErrors = {};
       error.details.forEach((detail) => {
