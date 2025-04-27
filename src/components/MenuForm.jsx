@@ -3,8 +3,8 @@ import React from 'react';
 const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
   const handleIngredientChange = (index, value) => {
     const newIngredients = [...menuItem.ingredients];
-    newIngredients[index] = value;
-    setMenuItem({ ...menuItem, ingredients: newIngredients });
+    newIngredients[index] = value.trim(); 
+    setMenuItem({ ...menuItem, ingredients: newIngredients.filter(ingredient => ingredient.length > 0) });
   };
 
   const addIngredient = () => {

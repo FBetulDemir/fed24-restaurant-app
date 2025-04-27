@@ -42,6 +42,12 @@
 .error {
   color: red;
   text-shadow: 2px 2px 4px solid black;
+  margin-top: -23px;
+}
+
+.error-inlogg {
+  color: red;
+  text-shadow: 2px 2px 4px solid black;
 }
 
 .success {

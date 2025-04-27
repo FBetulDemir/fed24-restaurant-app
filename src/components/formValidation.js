@@ -16,14 +16,18 @@ export const dishSchema = Joi.object({
     "any.required": "Pris är obligatoriskt.",
   }),
   ingredients: Joi.array()
-    .items(Joi.string())
-    .max(30)
-    .optional()
-    .messages({
-      "array.base": "Ingredienser måste vara en lista.",
-      "array.max": "Ingredienser får inte överstiga 30 stycken.",
-      "string.base": "Varje ingrediens måste vara en textsträng.",
-    }),
+  .items(Joi.string().min(1).trim().required()) 
+  .min(1)
+  .max(30)
+  .required()
+  .messages({
+    "array.base": "Ingredienser måste vara en lista.",
+    "array.max": "Ingredienser får inte överstiga 30 stycken.",
+    "string.base": "Varje ingrediens måste vara en textsträng.",
+    "string.empty": "Ingrediens kan inte vara tom.",
+    "any.required": "Ingredienser är obligatoriska.",
+    "array.min": "Ingredienser måste innehålla minst en ingrediens.", 
+  }),
   category: Joi.string()
     .valid("maki", "nigiri", "sashimi", "drinks")
     .required()
