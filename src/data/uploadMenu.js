@@ -1,10 +1,10 @@
 import { drinksMenuList, makiMenuList, nigiriMenuList, sashimiMenuList } from "../data/produktLists";
 
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
-const API_KEY = "isushi_menu_2025_menu"; // ← corrected here
+const API_KEY = "isushi_menu_2025_menu";
 
 
-// Helper: Fetch current menu from API
+
 const fetchCurrentMenu = async () => {
   try {
     const response = await fetch(`${API_URL}?method=load&key=${API_KEY}`);
@@ -21,7 +21,7 @@ const fetchCurrentMenu = async () => {
   }
 };
 
-// Helper: Save menu to API
+
 const saveMenuToApi = async (menu) => {
   try {
     const saveResponse = await fetch(`${API_URL}?method=save`, {
@@ -42,7 +42,7 @@ const saveMenuToApi = async (menu) => {
   }
 };
 
-// Upload all menus
+
 export const uploadAllMenus = async () => {
   try {
     const currentMenu = await fetchCurrentMenu();
@@ -88,7 +88,7 @@ export const uploadAllMenus = async () => {
   }
 };
 
-// Edit menu item
+
 export const editMenuItem = async (originalItem, updatedItem) => {
   try {
     const currentMenu = await fetchCurrentMenu();
@@ -109,7 +109,7 @@ export const editMenuItem = async (originalItem, updatedItem) => {
   }
 };
 
-// Delete menu item
+
 export const deleteMenuItem = async (itemToDelete) => {
   try {
     const currentMenu = await fetchCurrentMenu();
@@ -123,7 +123,7 @@ export const deleteMenuItem = async (itemToDelete) => {
   }
 };
 
-// Clear and reset full menu
+
 export const clearAndResetMenu = async () => {
   try {
     const allMenuItems = [
@@ -148,7 +148,7 @@ export const clearAndResetMenu = async () => {
   }
 };
 
-// Get current menu for viewing
+
 export const getCurrentMenu = async () => {
   return await fetchCurrentMenu();
 };

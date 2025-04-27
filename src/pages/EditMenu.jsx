@@ -36,7 +36,7 @@ const EditMenu = () => {
     } else {
       fetchMenu();
     }
-    // eslint-disable-next-line
+
   }, [isLoggedIn]);
 
   const handleDelete = async (id) => {

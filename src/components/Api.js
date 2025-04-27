@@ -11,7 +11,7 @@ export async function saveData(key, value, signal) {
       },
       body: JSON.stringify({
         key: uniqueKey,
-        value: JSON.stringify(value)  // save as string
+        value: JSON.stringify(value)
       }),
       signal,
     });
