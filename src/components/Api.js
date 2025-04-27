@@ -16,7 +16,8 @@ export async function saveData(key, value, signal) {
       signal,
     });
 
-    const result = await response.json();
+    // const result = await response.json();
+	const result = await response.text();
     console.log(`✅ saveData response for key ${uniqueKey}:`, result);
     return response.ok;
   } catch (error) {

@@ -48,6 +48,7 @@ const MakiSushi = () => {
       price: maki.price,
       quantity: 8,
       ingredients: maki.ingredients || [],
+	  description: maki.description || "",
     });
   };
   

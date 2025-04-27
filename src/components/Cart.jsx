@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { loadData } from "../components/Api";
+import { loadData, saveData } from "../components/Api";
 import "../styles/Cart.css";
 import { NavLink } from "react-router";
-import { saveData } from "../components/Api";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
@@ -33,7 +32,39 @@ const Cart = () => {
     saveData("temporary-test-cart", updated);
   };
 
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  const handleClearCart = () => {
+    setCart([]);
+    saveData("temporary-test-cart", []);
+  };
+
+  const getItemTotal = (item) => {
+	const { quantity = 1, price, extraBitPrice = 0, category } = item;
+  
+	if (category === "maki") {
+	  const baseQty = 8;
+	  const extra = Math.max(0, quantity - baseQty);
+	  return price + extra * extraBitPrice;
+	}
+  
+	if (category === "sashimi") {
+	  const baseQty = 5;
+	  const extra = Math.max(0, quantity - baseQty);
+	  return price + extra * extraBitPrice;
+	}
+  
+	// Nigiri: priset gäller för 2 bitar
+	if (category === "nigiri") {
+	  return price * (quantity / 2);
+	}
+  
+	return price * quantity; // Drycker
+  };
+  
+  
+  
+  
+
+  const total = cart.reduce((sum, item) => sum + getItemTotal(item), 0);
 
   return (
     <div>
@@ -42,22 +73,22 @@ const Cart = () => {
 
       {cart.map((item, index) => (
         <section className="box" key={item.id || index}>
-		<div className="product">
-		  <h2 id="title">{item.name}</h2>
-		  <div className="desPic">
-			<img id="pics" src="-" alt={`Bild på ${item.name}`} />
-			<p id="description">{item.description || ""}</p>
-		  </div>
-		  <div className="btns">
-			<div className="cart-quantity-controls">
-			  <button className="quantity-control" onClick={() => decreaseQuantity(item.id)}>-</button>
-			  <span>{item.quantity} st</span>
-			  <button className="quantity-control" onClick={() => increaseQuantity(item.id)}>+</button>
-			</div>
-			<p>{item.price.toFixed(2)} kr</p>
-		  </div>
-		</div>
-	  </section>
+          <div className="product">
+            <h2 id="title">{item.name}</h2>
+            <div className="desPic">
+              <img id="pics" src="-" alt={`Bild på ${item.name}`} />
+              <p id="description">{item.description || ""}</p>
+            </div>
+            <div className="btns">
+              <div className="cart-quantity-controls">
+                <button onClick={() => decreaseQuantity(item.id)}>-</button>
+                <span>{item.quantity} st</span>
+                <button onClick={() => increaseQuantity(item.id)}>+</button>
+              </div>
+              <p>{getItemTotal(item).toFixed(2)} kr</p>
+            </div>
+          </div>
+        </section>
       ))}
 
       <section id="priceOrder">
@@ -66,14 +97,7 @@ const Cart = () => {
         </div>
 
         <div className="orderNr">
-		<button
-  			id="cancelOrdBtn"
-  			onClick={() => {
-    		setCart([]);
-    		saveData("temporary-test-cart", []);
-  			}}>
-  			ÅNGRA
-		</button>
+          <button id="cancelOrdBtn" onClick={handleClearCart}>ÅNGRA</button>
         </div>
       </section>
 
