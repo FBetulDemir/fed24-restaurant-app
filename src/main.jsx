@@ -71,16 +71,12 @@ const router = createHashRouter(
           Component: FetchReceipt,
         },
         { 
-          path: 'pages/login/:loginId?', 
+          path: '/admin/login/:loginId?', 
           Component: InLogg 
         },
         { 
           path: 'components/admin/:adminId?', 
           Component: AdminStart 
-        },
-        { 
-          path: 'components/adminNewDish/:adminNewDishId?', 
-          Component: AdminDishForm
         },
         {
           path: '/admin/add',
@@ -95,17 +91,15 @@ const router = createHashRouter(
           Component: AdminStart,
         },
         {
-          path: 'components/adminNewDish/:adminNewDishId?',
-          Component: AdminDishForm,
-        },
-        {
           path: '/admin/add',
           Component: AdminDishForm,
         },
         {
-          path: 'pages/editmenu/:menuId?',
+          path: 'pages/editMenu/:menuId?',
           Component: EditMenu,
-        },
+        }
+        
+
         
       ]
    }

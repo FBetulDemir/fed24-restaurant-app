@@ -17,7 +17,7 @@ const Footer = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/pages/login" className="navlink-footer">Admin login</NavLink>
+                        <NavLink to="components/admin" className="navlink-footer">Admin login</NavLink>
                     </li>
                     {/* <li>
                         <NavLink to="/pages/orderOnline" className="navlink-footer">Beställ nu</NavLink>
