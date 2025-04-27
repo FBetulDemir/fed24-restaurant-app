@@ -4,9 +4,14 @@ body {
 	font-family: 'Helvetica Neue', sans-serif;
 	margin: 0;
 	padding: 0;
-  }
-  
-  h1#yourOrder {
+}
+.navlink, 
+.navlink:visited, 
+.navlink:active {
+  text-decoration: none;
+}
+
+h1#yourOrder {
 	text-align: center;
 	font-size: 2.2rem;
 	margin-top: 2rem;
@@ -100,13 +105,13 @@ body {
 	margin: 2rem auto;
 	padding: 1rem 2rem;
 	background-color: rgba(24, 24, 24, 0.5);
-	border: 2px solid #b5119f;
+	border: 2px solid #EFE7D2;
 	color: #EFE7D2;
 	font-weight: bold;
-	border: none;
 	border-radius: 8px;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
+	text-decoration: none;
   }
   
   #processBtn:hover {
@@ -127,4 +132,18 @@ body {
 	border-color: red;
 	color: red;
   }
+
+.cart-quantity-controls {
+	background-color: rgba(24, 24, 24, 0.5);
+	border: 2px solid #EFE7D2;
+	color: #EFE7D2;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.cart-quantity-controls button {
+	color: #EFE7D2;
+	border: 1px solid #555;	
+}
+
   
