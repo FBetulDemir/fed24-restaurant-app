@@ -11,27 +11,15 @@ export async function saveData(key, value, signal) {
       },
       body: JSON.stringify({
         key: uniqueKey,
-        value: JSON.stringify(value)   // save as string
+        value: JSON.stringify(value)  // save as string
       }),
       signal,
     });
 
-    const contentType = response.headers.get("content-type");
-    let result;
-    if (contentType && contentType.includes("application/json")) {
-      result = await response.json();
-      console.log(`✅ saveData response for key ${uniqueKey}:`, result);
-    } else {
-      result = await response.text();
-      console.log(`✅ saveData response (text) for key ${uniqueKey}:`, result);
-    }
-
+    const result = await response.json();
+    console.log(`✅ saveData response for key ${uniqueKey}:`, result);
     return response.ok;
   } catch (error) {
-    if (error.name === 'AbortError') {
-      console.log(`⚠️ saveData request for key ${uniqueKey} was aborted`);
-      return false;
-    }
     console.error(`❌ Save error for key ${uniqueKey}:`, error);
     return false;
   }
@@ -43,16 +31,14 @@ export async function loadData(key, signal) {
     const response = await fetch(`${API_URL}?method=load&key=${uniqueKey}`, {
       signal,
     });
-    const data = await response.json();
-    console.log(`📥 loadData response for key ${uniqueKey}:`, data);
+    const raw = await response.json();
+    console.log(`📥 raw loadData for key ${uniqueKey}:`, raw);
+    
+    const parsed = typeof raw === "string" ? JSON.parse(raw) : raw;
+    console.log(`📥 parsed loadData for key ${uniqueKey}:`, parsed);
 
-    // 🛠️ FIXED: return data directly without JSON.parse
-    return data ?? null;
+    return parsed ?? null;
   } catch (error) {
-    if (error.name === 'AbortError') {
-      console.log(`⚠️ loadData request for key ${uniqueKey} was aborted`);
-      return null;
-    }
     console.error(`❌ Load error for key ${uniqueKey}:`, error);
     return null;
   }

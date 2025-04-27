@@ -2,7 +2,7 @@
 
     width: 70%;
     background-color: #2a2a2a;
-    border-right: 1px solid #e6d6b2;
+
     padding: 3em 2em;
     display: flex;
     flex-direction: column;
@@ -13,6 +13,9 @@
         margin-bottom: 1em;
     }
 
+}
+.admin-sidebar{
+    border-right: 1px solid #e6d6b2;
 }
 
 
@@ -44,7 +47,6 @@
         flex-wrap: wrap;
         justify-content: center;
         border-right: none;
-        border-bottom: 1px solid #e6d6b2;
     }
 
     .sidebar,
