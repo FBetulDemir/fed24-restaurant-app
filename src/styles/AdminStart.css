@@ -1,7 +1,8 @@
 .sidebar, .admin-sidebar {
+
     width: 70%;
     background-color: #2a2a2a;
-    border-right: 1px solid #e6d6b2;
+
     padding: 3em 2em;
     display: flex;
     flex-direction: column;
@@ -13,10 +14,31 @@
     }
 
 }
+.admin-sidebar{
+    border-right: 1px solid #e6d6b2;
+}
+
 
 .form-btn{
-    width: 100%
+    width: 100%;
 }
+
+.upload {
+    background-color: rgb(4, 83, 3);
+}
+.upload:hover {
+    background-color: rgb(10, 141, 8);
+}
+
+.reset {
+    background-color: rgb(94, 8, 8);
+    
+}
+.reset:hover {
+    background-color: rgb(158, 16, 16);
+}
+
+
 
 @media screen and (max-width: 768px) {
     .sidebar, .admin-sidebar  {
@@ -25,7 +47,6 @@
         flex-wrap: wrap;
         justify-content: center;
         border-right: none;
-        border-bottom: 1px solid #e6d6b2;
     }
 
     .sidebar,
@@ -35,7 +56,7 @@
         margin-bottom: 0.5em;
     }
 
-    .form-btn {
+    .form-btn, .form-btn-reset, .form-btn-upload {
         margin: 0.5em;
     }
 }

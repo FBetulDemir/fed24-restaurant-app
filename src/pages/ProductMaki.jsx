@@ -1,7 +1,7 @@
 import "../styles/ProductPage.css";
 import React, { useState, useEffect } from "react";
 import { sushiMenu } from "../data/produktLists.js";
-import UploadAllMenus from "../components/uploadAllMenus.jsx";
+import UploadAllMenus from "../components/UploadAllMenusButton.jsx";
 // import { useCart } from "../components/CartFunctions.jsx";
 import { useCartStore } from "../data/CartStore.js";
 
@@ -53,7 +53,7 @@ const MakiSushi = () => {
   
   return (
     <section className="product-page">
-      <UploadAllMenus />
+      {/* <UploadAllMenus /> */}
       {error && <p className="error">{error}</p>}
       <div className="product-img-sides-container">
         <img src={makiSushi.image} alt={makiSushi.name} className="product-image" />

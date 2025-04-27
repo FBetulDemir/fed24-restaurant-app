@@ -1,18 +1,21 @@
-import { Outlet } from 'react-router'
-import './App.css'
-import './index.css'
-import Header from './components/Header'
-import Footer from './components/Footer'
+import { Outlet } from 'react-router';
+import './App.css';
+import './index.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import { MenuProvider } from './components/MenuContext';
 
 function App() {
   return (
-    <div className="layout">
+    <MenuProvider> 
+      <div className="layout">
         <Header />
-        <main className='main'>
+        <main className="main">
           <Outlet />
         </main>
         <Footer />
-    </div>
+      </div>
+    </MenuProvider>
   );
 }
 

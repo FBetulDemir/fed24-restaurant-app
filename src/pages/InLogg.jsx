@@ -1,106 +1,74 @@
-import { useNavigate } from 'react-router-dom'
-import Joi from 'joi'
-import '../styles/InLogg.css'
-import { useState, useEffect } from 'react'
-import AdminStart from '../components/AdminStart'
-
-
-
-
+import { useNavigate } from 'react-router-dom';
+import Joi from 'joi';
+import '../styles/InLogg.css';
+import { useState } from 'react';
+import useAdminStore from '../stores/authorizationStore';
 
 function InLogg() {
-    const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
-    const [correct, setCorrect] = useState('')
-    const [isvalid, setIsValid] = useState(null)
-    const [passwordError, setPasswordError] = useState(false) 
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isValid, setIsValid] = useState(null);
 
-    
-    const navigate = useNavigate()
+  const correctPassword = 'mums';
+  const navigate = useNavigate();
 
-    const schema = Joi.object({
-        password: Joi.string().min(4).required(),
-    })
-
-    const correctPassword = 'mums'
+  const login = useAdminStore((state) => state.login);
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+  const schema = Joi.object({
+    password: Joi.string().min(4).required(),
+  });
 
-        const { error: joierror} = schema.validate({ password })
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-        if (joierror) {
-             console.log('Validationerors', joierror.details[0].message)
-            setError('Minst 4 tecken')
-            setIsValid(false)
-            setIsLoggedIn(false)
-            return
-            }  
-            
-        if (password !== correctPassword)  {
-            setError('Fel lösenord')
-            setIsValid(false)
-            setIsLoggedIn(false)
-            return
-            
-        } else {
-            setError('')
-            setCorrect('')
+    const { error: joiError } = schema.validate({ password });
 
-            setPasswordError(false)
-            setIsValid(true)
-            setIsLoggedIn(true)
-        }
-        // setError
-        setIsValid(true)
-
-        navigate('/components/admin')
-
-
+    if (joiError) {
+      setError('Minst 4 tecken');
+      setIsValid(false);
+      return;
     }
-   
 
+    if (password !== correctPassword) {
+      setError('Fel lösenord');
+      setIsValid(false);
+      return;
+    }
 
-    return (
-        <section className='blurp' > 
-            <div className='sign-section' style={ isLoggedIn ? { display: 'none' } : { display: 'block' }}>
-                <section className='form'>
+    // Login success
+    setError('');
+    setIsValid(true);
+    login();
 
-                    <p className='admin'>Admin</p>
+    navigate('/pages/editMenu'); // ✅ Adjust based on your routing setup
+  };
 
-                    <p className="error"> </p> 
-                    {/* <p>Ange ditt lösenord för att logga in</p> */}
-                    <input className={
-                    `input-box ${isvalid === true ? 
-                    'input-success' : isvalid === false ? 
-                    'input-error' : ''}`}
+  return (
+    <section className='blurp'>
+      <div className='sign-section'>
+        <section className='form'>
+          <p className='admin'>Admin</p>
 
-                    type="password" 
-                    placeholder='Lösenord'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                        handleSubmit(e)
-                    }}
-                     }
-                    />
-                     {error && <p className='error'>{error}</p>}
-               
-                <p> &nbsp; </p> 
-                <form onSubmit={handleSubmit}>
+          <input
+            className={`input-box ${isValid === true ? 'input-success' : isValid === false ? 'input-error' : ''}`}
+            type="password"
+            placeholder="Lösenord"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSubmit(e);
+            }}
+          />
+          {error && <p className="error">{error}</p>}
 
-                 <button className='ghost-button' type='submit'>Logga In</button>
-                </form>
-            </section>
-        </div>
-
+          <form onSubmit={handleSubmit}>
+            <button className="ghost-button" type="submit">Logga In</button>
+          </form>
         </section>
-
-    
-    )
+      </div>
+    </section>
+  );
 }
 
-export default InLogg
+export default InLogg;
