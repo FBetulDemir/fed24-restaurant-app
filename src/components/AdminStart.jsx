@@ -16,7 +16,9 @@ const AdminStart = () => {
         </NavLink>
         <NavLink to="/pages/editmenu">Edit Menu</NavLink>
         
-        <UploadAllMenusButton />
+        {/* <UploadAllMenusButton />    Jag testar ändringar
+        <MenuResetButton /> */}
+        <UploadAllMenusButton />   
         <MenuResetButton />
 
         <NavLink to="/">
