@@ -134,18 +134,16 @@
     width: 100%;
   }
 }
-@media (max-width: 370px) {
+@media (max-width: 360px) {
   .nav {
     display: flex;
-    flex-direction: column;
+    flex-wrap: nowrap;
+    flex-direction: row;
   }
-  .nav-left {
-    margin: 20px;
-  }
-  .nav-right {
-    margin: 20px;
-  }
-  .dropbtn.btn-dark {
-    font-size: large;
+  .logo {
+    padding: 3px;
+    margin: 3px;
+    width: 10%;
+    font-size: medium;
   }
 }
