@@ -30,11 +30,11 @@
     background-color: rgb(10, 141, 8);
 }
 
-.reset {
-    background-color: rgb(94, 8, 8);
+#reset-menu-btn {
+    background-color: rgb(69, 6, 6);
     
 }
-.reset:hover {
+#reset-menu-btn:hover {
     background-color: rgb(158, 16, 16);
 }
 

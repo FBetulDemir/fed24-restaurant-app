@@ -33,7 +33,7 @@ const MenuResetButton = () => {
   return (
     <div>
       <button
-        className="form-btn reset"
+        id="reset-menu-btn"
         onClick={handleResetMenu}
         disabled={isLoading}
       >
