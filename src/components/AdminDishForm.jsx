@@ -169,7 +169,7 @@ const AdminDishForm = () => {
               name="category"
               value={formData.category}
               onChange={handleChange}
-              className={error.category ? "input-error" : ""}
+              className={error.category ? "input-error" : "admin-input"}
             >
               <option value="">Välj kategori</option>
               <option value="maki">Maki</option>
@@ -181,12 +181,12 @@ const AdminDishForm = () => {
           </div>
 
           <div className="form-field">
-            <input
+            <input 
               name="name"
               value={formData.name}
               onChange={handleChange}
               placeholder="Namn"
-              className={error.name ? "input-error" : ""}
+              className={error.name ? "input-error" : "admin-input"}
             />
             {error.name && <p className="error-admin">{error.name}</p>}
           </div>
@@ -197,7 +197,7 @@ const AdminDishForm = () => {
               value={formData.description}
               onChange={handleChange}
               placeholder="Beskrivning (valfritt)"
-              className={error.description ? "input-error" : ""}
+              className={error.description ? "input-error" : "admin-input"}
             />
             {error.description && <p className="error-admin">{error.description}</p>}
           </div>
@@ -209,7 +209,7 @@ const AdminDishForm = () => {
               value={formData.price}
               onChange={handleChange}
               placeholder="Pris"
-              className={error.price ? "input-error" : ""}
+              className={error.price ? "input-error" : "admin-input"}
             />
             {error.price && <p className="error-admin">{error.price}</p>}
           </div>
@@ -220,20 +220,20 @@ const AdminDishForm = () => {
               value={formData.ingredients}
               onChange={handleChange}
               placeholder="Ingredienser (komma-separerat, valfritt)"
-              className={error.ingredients ? "input-error" : ""}
+              className={error.ingredients ? "input-error" : "admin-input"}
             />
             {error.ingredients && <p className="error-admin">{error.ingredients}</p>}
           </div>
 
           {(formData.category === "maki" || formData.category === "sashimi") && (
             <div className="form-field">
-              <input
+              <input 
                 name="extraBitPrice"
                 type="number"
                 value={formData.extraBitPrice}
                 onChange={handleChange}
                 placeholder="Pris för extra bit"
-                className={error.extraBitPrice ? "input-error" : ""}
+                className={error.extraBitPrice ? "input-error" : "admin-input"}
               />
               {error.extraBitPrice && <p className="error-admin">{error.extraBitPrice}</p>}
             </div>
@@ -246,7 +246,7 @@ const AdminDishForm = () => {
                 value={formData.volume}
                 onChange={handleChange}
                 placeholder="Volym (t.ex. 0,5)"
-                className={error.volume ? "input-error" : ""}
+                className={error.volume ? "input-error" : "admin-input"}
               />
               {error.volume && <p className="error-admin">{error.volume}</p>}
             </div>

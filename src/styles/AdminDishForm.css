@@ -5,11 +5,7 @@
     font-family: 'Forum', serif;
     color: #EFE7D2;
     min-height: 100vh;
-    .form-section {
-        width: 75%;
-        padding: 4em;
-        background-color: #333;
-    }
+    
     .dish-form input,
     .dish-form select {
       padding: 0.9em 1em;
@@ -22,7 +18,14 @@
     }
   }
   
-
+.form-section {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    padding: 4em;
+    background-color: #333;
+    justify-content: center;
+}
   
 .form-btn {
     background-color: transparent;
@@ -39,10 +42,7 @@
     }
 }
 
-/* .from-field {
-    display: flex;
-}
-   */
+
   
 .form-section h1 {
     font-size: 2em;
@@ -75,6 +75,10 @@
     text-align: start;
     font-size: 1.2em;
     margin-top: 1rem;
+}
+
+.admin-input, .input-error {
+    width: 21.5em;
 }
 
 .error-message, .error-admin{
