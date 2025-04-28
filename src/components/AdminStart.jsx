@@ -24,6 +24,12 @@ const logout = useAdminStore((state) => state.logout);
         <NavLink to="/pages/editMenu">
             <button className="form-btn">Redigera/Ta bort meny</button>
         </NavLink>
+        <NavLink to="/pages/editmenu">Edit Menu</NavLink>
+        
+        {/* <UploadAllMenusButton />    Jag testar ändringar
+        <MenuResetButton /> */}
+        <UploadAllMenusButton />   
+        <MenuResetButton />
 
         <NavLink to="/">
             <button className="form-btn">Logga ut</button>
