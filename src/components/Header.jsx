@@ -102,11 +102,11 @@ const Header = () => {
             {/* <button className="btn-dark">LOGGA IN</button> */}
           </NavLink>
           <NavLink
-            to="/pages/orderOnline"
+            to="/components/Cart/:cartId"
             className="navlink"
             onClick={() => setHamburgerOpen(false)}
           >
-            <button className="btn-dark">BESTÄLL ONLINE</button>
+            <button className="btn-dark">KUNGVAGN</button>
           </NavLink>
         </div>
 
