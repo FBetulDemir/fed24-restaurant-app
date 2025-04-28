@@ -41,7 +41,7 @@ function InLogg() {
     setIsValid(true);
     login();
 
-    navigate('/pages/editMenu'); // ✅ Adjust based on your routing setup
+    navigate('/pages/editMenu'); 
   };
 
   return (
@@ -60,7 +60,7 @@ function InLogg() {
               if (e.key === 'Enter') handleSubmit(e);
             }}
           />
-          {error && <p className="error">{error}</p>}
+          {error && <p className="error-inlogg">{error}</p>}
 
           <form onSubmit={handleSubmit}>
             <button className="ghost-button" type="submit">Logga In</button>

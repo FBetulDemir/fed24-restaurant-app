@@ -94,9 +94,9 @@ const AddMenu = () => {
       <div className="admin-container">
         <aside className="admin-sidebar">
           <h2>Welcome Employee!</h2>
-          <button onClick={() => navigate('/admin/add')}>NEW MENU</button>
-          <button onClick={() => navigate('/admin/edit')}>EDIT/REMOVE MENU</button>
-          <button onClick={() => navigate('/')}>SIGN OUT</button>
+          <button onClick={() => navigate('/admin/add')}>Ny Meny</button>
+          <button onClick={() => navigate('/admin/edit')}>Redigera</button>
+          <button onClick={() => navigate('/')}>Logga ut</button>
         </aside>
         <main className="admin-main">
           <div className="admin-content">
@@ -105,7 +105,7 @@ const AddMenu = () => {
                 menuItem={newMenuItem}
                 setMenuItem={setNewMenuItem}
                 onSubmit={handleAddMenuItem}
-                buttonText="ADD NEW MENU"
+                buttonText="Lägg till ny meny"
               />
               {error && <p className="menu-form-error">{error}</p>}
             </div>

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import "../styles/Header.css";
 import { useCartStore } from '../stores/cartStore'
 import useOutsideClick from "./useOutsideClick";
@@ -16,13 +16,7 @@ const Header = () => {
     const cartCount = cart.length
     const dropdownRef = useRef(null);
     
-	const initializeCart = useCartStore((state) => state.initializeCart);
 
-	useEffect(() => {
-	  if (initializeCart) {
-		initializeCart();
-	  }
-	}, [initializeCart]);
 
 
     const toggleDropdown = () => {
@@ -79,11 +73,11 @@ const Header = () => {
                             </div>
                         )}
                     </li> */}
-                    <li>   
-                        <NavLink to="/pages/menu/menu/" className="navlink-footer">
-                            <button className="dropbtn btn-dark">Meny
-                            </button>
-                     </NavLink>   
+                    <li>
+                        <button className="dropbtn btn-dark">
+                            <NavLink to="/pages/menu/menu/" className="navlink-footer">Meny
+                            </NavLink>
+                        </button>
                     </li>
                 </ul>
                 <div className="logo-container">

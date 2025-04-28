@@ -3,8 +3,8 @@ import React from 'react';
 const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
   const handleIngredientChange = (index, value) => {
     const newIngredients = [...menuItem.ingredients];
-    newIngredients[index] = value;
-    setMenuItem({ ...menuItem, ingredients: newIngredients });
+    newIngredients[index] = value.trim(); 
+    setMenuItem({ ...menuItem, ingredients: newIngredients.filter(ingredient => ingredient.length > 0) });
   };
 
   const addIngredient = () => {
@@ -40,20 +40,22 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
           <option value="Maki">Maki</option>
           <option value="Nigiri">Nigiri</option>
           <option value="Sashimi">Sashimi</option>
-          <option value="Drinks">Drinks</option>
+          <option value="Drinks">Drycker</option>
         </select>
       </div>
       <div>
-        <label>Add Title</label>
+        <label>Lägg till titel</label>
         <input
           type="text"
           value={menuItem.name}
           onChange={(e) => setMenuItem({ ...menuItem, name: e.target.value })}
           required
         />
+          {errors?.text && <p className="error-message">{errors.text}</p>}
+
       </div>
       <div>
-        <label>Description</label>
+        <label>Beskrivning</label>
         <textarea
           value={menuItem.description}
           onChange={(e) => setMenuItem({ ...menuItem, description: e.target.value })}
@@ -61,7 +63,7 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
         />
       </div>
       <div>
-        <label>Price (kr)</label>
+        <label>Pris(kr)</label>
         <input
           type="text"
           value={menuItem.price}
@@ -71,7 +73,7 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
         />
       </div>
       <div>
-        <label>Extra Price (kr) (optional)</label>
+        <label>Extra Pris (kr) (optional)</label>
         <input
           type="text"
           value={menuItem.extraPrice || ''}
@@ -80,7 +82,7 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
         />
       </div>
       <div>
-        <label>Ingredients (optional)</label>
+        <label>Ingredienser(optional)</label>
         {menuItem.ingredients.map((ingredient, index) => (
           <div key={index} className="ingredient-group">
             <input
@@ -89,12 +91,12 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
               onChange={(e) => handleIngredientChange(index, e.target.value)}
             />
             <button type="button" onClick={() => removeIngredient(index)}>
-              Remove
+              Ta bort
             </button>
           </div>
         ))}
         <button type="button" onClick={addIngredient} className="add-ingredient">
-          Add Ingredient
+          Lägg till
         </button>
       </div>
       <button type="submit">{buttonText}</button>

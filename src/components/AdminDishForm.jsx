@@ -17,7 +17,7 @@ const AdminDishForm = () => {
   });
 
   const [menuList, setMenuList] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState({});
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
@@ -46,8 +46,8 @@ const AdminDishForm = () => {
       name: formData.name,
       price: parseFloat(formData.price),
       ingredients: formData.ingredients
-        ? formData.ingredients.split(",").map((s) => s.trim()).filter((s) => s)
-        : [],
+      ? formData.ingredients.split(",").map((s) => s.trim()).filter((s) => s.length > 0)
+      : [],
       category: formData.category,
       ...(formData.category === "maki" || formData.category === "sashimi"
         ? { extraBitPrice: parseFloat(formData.extraBitPrice) || 0 }
@@ -59,9 +59,14 @@ const AdminDishForm = () => {
         : {}),
     };
 
-    const { error } = dishSchema.validate(newDish);
+    const { error } = dishSchema.validate(newDish, { abortEarly: false });
     if (error) {
-      setError(error.message);
+      const fieldErrors = {};
+      error.details.forEach((detail) => {
+        const field = detail.path[0];
+        fieldErrors[field] = detail.message;
+      });
+      setError(fieldErrors);
       setSuccess("");
       return;
     }
@@ -112,22 +117,26 @@ const AdminDishForm = () => {
       <div className="form-section">
         <h1>Lägg till en ny maträtt</h1>
         <form className="dish-form" onSubmit={handleSubmit}>
-          <select name="category" value={formData.category} onChange={handleChange}>
+          <select name="category" value={formData.category} onChange={handleChange} className={error?.category ? "input-error" : ""}
+
+          >
             <option value="">Välj kategori</option>
             <option value="maki">Maki</option>
             <option value="nigiri">Nigiri</option>
             <option value="sashimi">Sashimi</option>
             <option value="drinks">Drycker</option>
           </select>
-          {error.category && <p className='error'>{error.category}</p>}
+          {error?.category && <p className="error">{error.category}</p>}
+      
 
           <input
             name="name"
             value={formData.name}
             onChange={handleChange}
             placeholder="Namn"
+            className={error?.name ? "input-error" : ""}
           />
-          {error.name && <p className="error">{error.name}</p>}
+          {error?.name && <p className='error'>{error.name}</p>}
 
           <input
             name="price"
@@ -135,6 +144,7 @@ const AdminDishForm = () => {
             value={formData.price}
             onChange={handleChange}
             placeholder="Pris"
+            className={error?.price ? "input-error" : ""}
           />
           {error.price && <p className="error">{error.price}</p>}
 
@@ -143,35 +153,47 @@ const AdminDishForm = () => {
             value={formData.ingredients}
             onChange={handleChange}
             placeholder="Ingredienser (komma-separerat)"
+            className={error?.ingredients ? "input-error" : ""}
           />
+          {error?.ingredients && <p className="error">{error.ingredients}</p>}
 
-          {(formData.category === "maki" || formData.category === "sashimi") && (
-            <input
-              name="extraBitPrice"
-              type="number"
-              value={formData.extraBitPrice}
-              onChange={handleChange}
-              placeholder="Pris för extra bit"
-            />
-          )}
+
+
+            {(formData.category === "maki" || formData.category === "sashimi") && (
+              <>
+                <input
+                  name="extraBitPrice"
+                  type="number"
+                  value={formData.extraBitPrice}
+                  onChange={handleChange}
+                  placeholder="Pris för extra bit"
+                  className={error?.extraBitPrice ? "input-error" : ""}
+                />
+                {error?.extraBitPrice && <p className="error">{error.extraBitPrice}</p>}
+              </>
+            )}
+
+
 
           {formData.category === "drinks" && (
-            <input
-              name="volume"
-              value={formData.volume}
-              onChange={handleChange}
-              placeholder="Volym (t.ex. 0,5)"
-            />
+            <>
+              <input
+                name="volume"
+                value={formData.volume}
+                onChange={handleChange}
+                placeholder="Volym (t.ex. 0,5)"
+                className={error?.volume ? "input-error" : ""}
+              />
+              {error?.volume && <p className="error">{error.volume}</p>}
+            </>
           )}
+
+
           <button type="submit" className="form-btn">
             Lägg till
           </button>
         </form>
-        {error && (
-          <p style={{ color: "red" }} className="message-error">
-            {error}
-          </p>
-        )}
+        
         {success && (
           <p style={{ color: "green" }} className="message-success">
             {success}
