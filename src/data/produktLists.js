@@ -4,6 +4,7 @@ const makiMenuList = [
     name: "Kryddig tonfiskrulle",
     price: 95,
     ingredients: [],
+	baseQuantity: 8,
     category: "maki",
     extraBitPrice: 15,
     description: "Smakrik maki med kryddig tonfisk, perfekt balanserad med sushi-ris."
@@ -12,6 +13,7 @@ const makiMenuList = [
     id: crypto.randomUUID(),
     name: "Kaliforniarulle",
     ingredients: ["Krabba", "avokado", "gurka"],
+	baseQuantity: 8,
     price: 85,
     category: "maki",
     extraBitPrice: 12,
@@ -21,6 +23,7 @@ const makiMenuList = [
     id: crypto.randomUUID(),
     name: "Tempurarulle",
     ingredients: ["Räkor i tempura", "kryddig majonnäs"],
+	baseQuantity: 8,
     price: 99,
     category: "maki",
     extraBitPrice: 16,
@@ -31,6 +34,7 @@ const makiMenuList = [
     name: "Avokadorulle",
     price: 75,
     ingredients: [],
+	baseQuantity: 8,
     category: "maki",
     extraBitPrice: 11,
     description: "Enkel och fräsch maki med krämig avokado i varje tugga."
@@ -40,6 +44,7 @@ const makiMenuList = [
     name: "Gurkrulle",
     price: 70,
     ingredients: [],
+	baseQuantity: 8,
     category: "maki",
     extraBitPrice: 10,
     description: "Lätt och krispig maki med färsk gurka, perfekt som tillbehör."
@@ -52,7 +57,9 @@ const nigiriMenuList = [
     name: "Lax Nigiri",
     price: 42,
     ingredients: [],
+	baseQuantity: 2,
     category: "nigiri",
+	extraBitPrice: 10,
     description: "Två bitar nigiri med färsk, smältande lax av högsta kvalitet."
   },
   {
@@ -60,7 +67,9 @@ const nigiriMenuList = [
     name: "Tonfisk Nigiri",
     price: 48,
     ingredients: [],
+	baseQuantity: 2,
     category: "nigiri",
+	extraBitPrice: 10,
     description: "Två bitar nigiri med fyllig tonfisk, en smakrik delikatess."
   },
   {
@@ -68,7 +77,9 @@ const nigiriMenuList = [
     name: "Räka Nigiri",
     price: 38,
     ingredients: [],
+	baseQuantity: 2,
     category: "nigiri",
+	extraBitPrice: 10,
     description: "Två bitar nigiri med färska räkor, söta och delikata."
   },
   {
@@ -76,7 +87,9 @@ const nigiriMenuList = [
     name: "Ål Nigiri",
     price: 52,
     ingredients: [],
+	baseQuantity: 2,
     category: "nigiri",
+	extraBitPrice: 10,
     description: "Två bitar nigiri med smakrik ål, toppad med lätt söt sås."
   },
 ];
@@ -87,6 +100,7 @@ const sashimiMenuList = [
     name: "Lax Sashimi",
     price: 98,
     ingredients: [],
+	baseQuantity: 5,
     category: "sashimi",
     extraBitPrice: 25,
     description: "Färska skivor lax, smältande mjuk med ren smak."
@@ -96,6 +110,7 @@ const sashimiMenuList = [
     name: "Tonfisk Sashimi",
     price: 110,
     ingredients: [],
+	baseQuantity: 5,
     category: "sashimi",
     extraBitPrice: 27,
     description: "Premium tonfisk i tunna skivor, fyllig och smakrik."
@@ -105,6 +120,7 @@ const sashimiMenuList = [
     name: "Hamachi Sashimi",
     price: 115,
     ingredients: [],
+	baseQuantity: 5,
     category: "sashimi",
     extraBitPrice: 28,
     description: "Delikat hamachi sashimi, len med en lätt nötig ton."
@@ -114,6 +130,7 @@ const sashimiMenuList = [
     name: "Hälleflundra Sashimi",
     price: 105,
     ingredients: [],
+	baseQuantity: 5,
     category: "sashimi",
     extraBitPrice: 26,
     description: "Färsk hälleflundra i skivor, mild och elegant i smaken."
@@ -126,6 +143,7 @@ const drinksMenuList = [
     name: "Pepsi Max",
     price: 20,
     ingredients: [],
+	baseQuantity: 1,
     category: "drinks",
     volume: "0,33",
     description: "Klassisk sockerfri Pepsi Max, krispig och uppfriskande."
@@ -135,6 +153,7 @@ const drinksMenuList = [
     name: "Coca-Cola",
     price: 20,
     ingredients: [],
+	baseQuantity: 1,
     category: "drinks",
     volume: "0,33",
     description: "Iskall Coca-Cola, tidlös och bubblande god."
@@ -144,6 +163,7 @@ const drinksMenuList = [
     name: "Sprite",
     price: 20,
     ingredients: [],
+	baseQuantity: 1,
     category: "drinks",
     volume: "0,33",
     description: "Frisk Sprite med citron- och limesmak, perfekt törstsläckare."
@@ -153,6 +173,7 @@ const drinksMenuList = [
     name: "Ramlösa Citrus",
     price: 25,
     ingredients: [],
+	baseQuantity: 1,
     category: "drinks",
     volume: "0,5",
     description: "Lätt kolsyrat mineralvatten med uppfriskande citrussmak."
@@ -162,6 +183,7 @@ const drinksMenuList = [
     name: "Loka Naturell",
     price: 25,
     ingredients: [],
+	baseQuantity: 1,
     category: "drinks",
     volume: "0,5",
     description: "Rent kolsyrat vatten, fräscht och utan tillsatser."
@@ -169,6 +191,7 @@ const drinksMenuList = [
   {
     id: crypto.randomUUID(),
     name: "Apelsinjuice",
+	baseQuantity: 1,
     price: 30,
     volume: "0,25",
     description: "Färskpressad apelsinjuice, söt och full av vitaminer."
@@ -176,6 +199,7 @@ const drinksMenuList = [
   {
     id: crypto.randomUUID(),
     name: "Äppeljuice",
+	baseQuantity: 1,
     price: 30,
     ingredients: [],
     category: "drinks",
@@ -185,6 +209,7 @@ const drinksMenuList = [
   {
     id: crypto.randomUUID(),
     name: "Ramune Yuzu",
+	baseQuantity: 1,
     price: 35,
     ingredients: [],
     category: "drinks",
@@ -194,6 +219,7 @@ const drinksMenuList = [
   {
     id: crypto.randomUUID(),
     name: "Iskaffe",
+	baseQuantity: 1,
     price: 40,
     ingredients: [],
     category: "drinks",
@@ -205,6 +231,7 @@ const drinksMenuList = [
     name: "Japanskt grönt te",
     price: 25,
     ingredients: [],
+	baseQuantity: 1,
     category: "drinks",
     volume: "0,5",
     description: "Autentiskt grönt te, mild och aromatisk."
@@ -213,6 +240,7 @@ const drinksMenuList = [
     id: crypto.randomUUID(),
     name: "Kombucha Original",
     price: 45,
+	baseQuantity: 1,
     ingredients: [],
     category: "drinks",
     volume: "0,33",
