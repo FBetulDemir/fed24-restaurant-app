@@ -1,31 +1,53 @@
-
-import { useEffect, useState } from "react";
-import { getCurrentMenu, editMenuItem, deleteMenuItem } from "../data/uploadMenu";
+import { useEffect, useState, useContext } from "react";
+import { editMenuItem, deleteMenuItem } from "../data/uploadMenu";
+import MenuContext from "../ payoffs/MenuContext";
+import { dishSchema } from "./formValidation";
 
 const ManageMenu = () => {
+  const { menuData, refreshMenu } = useContext(MenuContext);
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editingItem, setEditingItem] = useState(null);
   const [updatedItem, setUpdatedItem] = useState({});
+  const [validationErrors, setValidationErrors] = useState({});
 
-  // Fetch menu on mount
+  // Synkronisera meny från MenuContext
   useEffect(() => {
-    const fetchMenu = async () => {
-      try {
-        const currentMenu = await getCurrentMenu();
-        setMenu(currentMenu);
-        setLoading(false);
-      } catch (err) {
-        setError("Failed to load menu.");
-        setLoading(false);
-      }
-    };
-    fetchMenu();
-  }, []);
+    const allMenuItems = [
+      ...menuData.drinks,
+      ...menuData.maki,
+      ...menuData.nigiri,
+      ...menuData.sashimi,
+    ];
+    setMenu(allMenuItems);
+    setLoading(false);
+  }, [menuData]);
+
+  // Validera formulärdata
+  const validateForm = (item) => {
+    const { error } = dishSchema.validate(item, { abortEarly: false });
+    if (error) {
+      const fieldErrors = {};
+      error.details.forEach((detail) => {
+        const field = detail.path[0];
+        fieldErrors[field] = detail.message;
+      });
+      setValidationErrors(fieldErrors);
+      return false;
+    }
+    setValidationErrors({});
+    return true;
+  };
 
   // Handle edit form submission
   const handleEdit = async (originalItem) => {
+    // Validera innan spara
+    const isValid = validateForm(updatedItem);
+    if (!isValid) {
+      return;
+    }
+
     const success = await editMenuItem(originalItem, updatedItem);
     if (success) {
       setMenu((prev) =>
@@ -37,14 +59,15 @@ const ManageMenu = () => {
       );
       setEditingItem(null);
       setUpdatedItem({});
+      refreshMenu(); // Uppdatera menyn i gränssnittet
     } else {
-      setError("Failed to update item.");
+      setError("Misslyckades med att uppdatera objektet.");
     }
   };
 
   // Handle delete
   const handleDelete = async (item) => {
-    if (window.confirm(`Are you sure you want to delete ${item.name}?`)) {
+    if (window.confirm(`Är du säker på att du vill radera ${item.name}?`)) {
       const success = await deleteMenuItem(item);
       if (success) {
         setMenu((prev) =>
@@ -52,8 +75,9 @@ const ManageMenu = () => {
             (i) => !(i.name === item.name && i.category === item.category)
           )
         );
+        refreshMenu(); // Uppdatera menyn i gränssnittet
       } else {
-        setError("Failed to delete item.");
+        setError("Misslyckades med att radera objektet.");
       }
     }
   };
@@ -62,6 +86,7 @@ const ManageMenu = () => {
   const startEditing = (item) => {
     setEditingItem(item);
     setUpdatedItem({ ...item });
+    setValidationErrors({});
   };
 
   // Handle form input changes
@@ -70,23 +95,23 @@ const ManageMenu = () => {
     setUpdatedItem((prev) => ({ ...prev, [name]: value }));
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div>Laddar...</div>;
+  if (error) return <div>Fel: {error}</div>;
 
   return (
     <div>
-      <h2>Manage Menu</h2>
+      <h2>Hantera meny</h2>
       {menu.length === 0 ? (
-        <p>No items in the menu.</p>
+        <p>Inga objekt i menyn.</p>
       ) : (
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Price</th>
-              <th>Description</th>
-              <th>Actions</th>
+              <th>Namn</th>
+              <th>Kategori</th>
+              <th>Pris</th>
+              <th>Beskrivning</th>
+              <th>Åtgärder</th>
             </tr>
           </thead>
           <tbody>
@@ -103,6 +128,9 @@ const ManageMenu = () => {
                         value={updatedItem.name || ""}
                         onChange={handleInputChange}
                       />
+                      {validationErrors.name && (
+                        <p className="error">{validationErrors.name}</p>
+                      )}
                     </td>
                     <td>{item.category}</td>
                     <td>
@@ -112,6 +140,9 @@ const ManageMenu = () => {
                         value={updatedItem.price || ""}
                         onChange={handleInputChange}
                       />
+                      {validationErrors.price && (
+                        <p className="error">{validationErrors.price}</p>
+                      )}
                     </td>
                     <td>
                       <input
@@ -120,10 +151,13 @@ const ManageMenu = () => {
                         value={updatedItem.description || ""}
                         onChange={handleInputChange}
                       />
+                      {validationErrors.description && (
+                        <p className="error">{validationErrors.description}</p>
+                      )}
                     </td>
                     <td>
-                      <button onClick={() => handleEdit(item)}>Save</button>
-                      <button onClick={() => setEditingItem(null)}>Cancel</button>
+                      <button onClick={() => handleEdit(item)}>Spara</button>
+                      <button onClick={() => setEditingItem(null)}>Avbryt</button>
                     </td>
                   </>
                 ) : (
@@ -133,8 +167,8 @@ const ManageMenu = () => {
                     <td>{item.price}</td>
                     <td>{item.description}</td>
                     <td>
-                      <button onClick={() => startEditing(item)}>Edit</button>
-                      <button onClick={() => handleDelete(item)}>Delete</button>
+                      <button onClick={() => startEditing(item)}>Redigera</button>
+                      <button onClick={() => handleDelete(item)}>Radera</button>
                     </td>
                   </>
                 )}
