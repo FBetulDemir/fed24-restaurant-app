@@ -145,4 +145,7 @@
   .nav-right {
     margin: 20px;
   }
+  .dropbtn.btn-dark {
+    font-size: large;
+  }
 }
