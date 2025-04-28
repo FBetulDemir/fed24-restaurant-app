@@ -7,8 +7,9 @@ export const dishSchema = Joi.object({
     "string.min": "Namnet måste vara minst 2 tecken långt.",
     "any.required": "Namn är obligatoriskt.",
   }),
-  description: Joi.string().min(5).optional().messages({
-    "string.min": "Beskrivningen måste vara minst 5 tecken lång.",
+  description: Joi.string().allow("").optional().messages({
+    "string.base": "Beskrivningen måste vara en textsträng.",
+    "any.invalid": "Beskrivningen är ogiltig.",
   }),
   price: Joi.number().positive().required().messages({
     "number.base": "Pris måste vara ett nummer.",
@@ -16,8 +17,7 @@ export const dishSchema = Joi.object({
     "any.required": "Pris är obligatoriskt.",
   }),
   ingredients: Joi.array()
-    .items(Joi.string().min(1).trim().required())
-    .min(1)
+    .items(Joi.string().min(1).trim())
     .max(30)
     .optional()
     .messages({
@@ -25,8 +25,6 @@ export const dishSchema = Joi.object({
       "array.max": "Ingredienser får inte överstiga 30 stycken.",
       "string.base": "Varje ingrediens måste vara en textsträng.",
       "string.empty": "Ingrediens kan inte vara tom.",
-      "any.required": "Ingredienser är obligatoriska.",
-      "array.min": "Minst en ingrediens krävs.",
     }),
   category: Joi.string()
     .valid("maki", "nigiri", "sashimi", "drinks")
@@ -52,9 +50,7 @@ export const dishSchema = Joi.object({
     then: Joi.string()
       .required()
       .custom((value, helpers) => {
-        // Normalize: replace period with comma
         let normalized = value.replace(".", ",");
-        // Validate pattern
         if (!/^\d+(,\d+)?$/.test(normalized)) {
           return helpers.error("string.pattern.base");
         }

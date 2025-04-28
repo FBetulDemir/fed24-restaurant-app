@@ -67,7 +67,6 @@ const AdminDishForm = () => {
     const { name, value } = e.target;
     let normalizedValue = value;
     if (name === "volume") {
-      // Normalize: replace period with comma, remove invalid characters
       normalizedValue = value.replace(".", ",").replace(/[^0-9,]/g, "");
     }
     setFormData((prev) => ({ ...prev, [name]: normalizedValue }));
@@ -197,7 +196,7 @@ const AdminDishForm = () => {
               name="description"
               value={formData.description}
               onChange={handleChange}
-              placeholder="Beskrivning"
+              placeholder="Beskrivning (valfritt)"
               className={error.description ? "input-error" : ""}
             />
             {error.description && <p className="error-admin">{error.description}</p>}
@@ -220,7 +219,7 @@ const AdminDishForm = () => {
               name="ingredients"
               value={formData.ingredients}
               onChange={handleChange}
-              placeholder="Ingredienser (komma-separerat)"
+              placeholder="Ingredienser (komma-separerat, valfritt)"
               className={error.ingredients ? "input-error" : ""}
             />
             {error.ingredients && <p className="error-admin">{error.ingredients}</p>}
@@ -263,7 +262,7 @@ const AdminDishForm = () => {
             {success}
           </p>
         )}
-        {Object.keys(error).length > 0 && (
+        {/* {Object.keys(error).length > 0 && (
           <div className="error-admin">
             <p>Fel vid validering:</p>
             <ul>
@@ -272,7 +271,7 @@ const AdminDishForm = () => {
               ))}
             </ul>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
