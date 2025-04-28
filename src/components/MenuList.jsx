@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { dishSchema } from './formValidation';
 
 const MenuList = ({ menu, onEdit, onDelete, errors }) => {
   const [editId, setEditId] = useState(null);
@@ -22,12 +23,12 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
   };
 
   const handleSaveClick = () => {
-    const { id, ...formWithoutId } = formData; 
-    if (validateForm(formWithoutId)) {  
+    if (validateForms()) { 
       if (onEdit) {
-        onEdit(editId, formWithoutId);  
+        const { id, ...formWithoutId } = formData;
+        onEdit(editId, formWithoutId);
       }
-      setEditId(null); 
+      setEditId(null);
     }
   };
 
@@ -51,29 +52,34 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
     const updatedFormData = { ...formData, [name]: value };
     setFormData(updatedFormData);
   
-    const error = validateField(name, value);
-    setLocalErrors((prevErrors) => {
-      const newErrors = { ...prevErrors, [name]: error };
-      if (!updatedFormData.hasOwnProperty(name)) {
-        delete newErrors[name];
-      }
-      return newErrors;
-    });
-  };
-
-  const validateFields = (fieldName, value) => {
-    if (fieldName === 'id' || fieldName === 'ingredients' || fieldName === 'description' || fieldName === 'group') {
-      return '';  
+    if (name === "group") {
+      return;
     }
   
-    switch (fieldName) {
-      case 'name':
-        return value.trim() === '' ? 'Namnet är obligatoriskt.' : '';
-      case 'price':
-        return value.trim() === '' ? 'Pris är obligatoriskt.' : '';
-      default:
-        return '';  
+    try {
+      const singleFieldSchema = dishSchema.extract(name);
+      const { error } = singleFieldSchema.validate(value);
+      setLocalErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: error ? error.message : undefined,
+      }));
+    } catch (err) {
     }
+  };
+
+  const validateForms = () => {
+    const { error } = dishSchema.validate(formData, { abortEarly: false });
+    if (error) {
+      const formErrors = {};
+      error.details.forEach((detail) => {
+        const field = detail.path[0]; 
+        formErrors[field] = detail.message;
+      });
+      setLocalErrors(formErrors);
+      return false;
+    }
+    setLocalErrors({});
+    return true;
   };
 
   return (
@@ -96,12 +102,13 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
               <label></label>
               <input
                 name="description"
-                value={formData.description}
+                value={formData.description || ''}
                 onChange={handleChange}
               />
-              {localErrors.description && (
+                {localErrors.description && (
                 <p className="error-message">{localErrors.description}</p>
               )}
+
             </div>
             <div>
               <label></label>
@@ -124,11 +131,11 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
                 <option value="Maki">Maki</option>
                 <option value="Nigiri">Nigiri</option>
                 <option value="Sashimi">Sashimi</option>
-                <option value="Drinks">Drycker</option>
+                <option value="Drycker">Drycker</option>
               </select>
-              {localErrors.group && (
+              {/* {localErrors.group && (
                 <p className="error-message">{localErrors.group}</p>
-              )}
+              )} */}
             </div>
             <button onClick={handleSaveClick}>Spara</button>
           </div>
