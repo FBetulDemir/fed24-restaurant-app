@@ -65,48 +65,14 @@ const Header = () => {
                         )}
                     </li> */}
           <li>
-              <NavLink to="/pages/menu/menu/" className="navlink-footer">
-            	<button className="dropbtn btn-dark">
-                Meny
-            	</button>
-              </NavLink>
+            <NavLink to="/pages/menu/menu/" className="navlink-footer">
+              <button className="dropbtn btn-dark">Meny</button>
+            </NavLink>
           </li>
         </ul>
         <div className="logo-container">
           <NavLink to="/" className="logo">
             ISUSHI
-          </NavLink>
-        </div>
-
-        <button className="hamburger-button" onClick={toggleHamburger}>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-        </button>
-
-        <div
-          className="dropdown-content"
-          style={{ display: hamburgerOpen ? "block" : "none" }}
-        >
-          <NavLink
-            to="/"
-            className="navlink"
-            onClick={() => setHamburgerOpen(false)}
-          ></NavLink>
-          {/* <NavLink to="/pages/about" className="navlink" onClick={() => setHamburgerOpen(false)}>OM</NavLink> */}
-          <NavLink
-            to="/pages/login"
-            className="navlink"
-            onClick={() => setHamburgerOpen(false)}
-          >
-            {/* <button className="btn-dark">LOGGA IN</button> */}
-          </NavLink>
-          <NavLink
-            to="/components/Cart/:cartId"
-            className="navlink"
-            onClick={() => setHamburgerOpen(false)}
-          >
-            <button className="btn-dark">KUNGVAGN</button>
           </NavLink>
         </div>
 
