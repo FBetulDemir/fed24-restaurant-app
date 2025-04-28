@@ -1,6 +1,48 @@
+.admin-page {
+  display: flex;
+  min-height: 100vh;
+  background-color: #1e1e1e;
+  font-family: 'Forum', serif;
+  color: #EFE7D2;
+}
+
+.admin-sidebar {
+  width: 20%;
+  background-color: #2a2a2a;
+  padding: 3em 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  border-right: 1px solid #e6d6b2;
+}
+
+.admin-sidebar h2 {
+  font-size: 1.8em;
+  text-align: center;
+  margin-bottom: 1em;
+  color: #e6d6b2;
+}
+
+.admin-sidebar button {
+  background-color: transparent;
+  border: 2px solid #e6d6b2;
+  border-radius: 6px;
+  padding: 0.75em 1.2em;
+  color: #EFE7D2;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.admin-sidebar button:hover {
+  background-color: #D9BF77;
+  color: #2a2a2a;
+}
+
 .admin-main {
   width: 80%;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .admin-content {
@@ -24,53 +66,39 @@
   color: #EFE7D2;
 }
 
-/* ปรับให้ใช้ความกว้างเต็มในหน้า AddMenu และ EditMenu */
 .admin-menu-list.full-width,
 .admin-menu-form.full-width {
   width: 100%;
   padding: 0;
 }
 
-/* Menu Group */
 .admin-content .menu-group {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   width: 100%;
 }
 
 .admin-content .menu-group h3 {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #A9A9A9;
+  margin-bottom: 0.75rem;
+  border-bottom: 2px solid #e6d6b2;
   padding-bottom: 0.5rem;
   color: #e6d6b2;
 }
 
-/* Menu List */
 .menu-item {
   display: flex;
-  flex-direction: column;
-  padding: 0.5rem 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
   border-bottom: 1px solid #ccc;
-  margin-bottom: 20px;
-  gap: 10px;
+  margin-bottom: 10px;
   background-color: #1e1e1e;
   border-radius: 6px;
 }
 
-.menu-item-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.menu-item-details {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.menu-item-details span {
-  font-size: 1rem;
+.menu-item p {
+  margin: 0;
+  font-size: 1.1rem;
   color: #EFE7D2;
 }
 
@@ -81,11 +109,11 @@
 
 .menu-item .actions button {
   background-color: transparent;
-  border: 2px solid #e6d6b2;
-  border-radius: 6px;
-  padding: 0.5em 1em;
+  border: 1px solid #e6d6b2;
+  border-radius: 4px;
+  padding: 0.3em 0.6em;
   color: #EFE7D2;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -96,8 +124,8 @@
 }
 
 .menu-item .actions svg {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
   color: #EFE7D2;
 }
 
@@ -110,7 +138,58 @@
   font-style: italic;
 }
 
-/* Menu Form */
+.menu-item.edit-mode {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: #2a2a2a;
+  border-radius: 6px;
+}
+
+.menu-item.edit-mode div {
+  margin-bottom: 0.75rem;
+}
+
+.menu-item.edit-mode label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #EFE7D2;
+  font-size: 0.9rem;
+}
+
+.menu-item.edit-mode input,
+.menu-item.edit-mode select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #f7f7f7;
+  color: #333;
+}
+
+.menu-item.edit-mode select:focus {
+  outline: none;
+  border-color: #D9BF77;
+}
+
+.menu-item.edit-mode button {
+  background-color: transparent;
+  border: 2px solid #e6d6b2;
+  border-radius: 6px;
+  padding: 0.5em 1em;
+  color: #EFE7D2;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.menu-item.edit-mode button:hover {
+  background-color: #D9BF77;
+  color: #2a2a2a;
+}
+
 .menu-form {
   background-color: #1e1e1e;
   padding: 1.5rem;
@@ -223,7 +302,6 @@
   font-size: 0.9rem;
 }
 
-/* ปุ่มกดในหน้า EditMenu */
 .admin-main button {
   background-color: transparent;
   border: 2px solid #e6d6b2;
@@ -239,4 +317,44 @@
 .admin-main button:hover {
   background-color: #D9BF77;
   color: #2a2a2a;
+}
+
+@media screen and (max-width: 768px) {
+  .admin-page {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-right: none;
+    padding: 1.5em;
+  }
+
+  .admin-sidebar h2 {
+    width: 100%;
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+  }
+
+  .admin-sidebar button {
+    margin: 0.5em;
+    width: auto;
+  }
+
+  .admin-main {
+    width: 100%;
+    padding: 1.5em;
+  }
+
+  .menu-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-item .actions {
+    margin-top: 0.5rem;
+  }
 }
