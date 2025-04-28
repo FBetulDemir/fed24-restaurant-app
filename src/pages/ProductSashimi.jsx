@@ -13,6 +13,7 @@ const Sashimi = () => {
   const [loading, setLoading] = useState(true);
   const sashimi = sushiMenu[2];
 
+  const cart = useCartStore((state) => state.cart);
   const addToCart = useCartStore((state) => state.addToCart);
 
   useEffect(() => {
@@ -36,28 +37,45 @@ const Sashimi = () => {
         setLoading(false);
       }
     };
-  
+
     fetchMenu();
   }, []);
 
-  	const handleAddToCart = (sashimi) => {
+  const handleAddToCart = (item) => {
     addToCart({
-      id: sashimi.id,
-      name: sashimi.name,
-      price: sashimi.price,
+      id: item.id,
+      name: item.name,
+      price: item.price,
       quantity: 5,
-	  baseQuantity: 5,
-      ingredients: sashimi.ingredients || [],
-	  description: sashimi.description || "",
-	  extraBitPrice: sashimi.extraBitPrice,
-	  category: "sashimi",
+      baseQuantity: 5,
+      ingredients: item.ingredients || [],
+      description: item.description || "",
+      extraBitPrice: item.extraBitPrice,
+      category: "sashimi",
     });
   };
 
-  
+  const handleAddExtraBit = (item) => {
+    addToCart({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      quantity: 1,
+      baseQuantity: 5,
+      ingredients: item.ingredients || [],
+      description: item.description || "",
+      extraBitPrice: item.extraBitPrice,
+      category: "sashimi",
+    });
+  };
+
+  const isBaseQuantityAdded = (id, baseQuantity) => {
+    const item = cart.find((i) => i.id === id);
+    return item && item.quantity >= baseQuantity;
+  };
+
   return (
     <section className="product-page">
-      {/* <UploadAllMenus /> */}
       {error && <p className="error">{error}</p>}
       <div className="product-img-sides-container">
         <img src={sashimi.image} alt={sashimi.name} className="product-image" />
@@ -69,27 +87,30 @@ const Sashimi = () => {
         {loading ? (
           <p>Laddar meny...</p>
         ) : sashimiMenuList.length > 0 ? (
-          sashimiMenuList.map((sashimi, index) => (
-            <div key={sashimi.id || index} className="product-price">
+          sashimiMenuList.map((item, index) => (
+            <div key={item.id || index} className="product-price">
               <p className="product-name">
-			  	<button
-                	className="product-buy-btn"
-                	onClick={() => handleAddToCart(sashimi)}>
-                  	Lägg till 5 bitar
+                <button
+                  className="product-buy-btn"
+                  onClick={() => handleAddToCart(item)}
+                >
+                  Lägg till 5 bitar
                 </button>
                 <span className="product-length">
-                  {sashimi.name} {sashimi.price}:-
+                  {item.name} {item.price}:-
                 </span>
-                {sashimi.extraBitPrice && (
-                  <button className="product-extra-btn">
-                    extra bit +{sashimi.extraBitPrice}:-
+                {item.extraBitPrice && (
+                  <button
+                    className="product-extra-btn"
+                    disabled={!isBaseQuantityAdded(item.id, 5)}
+                    onClick={() => handleAddExtraBit(item)}
+                  >
+                    extra bit +{item.extraBitPrice}:-
                   </button>
                 )}
               </p>
-              {sashimi.ingredients && (
-                <p className="product-ingredients">
-                  {sashimi.ingredients.join(", ")}
-                </p>
+              {item.ingredients && (
+                <p className="product-ingredients">{item.ingredients.join(", ")}</p>
               )}
             </div>
           ))
@@ -99,6 +120,6 @@ const Sashimi = () => {
       </div>
     </section>
   );
-  };
-  
-  export default Sashimi;
+};
+
+export default Sashimi;

@@ -2,7 +2,6 @@ import "../styles/ProductPage.css";
 import React, { useState, useEffect } from "react";
 import { sushiMenu } from "../data/produktLists.js";
 import UploadAllMenus from "../components/UploadAllMenusButton.jsx";
-// import { useCart } from "../components/CartFunctions.jsx";
 import { useCartStore } from "../data/CartStore.js";
 
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
@@ -14,6 +13,7 @@ const MakiSushi = () => {
   const [loading, setLoading] = useState(true);
   const makiSushi = sushiMenu[0];
   const addToCart = useCartStore((state) => state.addToCart);
+  const cart = useCartStore((state) => state.cart);
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -36,29 +36,37 @@ const MakiSushi = () => {
         setLoading(false);
       }
     };
-  
     fetchMenu();
   }, []);
-  
 
   const handleAddToCart = (maki) => {
-	addToCart({
-	  id: maki.id,
-	  name: maki.name,
-	  price: maki.price,
-	  quantity: 8,
-	  baseQuantity: 8,
-	  ingredients: maki.ingredients || [],
-	  description: maki.description || "",
- 	  extraBitPrice: maki.extraBitPrice,
-	   category: "maki",
-
-	});
+    addToCart({
+      id: maki.id,
+      name: maki.name,
+      price: maki.price,
+      quantity: maki.baseQuantity || 8,
+      baseQuantity: maki.baseQuantity || 8,
+      ingredients: maki.ingredients || [],
+      description: maki.description || "",
+      extraBitPrice: maki.extraBitPrice,
+      category: "maki",
+    });
   };
-  
+
+  const handleAddExtraBit = (maki) => {
+    addToCart({
+      ...maki,
+      quantity: 1,
+    });
+  };
+
+  const isExtraBitEnabled = (maki) => {
+    const existing = cart.find((item) => item.id === maki.id);
+    return existing && existing.quantity >= (maki.baseQuantity || 8);
+  };
+
   return (
     <section className="product-page">
-      {/* <UploadAllMenus /> */}
       {error && <p className="error">{error}</p>}
       <div className="product-img-sides-container">
         <img src={makiSushi.image} alt={makiSushi.name} className="product-image" />
@@ -77,13 +85,17 @@ const MakiSushi = () => {
                   className="product-buy-btn"
                   onClick={() => handleAddToCart(maki)}
                 >
-                  Lägg till 8 bitar
+                  Lägg till {maki.baseQuantity || 8} bitar
                 </button>
                 <span className="product-length">
                   {maki.name} {maki.price}:-
                 </span>
                 {maki.extraBitPrice && (
-                  <button className="product-extra-btn">
+                  <button
+                    className="product-extra-btn"
+                    disabled={!isExtraBitEnabled(maki)}
+                    onClick={() => handleAddExtraBit(maki)}
+                  >
                     extra bit +{maki.extraBitPrice}:-
                   </button>
                 )}
@@ -99,6 +111,6 @@ const MakiSushi = () => {
       </div>
     </section>
   );
-  };
-  
-  export default MakiSushi;
+};
+
+export default MakiSushi;
