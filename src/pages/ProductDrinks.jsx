@@ -11,19 +11,23 @@ const DrinksMenu = () => {
   const drinks = sushiMenu[3];
   const addToCart = useCartStore((state) => state.addToCart);
 
+  console.log("📋 Drycker menydata:", drinkList);
+
   const handleAddToCart = (drink) => {
     addToCart({
       id: drink.id,
       name: drink.name,
       price: drink.price,
-      quantity: 1,
+      quantity: drink.baseQuantity || 1,
+      baseQuantity: drink.baseQuantity || 1,
       ingredients: drink.ingredients || [],
+      volume: drink.volume,
+      category: "drinks",
     });
   };
 
   return (
     <section className="product-page">
-      {/* <UploadAllMenus /> */}
       {error && <p className="error">{error}</p>}
       <div className="product-img-sides-container">
         <img src={drinks.image} alt={drinks.name} className="product-image" />

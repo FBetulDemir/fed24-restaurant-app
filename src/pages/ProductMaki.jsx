@@ -1,17 +1,14 @@
 import "../styles/ProductPage.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { sushiMenu } from "../data/produktLists.js";
 import UploadAllMenus from "../components/UploadAllMenusButton.jsx";
 import { useCartStore } from "../data/CartStore.js";
 import Toast from "../components/Toast.jsx";
-
-const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
-const API_KEY = "isushi-menu";
+import MenuContext from "../components/MenuContext.jsx";
 
 const MakiSushi = () => {
-  const [makiMenuList, setMakiMenuList] = useState([]);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
+  const { menuData, error, loading } = useContext(MenuContext);
+  const makiMenuList = menuData.maki;
   const makiSushi = sushiMenu[0];
   const addToCart = useCartStore((state) => state.addToCart);
   const cart = useCartStore((state) => state.cart);
@@ -19,29 +16,7 @@ const MakiSushi = () => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
-  useEffect(() => {
-    const fetchMenu = async () => {
-      try {
-        const response = await fetch(`${API_URL}?method=load&key=${API_KEY}`);
-        const data = await response.json();
-        if (Array.isArray(data)) {
-          const makiItems = data.filter((item) => item.category === "maki");
-          setMakiMenuList(makiItems);
-          if (makiItems.length === 0) {
-            setError("Inga maki-objekt hittades i API-svaret.");
-          }
-        } else {
-          setError("API-svaret är inte en lista över menyobjekt.");
-        }
-      } catch (err) {
-        console.error("Misslyckades med att ladda menyn", err);
-        setError("Kunde inte ladda menyn.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMenu();
-  }, []);
+  console.log("📋 Maki menydata:", makiMenuList);
 
   const handleAddToCart = (maki) => {
     addToCart({
@@ -62,8 +37,15 @@ const MakiSushi = () => {
 
   const handleAddExtraBit = (maki) => {
     addToCart({
-      ...maki,
+      id: maki.id,
+      name: maki.name,
+      price: maki.extraBitPrice,
       quantity: 1,
+      baseQuantity: maki.baseQuantity || 8,
+      ingredients: maki.ingredients || [],
+      description: maki.description || "",
+      extraBitPrice: maki.extraBitPrice,
+      category: "maki",
     });
     setToastMessage(`Extra bit av ${maki.name} lades till!`);
     setShowToast(true);
@@ -115,7 +97,7 @@ const MakiSushi = () => {
                     </button>
                   )}
                 </p>
-                {maki.ingredients && (
+                {maki.ingredients && maki.ingredients.length > 0 && (
                   <p className="product-ingredients">
                     {maki.ingredients.join(", ")}
                   </p>
