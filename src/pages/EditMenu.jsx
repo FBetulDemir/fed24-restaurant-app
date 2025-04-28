@@ -149,7 +149,7 @@ const handleEdit = async (id, updatedItem) => {
           Förnya Menyn
         </button>
 
-        {error && <p className="menu-form-error">{error}</p>}
+        {/* {error && <p className="menu-form-error">{error}</p>} */}
 
         {menu.length === 0 ? (
           <p>No menu items available.</p>

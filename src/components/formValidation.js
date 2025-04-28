@@ -1,14 +1,15 @@
 import Joi from "joi";
 
 export const dishSchema = Joi.object({
-  id: Joi.string().required().messages({
-    "string.empty": "ID är obligatoriskt.",
-    "any.required": "ID är obligatoriskt.",
-  }),
   name: Joi.string().min(2).required().messages({
     "string.empty": "Namn är obligatoriskt.",
     "string.min": "Namnet måste vara minst 2 tecken långt.",
     "any.required": "Namn är obligatoriskt.",
+  }),
+  description: Joi.string().min(5).required().messages({
+    "string.empty": "Beskrivning är obligatoriskt.",
+    "string.min": "Beskrivningen måste vara minst 5 tecken lång.",
+    "any.required": "Beskrivning är obligatoriskt.",
   }),
   price: Joi.number().positive().required().messages({
     "number.base": "Pris är obligatoriskt.",
@@ -50,7 +51,7 @@ export const dishSchema = Joi.object({
       }),
   }),
   volume: Joi.when("category", {
-    is: "drinks",
+    is: "drycker",
     then: Joi.string()
       .pattern(/^\d+(,\d+)?$/)
       .required()
