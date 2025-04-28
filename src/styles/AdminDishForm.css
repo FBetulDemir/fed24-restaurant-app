@@ -39,7 +39,10 @@
     }
 }
 
-  
+/* .from-field {
+    display: flex;
+}
+   */
   
 .form-section h1 {
     font-size: 2em;
@@ -51,7 +54,7 @@
 .dish-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5em;
+    gap: 2em;
     max-width: 600px;
     margin: 0 auto;
     input:focus, select:focus {
@@ -68,13 +71,13 @@
     margin-top: 1em;
 }
   
-.message-error, .message-success {
-    text-align: center;
+.message-error, .message-success, .error-admin {
+    text-align: start;
     font-size: 1.2em;
     margin-top: 1rem;
 }
 
-.error-message {
+.error-message, .error-admin{
     color: red;
     font-size: 0.9rem;
     margin-top: 5px;
