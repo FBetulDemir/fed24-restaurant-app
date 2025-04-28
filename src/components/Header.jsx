@@ -65,11 +65,11 @@ const Header = () => {
                         )}
                     </li> */}
           <li>
-            <button className="dropbtn btn-dark">
               <NavLink to="/pages/menu/menu/" className="navlink-footer">
+            	<button className="dropbtn btn-dark">
                 Meny
+            	</button>
               </NavLink>
-            </button>
           </li>
         </ul>
         <div className="logo-container">
