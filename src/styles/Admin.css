@@ -1,11 +1,10 @@
-/* Main Content */
 .admin-main {
   width: 80%;
   padding: 1rem;
 }
 
 .admin-content {
-  background-color: #E8ECEF;
+  background-color: #333;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -15,12 +14,14 @@
 }
 
 .admin-content h2 {
-  color: #ffffff;
+  color: #e6d6b2;
   margin-bottom: 1rem;
+  font-size: 2em;
+  text-align: center;
 }
 
 .admin-content p {
-  color: #666;
+  color: #EFE7D2;
 }
 
 /* ปรับให้ใช้ความกว้างเต็มในหน้า AddMenu และ EditMenu */
@@ -41,7 +42,7 @@
   margin-bottom: 1rem;
   border-bottom: 2px solid #A9A9A9;
   padding-bottom: 0.5rem;
-  color: #000 !important;
+  color: #e6d6b2;
 }
 
 /* Menu List */
@@ -52,6 +53,8 @@
   border-bottom: 1px solid #ccc;
   margin-bottom: 20px;
   gap: 10px;
+  background-color: #1e1e1e;
+  border-radius: 6px;
 }
 
 .menu-item-content {
@@ -68,6 +71,7 @@
 
 .menu-item-details span {
   font-size: 1rem;
+  color: #EFE7D2;
 }
 
 .menu-item .actions {
@@ -76,29 +80,39 @@
 }
 
 .menu-item .actions button {
-  background: none;
-  border: none;
+  background-color: transparent;
+  border: 2px solid #e6d6b2;
+  border-radius: 6px;
+  padding: 0.5em 1em;
+  color: #EFE7D2;
+  font-size: 0.9rem;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menu-item .actions button:hover {
+  background-color: #D9BF77;
+  color: #2a2a2a;
 }
 
 .menu-item .actions svg {
   width: 1.25rem;
   height: 1.25rem;
-  color: #666;
+  color: #EFE7D2;
 }
 
 .menu-item .actions button:hover svg {
-  color: #333;
+  color: #2a2a2a;
 }
 
 .menu-empty {
-  color: #666;
+  color: #EFE7D2;
   font-style: italic;
 }
 
 /* Menu Form */
 .menu-form {
-  background-color: white;
+  background-color: #1e1e1e;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -109,7 +123,7 @@
 .menu-form label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #666;
+  color: #EFE7D2;
 }
 
 .menu-form input,
@@ -121,17 +135,19 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
+  background-color: #f7f7f7;
+  color: #333;
 }
 
 .menu-form select {
-  background-color: #fff;
+  background-color: #f7f7f7;
   color: #333;
   cursor: pointer;
 }
 
 .menu-form select:focus {
   outline: none;
-  border-color: #A9A9A9;
+  border-color: #D9BF77;
 }
 
 .menu-form textarea {
@@ -152,49 +168,75 @@
 
 .menu-form .ingredient-group button {
   margin-left: 0.5rem;
-  background-color: #A9A9A9;
-  color: white;
-  padding: 0.5rem;
-  border: none;
-  border-radius: 4px;
+  background-color: transparent;
+  border: 2px solid #e6d6b2;
+  border-radius: 6px;
+  padding: 0.5em 1em;
+  color: #EFE7D2;
+  font-size: 0.9rem;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .menu-form .ingredient-group button:hover {
-  background-color: #8B8B8B;
+  background-color: #D9BF77;
+  color: #2a2a2a;
 }
 
 .menu-form .add-ingredient {
-  background-color: #A9A9A9;
-  color: white;
-  padding: 0.5rem;
-  border: none;
-  border-radius: 4px;
+  background-color: transparent;
+  border: 2px solid #e6d6b2;
+  border-radius: 6px;
+  padding: 0.5em 1em;
+  color: #EFE7D2;
+  font-size: 0.9rem;
   cursor: pointer;
+  transition: all 0.3s ease;
   margin-bottom: 1rem;
 }
 
 .menu-form .add-ingredient:hover {
-  background-color: #8B8B8B;
+  background-color: #D9BF77;
+  color: #2a2a2a;
 }
 
 .menu-form button[type="submit"] {
   width: 100%;
-  background-color: #A9A9A9;
-  color: white;
-  padding: 0.5rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  background-color: transparent;
+  border: 2px solid #e6d6b2;
+  border-radius: 6px;
+  padding: 0.75em 1.2em;
+  color: #EFE7D2;
   font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .menu-form button[type="submit"]:hover {
-  background-color: #8B8B8B;
+  background-color: #D9BF77;
+  color: #2a2a2a;
 }
 
 .menu-form-error {
   color: red;
   margin-top: 0.5rem;
   font-size: 0.9rem;
+}
+
+/* ปุ่มกดในหน้า EditMenu */
+.admin-main button {
+  background-color: transparent;
+  border: 2px solid #e6d6b2;
+  border-radius: 6px;
+  padding: 0.75em 1.2em;
+  color: #EFE7D2;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.admin-main button:hover {
+  background-color: #D9BF77;
+  color: #2a2a2a;
 }
