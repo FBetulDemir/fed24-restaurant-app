@@ -38,6 +38,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	border-radius: 0.2em;
+	min-width: 300px;
 }
 .new-order {
 	background-color: #181818;

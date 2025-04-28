@@ -23,11 +23,26 @@ const Cart = () => {
   };
 
   const decreaseQuantity = (id) => {
-    const updated = cart.map(item =>
-      item.id === id
-        ? { ...item, quantity: Math.max(1, item.quantity - 1) }
-        : item
-    );
+    const updated = cart
+      .map(item => {
+        if (item.id !== id) return item;
+
+        const minQuantity =
+          item.category === "maki" ? 8 :
+          item.category === "sashimi" ? 5 :
+          item.category === "nigiri" ? 2 :
+          1; // drinks and others
+
+        const newQuantity = item.quantity - 1;
+
+        if (newQuantity < minQuantity) {
+          return item.category === "drinks" && newQuantity < 1 ? null : item;
+        }
+
+        return { ...item, quantity: newQuantity };
+      })
+      .filter(item => item !== null && item.quantity > 0);
+
     setCart(updated);
     saveData("temporary-test-cart", updated);
   };
@@ -38,31 +53,26 @@ const Cart = () => {
   };
 
   const getItemTotal = (item) => {
-	const { quantity = 1, price, extraBitPrice = 0, category } = item;
-  
-	if (category === "maki") {
-	  const baseQty = 8;
-	  const extra = Math.max(0, quantity - baseQty);
-	  return price + extra * extraBitPrice;
-	}
-  
-	if (category === "sashimi") {
-	  const baseQty = 5;
-	  const extra = Math.max(0, quantity - baseQty);
-	  return price + extra * extraBitPrice;
-	}
-  
-	// Nigiri: priset gäller för 2 bitar
-	if (category === "nigiri") {
-	  return price * (quantity / 2);
-	}
-  
-	return price * quantity; // Drycker
+    const quantity = item.quantity || 1;
+    const basePrice = item.basePrice || item.price;
+    const extraBitPrice = item.extraBitPrice || 0;
+
+    if (item.category === "maki") {
+      const extraBits = Math.max(0, quantity - 8);
+      return basePrice + extraBits * extraBitPrice;
+    }
+
+    if (item.category === "sashimi") {
+      const extraBits = Math.max(0, quantity - 5);
+      return basePrice + extraBits * extraBitPrice;
+    }
+
+    if (item.category === "nigiri") {
+      return basePrice * quantity;
+    }
+
+    return basePrice * quantity;
   };
-  
-  
-  
-  
 
   const total = cart.reduce((sum, item) => sum + getItemTotal(item), 0);
 
