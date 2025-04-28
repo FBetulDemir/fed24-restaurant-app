@@ -43,9 +43,15 @@ const NigiriSushi = () => {
       name: nigiri.name,
       price: nigiri.price,
       quantity: 2,
+	  category: "nigiri",
+	  baseQuantity: 2,
+	  description: nigiri.description,	
       ingredients: nigiri.ingredients || [],
+	  extraBitPrice: nigiri.extraBitPrice,
     });
   };
+
+
 
   return (
     <section className="product-page">

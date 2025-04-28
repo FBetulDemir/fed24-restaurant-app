@@ -15,37 +15,42 @@ const Cart = () => {
   }, []);
 
   const increaseQuantity = (id) => {
-    const updated = cart.map(item =>
-      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-    );
-    setCart(updated);
-    saveData("temporary-test-cart", updated);
+	const updated = cart.map(item => {
+	  if (item.id === id) {
+		const updatedItem = {
+		  ...item,
+		  quantity: item.quantity + 1
+		};
+		return updatedItem;
+	  }
+	  return item;
+	});
+	setCart(updated);
+	saveData("temporary-test-cart", updated);
   };
-
+  
   const decreaseQuantity = (id) => {
-    const updated = cart
-      .map(item => {
-        if (item.id !== id) return item;
-
-        const minQuantity =
-          item.category === "maki" ? 8 :
-          item.category === "sashimi" ? 5 :
-          item.category === "nigiri" ? 2 :
-          1; // drinks and others
-
-        const newQuantity = item.quantity - 1;
-
-        if (newQuantity < minQuantity) {
-          return item.category === "drinks" && newQuantity < 1 ? null : item;
-        }
-
-        return { ...item, quantity: newQuantity };
-      })
-      .filter(item => item !== null && item.quantity > 0);
-
-    setCart(updated);
-    saveData("temporary-test-cart", updated);
+	const updated = cart
+	  .map(item => {
+		if (item.id === id) {
+		  const min = item.baseQuantity ?? 1;
+		  const isDrink = item.category === "drinks";
+		  const newQuantity = item.quantity - 1;
+  
+		  if (isDrink && newQuantity <= 0) return null;
+  
+		  if (!isDrink && newQuantity < min) return null;
+  
+		  return { ...item, quantity: newQuantity };
+		}
+		return item;
+	  })
+	  .filter(Boolean);
+  
+	setCart(updated);
+	saveData("temporary-test-cart", updated);
   };
+  
 
   const handleClearCart = () => {
     setCart([]);
@@ -53,26 +58,26 @@ const Cart = () => {
   };
 
   const getItemTotal = (item) => {
-    const quantity = item.quantity || 1;
-    const basePrice = item.basePrice || item.price;
-    const extraBitPrice = item.extraBitPrice || 0;
-
-    if (item.category === "maki") {
-      const extraBits = Math.max(0, quantity - 8);
-      return basePrice + extraBits * extraBitPrice;
-    }
-
-    if (item.category === "sashimi") {
-      const extraBits = Math.max(0, quantity - 5);
-      return basePrice + extraBits * extraBitPrice;
-    }
-
-    if (item.category === "nigiri") {
-      return basePrice * quantity;
-    }
-
-    return basePrice * quantity;
+	const {
+	  quantity = 1,
+	  price,
+	  baseQuantity = 1,
+	  extraBitPrice = 0,
+	} = item;
+  
+	// Om extraBitPrice inte finns eller är 0, använd vanlig multiplikation
+	if (!extraBitPrice) {
+	  return price * quantity;
+	}
+  
+	// Annars: räkna pris för baseQuantity + extra bits separat
+	const extraBits = Math.max(0, quantity - baseQuantity);
+	return price + extraBits * extraBitPrice;
   };
+  
+  
+  
+  
 
   const total = cart.reduce((sum, item) => sum + getItemTotal(item), 0);
 
@@ -86,7 +91,7 @@ const Cart = () => {
           <div className="product">
             <h2 id="title">{item.name}</h2>
             <div className="desPic">
-              <img id="pics" src="-" alt={`Bild på ${item.name}`} />
+              {/* <img id="pics" src="-" alt={`Bild på ${item.name}`} /> */}
               <p id="description">{item.description || ""}</p>
             </div>
             <div className="btns">

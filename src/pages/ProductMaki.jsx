@@ -40,16 +40,19 @@ const MakiSushi = () => {
     fetchMenu();
   }, []);
   
-  // Function to handle adding item to cart
+
   const handleAddToCart = (maki) => {
 	addToCart({
 	  id: maki.id,
 	  name: maki.name,
 	  price: maki.price,
-	  basePrice: maki.price,
 	  quantity: 8,
+	  baseQuantity: 8,
 	  ingredients: maki.ingredients || [],
 	  description: maki.description || "",
+ 	  extraBitPrice: maki.extraBitPrice,
+	   category: "maki",
+
 	});
   };
   

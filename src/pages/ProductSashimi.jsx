@@ -46,9 +46,14 @@ const Sashimi = () => {
       name: sashimi.name,
       price: sashimi.price,
       quantity: 5,
+	  baseQuantity: 5,
       ingredients: sashimi.ingredients || [],
+	  description: sashimi.description || "",
+	  extraBitPrice: sashimi.extraBitPrice,
+	  category: "sashimi",
     });
   };
+
   
   return (
     <section className="product-page">
