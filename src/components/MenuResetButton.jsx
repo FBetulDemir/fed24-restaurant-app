@@ -11,15 +11,19 @@ const MenuResetButton = () => {
   const handleResetMenu = async () => {
     setIsLoading(true);
     setMessage("");
+    console.log("Initiating menu reset...");
     try {
       const success = await clearAndResetMenu();
       if (success) {
+        console.log("Menu reset successful, refreshing UI...");
         setMessage("Menyn återställd framgångsrikt!");
-        refreshMenu(); // Uppdatera menyn i gränssnittet
+        await refreshMenu(); // Ensure UI refreshes after reset
       } else {
+        console.error("Menu reset failed");
         setMessage("Misslyckades med att återställa menyn.");
       }
     } catch (err) {
+      console.error("Error during menu reset:", err);
       setMessage("Fel vid återställning av meny: " + err.message);
     } finally {
       setIsLoading(false);
@@ -35,7 +39,11 @@ const MenuResetButton = () => {
       >
         {isLoading ? "Återställer..." : "Återställ standardmeny"}
       </button>
-      {message && <p>{message}</p>}
+      {message && (
+        <p style={{ color: message.includes("framgångsrikt") ? "green" : "red" }}>
+          {message}
+        </p>
+      )}
     </div>
   );
 };

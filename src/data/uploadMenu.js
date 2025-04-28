@@ -1,26 +1,29 @@
 import { drinksMenuList, makiMenuList, nigiriMenuList, sashimiMenuList } from "../data/produktLists";
 
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
-const API_KEY = "isushi_menu_2025_menu";
+const API_KEY = "isushi-menu";
 
 const fetchCurrentMenu = async () => {
   try {
+    console.log(`Fetching current menu with key: ${API_KEY}`);
     const response = await fetch(`${API_URL}?method=load&key=${API_KEY}`);
     if (response.ok) {
       const data = await response.json();
+      console.log("Fetched current menu:", data);
       return Array.isArray(data) ? data : [];
     } else {
-      console.error("Misslyckades med att hämta nuvarande meny");
+      console.error("Failed to fetch current menu, status:", response.status);
       return [];
     }
   } catch (err) {
-    console.error("Nätverksfel vid hämtning av meny:", err);
+    console.error("Network error fetching menu:", err);
     return [];
   }
 };
 
 const saveMenuToApi = async (menu) => {
   try {
+    console.log(`Saving menu to API with key: ${API_KEY}, items:`, menu);
     const saveResponse = await fetch(`${API_URL}?method=save`, {
       method: "POST",
       headers: {
@@ -33,14 +36,14 @@ const saveMenuToApi = async (menu) => {
       }),
     });
     if (saveResponse.ok) {
-      console.log("✅ Menyn sparades framgångsrikt!");
+      console.log("✅ Menu saved successfully!");
       return true;
     } else {
-      console.error("❌ Misslyckades med att spara menyn.");
+      console.error("❌ Failed to save menu, status:", saveResponse.status);
       return false;
     }
   } catch (err) {
-    console.error("❌ Nätverksfel vid sparande av meny:", err);
+    console.error("❌ Network error saving menu:", err);
     return false;
   }
 };
@@ -84,10 +87,10 @@ export const uploadAllMenus = async () => {
     }, []);
 
     const success = await saveMenuToApi(finalMenu);
-    if (!success) console.error("Misslyckades med att spara menyn.");
+    if (!success) console.error("Failed to save menu in uploadAllMenus");
     return success;
   } catch (err) {
-    console.error("Fel i uploadAllMenus:", err);
+    console.error("Error in uploadAllMenus:", err);
     return false;
   }
 };
@@ -100,21 +103,21 @@ export const editMenuItem = async (originalItem, updatedItem) => {
     );
 
     if (itemIndex === -1) {
-      console.error("Objektet hittades inte i nuvarande meny:", originalItem);
+      console.error("Item not found in current menu:", originalItem);
       return false;
     }
 
     currentMenu[itemIndex] = { ...updatedItem, category: originalItem.category };
     const success = await saveMenuToApi(currentMenu);
     if (success) {
-      console.log("✅ Menyobjekt uppdaterat:", updatedItem);
+      console.log("✅ Menu item updated:", updatedItem);
       return true;
     } else {
-      console.error("❌ Misslyckades med att spara uppdaterad meny.");
+      console.error("❌ Failed to save updated menu.");
       return false;
     }
   } catch (err) {
-    console.error("❌ Fel i editMenuItem:", err);
+    console.error("❌ Error in editMenuItem:", err);
     return false;
   }
 };
@@ -127,20 +130,21 @@ export const deleteMenuItem = async (itemToDelete) => {
     );
     const success = await saveMenuToApi(updatedMenu);
     if (success) {
-      console.log("✅ Menyobjekt raderat:", itemToDelete);
+      console.log("✅ Menu item deleted:", itemToDelete);
       return true;
     } else {
-      console.error("❌ Misslyckades med att spara uppdaterad meny.");
+      console.error("❌ Failed to save updated menu.");
       return false;
     }
   } catch (err) {
-    console.error("❌ Fel i deleteMenuItem:", err);
+    console.error("❌ Error in deleteMenuItem:", err);
     return false;
   }
 };
 
 export const clearAndResetMenu = async () => {
   try {
+    console.log("Resetting menu to default...");
     const allMenuItems = [
       ...drinksMenuList.map((item) => ({ ...item, category: "drinks" })),
       ...makiMenuList.map((item) => ({ ...item, category: "maki" })),
@@ -148,24 +152,17 @@ export const clearAndResetMenu = async () => {
       ...sashimiMenuList.map((item) => ({ ...item, category: "sashimi" })),
     ];
 
-    const uniqueMenuItems = allMenuItems.reduce((acc, item) => {
-      const exists = acc.some(
-        (existing) => existing.name === item.name && existing.category === item.category
-      );
-      if (!exists) acc.push(item);
-      return acc;
-    }, []);
-
-    const success = await saveMenuToApi(uniqueMenuItems);
+    console.log("Default menu items to upload:", allMenuItems);
+    const success = await saveMenuToApi(allMenuItems);
     if (success) {
-      console.log("✅ Menyn återställd till standardmenyn!");
+      console.log("✅ Menu reset to default menu!");
       return true;
     } else {
-      console.error("❌ Misslyckades med att spara standardmenyn.");
+      console.error("❌ Failed to save default menu.");
       return false;
     }
   } catch (err) {
-    console.error("❌ Fel i clearAndResetMenu:", err);
+    console.error("❌ Error in clearAndResetMenu:", err);
     return false;
   }
 };
