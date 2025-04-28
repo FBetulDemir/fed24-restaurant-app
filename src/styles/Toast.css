@@ -1,0 +1,23 @@
+.toast {
+	position: fixed;
+	top: 20px; /* 👈 visa toasten upptill */
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #333;
+	color: #fff;
+	padding: 1rem 2rem;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+	z-index: 9999;
+	font-weight: bold;
+	opacity: 0.95;
+	animation: fadeInOut 2.5s ease-in-out;
+  }
+  
+  @keyframes fadeInOut {
+	0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+	10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+	90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+	100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  }
+  
