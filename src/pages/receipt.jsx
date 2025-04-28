@@ -28,8 +28,9 @@ const Receipt = ({ cart }) => {
   const navigate = useNavigate();
 
   const handleNewOrder = async () => {
-    await saveData("temporary-test-cart", []);
-    navigate("/pages/menu/menu/");
+	await saveData("temporary-test-cart", []);
+	localStorage.removeItem("isushi_menu_2025_temporary-test-cart");
+	navigate("/pages/menu/menu/");
   };
 
   return (

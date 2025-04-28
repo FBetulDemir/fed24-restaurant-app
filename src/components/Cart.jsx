@@ -2,55 +2,56 @@ import { useState, useEffect } from "react";
 import { loadData, saveData } from "../components/Api";
 import "../styles/Cart.css";
 import { NavLink } from "react-router";
+import { useLocation } from "react-router-dom";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchCart = async () => {
       const data = await loadData("temporary-test-cart");
       if (data) setCart(data);
+      else setCart([]);
     };
     fetchCart();
-  }, []);
+  }, [location]);
 
   const increaseQuantity = (id) => {
-	const updated = cart.map(item => {
-	  if (item.id === id) {
-		const updatedItem = {
-		  ...item,
-		  quantity: item.quantity + 1
-		};
-		return updatedItem;
-	  }
-	  return item;
-	});
-	setCart(updated);
-	saveData("temporary-test-cart", updated);
+    const updated = cart.map(item => {
+      if (item.id === id) {
+        const updatedItem = {
+          ...item,
+          quantity: item.quantity + 1
+        };
+        return updatedItem;
+      }
+      return item;
+    });
+    setCart(updated);
+    saveData("temporary-test-cart", updated);
   };
-  
+
   const decreaseQuantity = (id) => {
-	const updated = cart
-	  .map(item => {
-		if (item.id === id) {
-		  const min = item.baseQuantity ?? 1;
-		  const isDrink = item.category === "drinks";
-		  const newQuantity = item.quantity - 1;
-  
-		  if (isDrink && newQuantity <= 0) return null;
-  
-		  if (!isDrink && newQuantity < min) return null;
-  
-		  return { ...item, quantity: newQuantity };
-		}
-		return item;
-	  })
-	  .filter(Boolean);
-  
-	setCart(updated);
-	saveData("temporary-test-cart", updated);
+    const updated = cart
+      .map(item => {
+        if (item.id === id) {
+          const min = item.baseQuantity ?? 1;
+          const isDrink = item.category === "drinks";
+          const newQuantity = item.quantity - 1;
+
+          if (isDrink && newQuantity <= 0) return null;
+          if (!isDrink && newQuantity < min) return null;
+
+          return { ...item, quantity: newQuantity };
+        }
+        return item;
+      })
+      .filter(Boolean);
+
+    setCart(updated);
+    saveData("temporary-test-cart", updated);
   };
-  
 
   const handleClearCart = () => {
     setCart([]);
@@ -58,26 +59,20 @@ const Cart = () => {
   };
 
   const getItemTotal = (item) => {
-	const {
-	  quantity = 1,
-	  price,
-	  baseQuantity = 1,
-	  extraBitPrice = 0,
-	} = item;
-  
-	// Om extraBitPrice inte finns eller är 0, använd vanlig multiplikation
-	if (!extraBitPrice) {
-	  return price * quantity;
-	}
-  
-	// Annars: räkna pris för baseQuantity + extra bits separat
-	const extraBits = Math.max(0, quantity - baseQuantity);
-	return price + extraBits * extraBitPrice;
+    const {
+      quantity = 1,
+      price,
+      baseQuantity = 1,
+      extraBitPrice = 0,
+    } = item;
+
+    if (!extraBitPrice) {
+      return price * quantity;
+    }
+
+    const extraBits = Math.max(0, quantity - baseQuantity);
+    return price + extraBits * extraBitPrice;
   };
-  
-  
-  
-  
 
   const total = cart.reduce((sum, item) => sum + getItemTotal(item), 0);
 
