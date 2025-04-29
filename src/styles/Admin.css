@@ -7,7 +7,6 @@
 }
 
 .admin-sidebar {
-  /* width: 25%; */
   background-color: #2a2a2a;
   padding: 1.5em 2em 3em 2em;
   display: flex;
@@ -148,13 +147,15 @@
   padding: 1rem;
   background-color: #2a2a2a;
   border-radius: 6px;
+  align-items: flex-start;
 }
 
 .menu-item.edit-mode div {
   margin-bottom: 0.5rem;
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
 }
 
 .menu-item.edit-mode label {
@@ -167,8 +168,8 @@
 .menu-item.edit-mode input,
 .menu-item.edit-mode select {
   width: 100%;
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 400px;
+  max-width: 400px;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -192,14 +193,21 @@
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 400px;
+  max-width: 400px;
   box-sizing: border-box;
+  margin-left: 0;
 }
 
 .menu-item.edit-mode button:hover {
   background-color: #D9BF77;
   color: #2a2a2a;
+}
+
+.menu-item.edit-mode .error-message {
+  color: #e6d6b2;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
 }
 
 .menu-form {
