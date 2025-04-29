@@ -95,7 +95,7 @@ const AddMenu = () => {
         <aside className="admin-sidebar">
           <h2>Welcome Employee!</h2>
           <button onClick={() => navigate('/admin/add')}>Ny Meny</button>
-          <button onClick={() => navigate('/admin/edit')}>Redigera</button>
+          {/* <button onClick={() => navigate('/admin/edit')}>Redigera</button> */}
           <button onClick={() => navigate('/')}>Logga ut</button>
         </aside>
         <main className="admin-main">
