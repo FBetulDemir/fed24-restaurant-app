@@ -205,7 +205,7 @@
 }
 
 .menu-item.edit-mode .error-message {
-  color: #e6d6b2;
+  color: red;
   font-size: 0.8rem;
   margin-top: 0.2rem;
 }
