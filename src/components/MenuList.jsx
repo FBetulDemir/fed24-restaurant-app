@@ -89,6 +89,22 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
           <div key={item.id} className="menu-item edit-mode">
             <div>
               <label></label>
+              <select
+                name="group"
+                value={formData.group}
+                onChange={handleChange}
+              >
+                <option value="Maki">Maki</option>
+                <option value="Nigiri">Nigiri</option>
+                <option value="Sashimi">Sashimi</option>
+                <option value="Drycker">Drycker</option>
+              </select>
+              {/* {localErrors.group && (
+                <p className="error-message">{localErrors.group}</p>
+              )} */}
+            </div>
+            <div>
+              <label></label>
               <input
                 name="name"
                 value={formData.name}
@@ -121,22 +137,7 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
                 <p className="error-message">{localErrors.price}</p>
               )}
             </div>
-            <div>
-              <label></label>
-              <select
-                name="group"
-                value={formData.group}
-                onChange={handleChange}
-              >
-                <option value="Maki">Maki</option>
-                <option value="Nigiri">Nigiri</option>
-                <option value="Sashimi">Sashimi</option>
-                <option value="Drycker">Drycker</option>
-              </select>
-              {/* {localErrors.group && (
-                <p className="error-message">{localErrors.group}</p>
-              )} */}
-            </div>
+
             <button onClick={handleSaveClick}>Spara</button>
           </div>
         ) : (

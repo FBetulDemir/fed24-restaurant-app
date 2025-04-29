@@ -33,9 +33,11 @@
   cursor: pointer;
   transition: all 0.3s ease;
   min-width: 220px;
+  width: 100%;
   text-align: center;
   white-space: nowrap;
   margin-top: 0.5em;
+  box-sizing: border-box;
 }
 
 .admin-sidebar button:hover {
@@ -80,12 +82,17 @@
   width: 100%;
 }
 
-.admin-content .menu-group h3 {
+.menu-group h3 {
   font-size: 1.5rem;
-  margin-bottom: 0.75rem;
-  border-bottom: 2px solid #e6d6b2;
-  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border: 2px solid #EFE7D2;
+  padding: 0.5rem 1rem;
   color: #e6d6b2;
+  border-radius: 6px;
+  box-sizing: border-box;
+  display: inline-block;
+  background-color: #444;
+  width: 100%;
 }
 
 .menu-item {
@@ -97,6 +104,7 @@
   margin-bottom: 10px;
   background-color: #1e1e1e;
   border-radius: 6px;
+  width: 100%;
 }
 
 .menu-item p {
@@ -148,6 +156,7 @@
   background-color: #2a2a2a;
   border-radius: 6px;
   align-items: flex-start;
+  width: 100%;
 }
 
 .menu-item.edit-mode div {
@@ -155,7 +164,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0;
+  width: 100%;
 }
 
 .menu-item.edit-mode label {
@@ -168,8 +177,8 @@
 .menu-item.edit-mode input,
 .menu-item.edit-mode select {
   width: 100%;
-  min-width: 400px;
-  max-width: 400px;
+  min-width: 100%;
+  max-width: 100%;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -193,10 +202,11 @@
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 400px;
-  max-width: 400px;
+  min-width: 300px;
+  max-width: 300px;
   box-sizing: border-box;
   margin-left: 0;
+  align-self: center;
 }
 
 .menu-item.edit-mode button:hover {
@@ -205,7 +215,7 @@
 }
 
 .menu-item.edit-mode .error-message {
-  color: red;
+  color: #ff0000;
   font-size: 0.8rem;
   margin-top: 0.2rem;
 }
