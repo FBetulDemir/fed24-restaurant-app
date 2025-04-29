@@ -14,7 +14,7 @@ const Admin = () => {
         <aside className="admin-sidebar">
           <h2>Välkommen Tillbaka!</h2>
           <button onClick={() => navigate('/admin/add')}>Ny Meny</button>
-          {/* <button onClick={() => navigate('/admin/edit')}>Ändra/Ta bort menu</button> */}
+          <button onClick={() => navigate('/admin/edit')}>Ändra/Ta bort menu</button>
           <button onClick={() => navigate('/')}>Logga ut</button>
         </aside>
 

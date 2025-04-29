@@ -94,10 +94,10 @@ const router = createHashRouter(
           path: '/admin/add',
           Component: AdminDishForm,
         },
-        // {
-        //   path: 'pages/editMenu/:menuId?',
-        //   Component: EditMenu,
-        // }
+        {
+          path: 'pages/editMenu/:menuId?',
+          Component: EditMenu,
+        }
         
 
         
