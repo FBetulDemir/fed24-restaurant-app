@@ -5,6 +5,7 @@ import UploadAllMenus from "../components/UploadAllMenusButton.jsx";
 import { useCartStore } from "../data/CartStore.js";
 import Toast from "../components/Toast.jsx";
 import MenuContext from "../components/MenuContext.jsx";
+import imageMakiSushi from "../assets/maki_sushi.jpg"
 
 const MakiSushi = () => {
   const { menuData, error, loading } = useContext(MenuContext);
@@ -61,7 +62,7 @@ const MakiSushi = () => {
         {error && <p className="error">{error}</p>}
         <div className="product-img-sides-container">
           <img
-            src={makiSushi.image}
+            src={imageMakiSushi}
             alt={makiSushi.name}
             className="product-image"
           />

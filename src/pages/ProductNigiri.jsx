@@ -4,6 +4,7 @@ import { sushiMenu } from "../data/produktLists.js";
 import UploadAllMenus from "../components/UploadAllMenusButton.jsx";
 import { useCartStore } from "../data/CartStore.js";
 import MenuContext from "../components/MenuContext.jsx";
+import imageNigiri from "../assets/nigiri_sushi.jpg"
 
 const NigiriSushi = () => {
   const { menuData, error, loading } = useContext(MenuContext);
@@ -30,7 +31,7 @@ const NigiriSushi = () => {
       {error && <p className="error">{error}</p>}
       <div className="product-img-sides-container">
         <img
-          src={nigiriSushi.image}
+          src={imageNigiri}
           alt={nigiriSushi.name}
           className="product-image"
         />
