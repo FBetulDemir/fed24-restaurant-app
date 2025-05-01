@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuForm from '../components/MenuForm.jsx';
-import Header from '../components/Header.jsx';
+import AdminStart from '../components/AdminStart';
 import { saveData, loadData } from '../api.js';
 import '../styles/Admin.css';
 
@@ -42,13 +42,11 @@ const AddMenu = () => {
       setError('Price is required.');
       return;
     }
-    // ตรวจสอบว่า price เป็นตัวเลขที่ถูกต้องและมากกว่าหรือเท่ากับ 0
     const priceValue = parseFloat(newMenuItem.price);
     if (isNaN(priceValue) || priceValue < 0) {
       setError('Price must be a valid number greater than or equal to 0.');
       return;
     }
-    // ตรวจสอบ extraPrice ถ้ามีค่า
     if (newMenuItem.extraPrice) {
       const extraPriceValue = parseFloat(newMenuItem.extraPrice);
       if (isNaN(extraPriceValue) || extraPriceValue < 0) {
@@ -89,29 +87,24 @@ const AddMenu = () => {
   };
 
   return (
-    <div>
-      <Header />
-      <div className="admin-container">
-        <aside className="admin-sidebar">
-          <h2>Welcome Employee!</h2>
-          <button onClick={() => navigate('/admin/add')}>Ny Meny</button>
-          <button onClick={() => navigate('/admin/edit')}>Redigera</button>
-          <button onClick={() => navigate('/')}>Logga ut</button>
-        </aside>
-        <main className="admin-main">
-          <div className="admin-content">
-            <div className="admin-menu-form full-width">
-              <MenuForm
-                menuItem={newMenuItem}
-                setMenuItem={setNewMenuItem}
-                onSubmit={handleAddMenuItem}
-                buttonText="Lägg till ny meny"
-              />
-              {error && <p className="menu-form-error">{error}</p>}
-            </div>
+    <div className="admin-container">
+      <aside className="admin-sidebar">
+        <AdminStart />
+      </aside>
+      <main className="admin-main">
+        <div className="admin-content">
+          <h2>Lägg till ny meny</h2>
+          <div className="admin-menu-form full-width">
+            <MenuForm
+              menuItem={newMenuItem}
+              setMenuItem={setNewMenuItem}
+              onSubmit={handleAddMenuItem}
+              buttonText="Lägg till ny meny"
+            />
+            {error && <p className="menu-form-error">{error}</p>}
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 };

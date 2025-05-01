@@ -1,4 +1,4 @@
-.admin-page {
+.admin-container {
   display: flex;
   min-height: 100vh;
   background-color: #1e1e1e;
@@ -8,31 +8,34 @@
 
 .admin-sidebar {
   background-color: #2a2a2a;
-  padding: 1.5em 2em 3em 2em;
+  padding: 1em 0.5em 3em 0.5em;
   display: flex;
   flex-direction: column;
   gap: 1em;
   border-right: 1px solid #e6d6b2;
+  width: 40%; /* ยืนยันความกว้าง 40% */
+  align-items: center;
 }
 
 .admin-sidebar h2 {
-  font-size: 1.8em;
+  font-size: 2em;
   text-align: center;
   margin-bottom: 0.5em;
   color: #e6d6b2;
   white-space: nowrap;
+  margin-top: 2rem;
 }
 
 .admin-sidebar button {
   background-color: transparent;
   border: 2px solid #e6d6b2;
   border-radius: 6px;
-  padding: 0.75em 1.5em;
+  padding: 0.75em 2.25em;
   color: #EFE7D2;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 220px;
+  min-width: 330px;
   width: 100%;
   text-align: center;
   white-space: nowrap;
@@ -46,7 +49,7 @@
 }
 
 .admin-main {
-  width: 75%;
+  width: 60%;
   padding: 2rem;
 }
 
@@ -57,14 +60,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .admin-content h2 {
   color: #e6d6b2;
   margin-bottom: 1rem;
   font-size: 2em;
-  text-align: center;
+  text-align: left;
 }
 
 .admin-content p {
@@ -197,16 +200,14 @@
   background-color: transparent;
   border: 2px solid #e6d6b2;
   border-radius: 6px;
-  padding: 0.5em 0;
+  padding: 0.5em 1em;
   color: #EFE7D2;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 150px;
+  margin-right: 0.5rem;
   box-sizing: border-box;
-  margin-left: 0;
-  align-self: center;
 }
 
 .menu-item.edit-mode button:hover {
@@ -218,6 +219,14 @@
   color: #ff0000;
   font-size: 0.8rem;
   margin-top: 0.2rem;
+}
+
+.menu-item.edit-mode .success-message {
+  color: #00ff00;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  text-align: center;
+  width: 100%;
 }
 
 .menu-form {
@@ -327,7 +336,7 @@
 }
 
 .menu-form-error {
-  color: red;
+  color: rgb(0, 255, 0);
   margin-top: 0.5rem;
   font-size: 0.9rem;
 }
@@ -350,7 +359,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .admin-page {
+  .admin-container {
     flex-direction: column;
   }
 
@@ -367,11 +376,14 @@
     width: 100%;
     font-size: 1.4em;
     margin-bottom: 0.5em;
+    margin-top: 0;
   }
 
   .admin-sidebar button {
     margin: 0.5em;
     min-width: 180px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .admin-main {

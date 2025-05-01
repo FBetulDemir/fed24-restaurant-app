@@ -8,7 +8,6 @@ import '../styles/Admin.css';
 import { dishSchema } from '../components/formValidation';
 import Joi from 'joi';
 
-
 const EditMenu = () => {
   const [menu, setMenu] = useState([]);
   const [error, setError] = useState('');
@@ -40,7 +39,6 @@ const EditMenu = () => {
     } else {
       fetchMenu();
     }
-
   }, [isLoggedIn]);
 
   const handleDelete = async (id) => {
@@ -58,120 +56,118 @@ const EditMenu = () => {
     }
   };
 
-const handleCreate = async (newItem) => {
-  try {
-    const { id: ignoredId, ...itemWithoutId } = newItem;
+  const handleCreate = async (newItem) => {
+    try {
+      const { id: ignoredId, ...itemWithoutId } = newItem;
 
-    const validatedItem = {
-      ...itemWithoutId,
-      ingredients: Array.isArray(newItem.ingredients)
-        ? newItem.ingredients
-        : newItem.ingredients.split(',').map(s => s.trim()).filter(s => s.length > 0),
-    };
+      const validatedItem = {
+        ...itemWithoutId,
+        ingredients: Array.isArray(newItem.ingredients)
+          ? newItem.ingredients
+          : newItem.ingredients.split(',').map(s => s.trim()).filter(s => s.length > 0),
+      };
 
-    const { error } = dishSchema.validate(validatedItem, { abortEarly: false });
+      const { error } = dishSchema.validate(validatedItem, { abortEarly: false });
 
-    if (error) {
-      const errorMessages = error.details.map((detail) => detail.message).join(', ');
-      setError('Fel i formuläret: ' + errorMessages);
-      return;
-    }
+      if (error) {
+        const errorMessages = error.details.map((detail) => detail.message).join(', ');
+        setError('Fel i formuläret: ' + errorMessages);
+        return;
+      }
 
-    const newMenu = [...menu, { ...validatedItem, id: menu.length + 1 }]; 
+      const newMenu = [...menu, { ...validatedItem, id: menu.length + 1 }];
 
-    const success = await saveData('menu', newMenu.map(({ id, ...rest }) => rest));
-    if (success) {
-      setMenu(newMenu);
-      setError('');
-    } else {
+      const success = await saveData('menu', newMenu.map(({ id, ...rest }) => rest));
+      if (success) {
+        setMenu(newMenu);
+        setError('');
+      } else {
+        setError('Misslyckades med att skapa ny rätt.');
+      }
+    } catch (err) {
+      console.error('Error creating menu item:', err);
       setError('Misslyckades med att skapa ny rätt.');
     }
-  } catch (err) {
-    console.error('Error creating menu item:', err);
-    setError('Misslyckades med att skapa ny rätt.');
-  }
-};
+  };
 
-const handleEdit = async (id, updatedItem) => {
-  try {
-    const { id: ignoredId, ...itemWithoutId } = updatedItem;
+  const handleEdit = async (id, updatedItem) => {
+    try {
+      const { id: ignoredId, ...itemWithoutId } = updatedItem;
 
-    const validatedItem = {
-      ...itemWithoutId,
-      ingredients: Array.isArray(updatedItem.ingredients)
-        ? updatedItem.ingredients
-        : updatedItem.ingredients.split(',').map(s => s.trim()).filter(s => s.length > 0),
-    };
+      const validatedItem = {
+        ...itemWithoutId,
+        ingredients: Array.isArray(updatedItem.ingredients)
+          ? updatedItem.ingredients
+          : updatedItem.ingredients.split(',').map(s => s.trim()).filter(s => s.length > 0),
+      };
 
-    const { error } = dishSchema.validate(validatedItem, { abortEarly: false });
+      const { error } = dishSchema.validate(validatedItem, { abortEarly: false });
 
-    if (error) {
-      const errorMessages = error.details.map((detail) => detail.message).join(', ');
-      setError('Fel i formuläret: ' + errorMessages);
-      return;
-    }
+      if (error) {
+        const errorMessages = error.details.map((detail) => detail.message).join(', ');
+        setError('Fel i formuläret: ' + errorMessages);
+        return;
+      }
 
-    const updatedMenu = menu.map((item) =>
-      item.id === id ? { ...item, ...validatedItem } : item
-    );
+      const updatedMenu = menu.map((item) =>
+        item.id === id ? { ...item, ...validatedItem } : item
+      );
 
-    const success = await saveData('menu', updatedMenu.map(({ id, ...rest }) => rest));
-    if (success) {
-      setMenu(updatedMenu);
-      setError('');
-    } else {
+      const success = await saveData('menu', updatedMenu.map(({ id, ...rest }) => rest));
+      if (success) {
+        setMenu(updatedMenu);
+        setError('');
+      } else {
+        setError('Misslyckades med att uppdatera rätt.');
+      }
+    } catch (err) {
+      console.error('Error updating menu item:', err);
       setError('Misslyckades med att uppdatera rätt.');
     }
-  } catch (err) {
-    console.error('Error updating menu item:', err);
-    setError('Misslyckades med att uppdatera rätt.');
-  }
-};
+  };
 
   const groups = ['Maki', 'Nigiri', 'Sashimi', 'Drinks'];
 
   const groupedMenu = menu.reduce((acc, item) => {
-    const group = item.group || item.category || 'Övrigt';  
+    const group = item.group || item.category || 'Övrigt';
     if (!acc[group]) acc[group] = [];
     acc[group].push(item);
     return acc;
   }, {});
 
   return (
-    <div className="admin-page">
-      <div className="admin-sidebar">
+    <div className="admin-container">
+      <aside className="admin-sidebar">
         <AdminStart />
-      </div>
-
-      <div className="admin-main">
-        <h2>Redigera Meny</h2>
-        <button onClick={fetchMenu} style={{ marginBottom: '1rem' }}>
-          Förnya Menyn
-        </button>
-
-        {/* {error && <p className="menu-form-error">{error}</p>} */}
-
-        {menu.length === 0 ? (
-          <p>No menu items available.</p>
-        ) : (
-          groups.map((group) => (
-            groupedMenu[group] && (
-              <div key={group} className="menu-group">
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <h3>{group}</h3>
-                <MenuList
-                  menu={groupedMenu[group]}
-                  onDelete={handleDelete}
-                  onEdit={handleEdit}
-                  errors={menuErrors} 
-                />
-
-              </div>
-            )
-          ))
-        )}
-      </div>
+      </aside>
+      <main className="admin-main">
+        <div className="admin-content">
+          <h2>Redigera Meny</h2>
+          <button onClick={fetchMenu} style={{ marginBottom: '1rem' }}>
+            Förnya Menyn
+          </button>
+          {error && <p className="menu-form-error">{error}</p>}
+          {menu.length === 0 ? (
+            <p>No menu items available.</p>
+          ) : (
+            groups.map((group) => (
+              groupedMenu[group] && (
+                <div key={group} className="menu-group">
+                  <p> </p>
+                  <p> </p>
+                  <h3>{group}</h3>
+                  <MenuList
+                    menu={groupedMenu[group]}
+                    onDelete={handleDelete}
+                    onEdit={handleEdit}
+                    errors={menuErrors}
+                  />
+                </div>
+              )
+            ))
+          )}
+        </div>
+      </main>
     </div>
   );
 };

@@ -11,7 +11,7 @@ const AdminStart = () => {
 
   return (
     <div className="sidebar">
-      <h2>Välkommen tillbaka!</h2>
+      <h2>Welcome Employee!</h2>
       <NavLink to="/admin/add">
         <button className="form-btn">Lägg till ny maträtt</button>
       </NavLink>
