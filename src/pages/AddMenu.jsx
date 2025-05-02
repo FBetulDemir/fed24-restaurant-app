@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuForm from '../components/MenuForm.jsx';
 import AdminStart from '../components/AdminStart';
-import { saveData, loadData } from '../api.js';
+import { saveData, loadData } from '../components/Api';
 import '../styles/Admin.css';
 
 const AddMenu = () => {
@@ -12,7 +12,7 @@ const AddMenu = () => {
     description: '',
     price: '',
     ingredients: [],
-    group: '',
+    category: '',
     extraPrice: '',
   });
   const navigate = useNavigate();
@@ -26,8 +26,8 @@ const AddMenu = () => {
 
   const handleAddMenuItem = async (e) => {
     e.preventDefault();
-    if (!newMenuItem.group) {
-      setError('Please select a group.');
+    if (!newMenuItem.category) {
+      setError('Please select a category.');
       return;
     }
     if (!newMenuItem.name || newMenuItem.name.length < 3) {
@@ -65,23 +65,20 @@ const AddMenu = () => {
       console.log('New menu to save:', updatedMenu);
 
       const success = await saveData('menu', updatedMenu, abortController.signal);
-      if (!success) {
-        throw new Error('Failed to add menu item. The API may be unavailable or reached its limit.');
+      if (success) {
+        setNewMenuItem({ name: '', description: '', price: '', ingredients: [], category: '', extraPrice: '' });
+        setError('');
+        alert('Menu item added successfully!');
+        navigate('/admin/edit');
+      } else {
+        setError('Failed to add menu item. API may be unavailable or quota exceeded.');
       }
-
-      const updatedData = await loadData('menu', abortController.signal);
-      console.log('Data after saving:', updatedData);
-
-      setNewMenuItem({ name: '', description: '', price: '', ingredients: [], group: '', extraPrice: '' });
-      setError('');
-      alert('Menu item added successfully!');
-      navigate('/admin/edit');
     } catch (err) {
       if (err.name === 'AbortError') {
         console.log('AddMenu request aborted');
         return;
       }
-      setError(err.message || 'Failed to add menu item.');
+      setError('Failed to add menu item. Please try again later.');
       console.error('Error adding menu item:', err);
     }
   };

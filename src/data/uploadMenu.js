@@ -3,25 +3,25 @@ import { drinksMenuList, makiMenuList, nigiriMenuList, sashimiMenuList } from ".
 const API_URL = "https://forverkliga.se/JavaScript/api/jsonStore.php";
 const API_KEY = "isushi-menu";
 
-const fetchCurrentMenu = async () => {
+export const fetchCurrentMenu = async (signal) => { // เพิ่ม export
   try {
     console.log(`Fetching current menu with key: ${API_KEY}`);
-    const response = await fetch(`${API_URL}?method=load&key=${API_KEY}`);
+    const response = await fetch(`${API_URL}?method=load&key=${API_KEY}`, { signal });
     if (response.ok) {
       const data = await response.json();
       console.log("Fetched current menu:", data);
       return Array.isArray(data) ? data : [];
     } else {
       console.error("Failed to fetch current menu, status:", response.status);
-      return [];
+      throw new Error(`Failed to fetch current menu, status: ${response.status}`);
     }
   } catch (err) {
     console.error("Network error fetching menu:", err);
-    return [];
+    throw err;
   }
 };
 
-const saveMenuToApi = async (menu) => {
+export const saveMenuToApi = async (menu, signal) => { // เพิ่ม export
   try {
     console.log(`Saving menu to API with key: ${API_KEY}, items:`, menu);
     const saveResponse = await fetch(`${API_URL}?method=save`, {
@@ -34,17 +34,18 @@ const saveMenuToApi = async (menu) => {
         key: API_KEY,
         value: menu,
       }),
+      signal,
     });
     if (saveResponse.ok) {
       console.log("✅ Menu saved successfully!");
       return true;
     } else {
       console.error("❌ Failed to save menu, status:", saveResponse.status);
-      return false;
+      throw new Error(`Failed to save menu, status: ${saveResponse.status}`);
     }
   } catch (err) {
     console.error("❌ Network error saving menu:", err);
-    return false;
+    throw err;
   }
 };
 

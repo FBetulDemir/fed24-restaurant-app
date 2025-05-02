@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuList from '../components/MenuList';
 import { saveData, loadData } from '../components/Api';
-import useAdminStore from '../stores/authorizationStore'; 
+import { clearAndResetMenu } from '../data/uploadMenu';
+import useAdminStore from '../stores/authorizationStore';
 import AdminStart from '../components/AdminStart';
 import '../styles/Admin.css';
 import { dishSchema } from '../components/formValidation';
@@ -22,14 +23,35 @@ const EditMenu = () => {
         const menuWithIds = data.map((item, index) => ({
           id: item.id || index + 1,
           ...item,
+          category: item.category || item.group || 'Övrigt',
+          group: undefined,
         }));
+        console.log('Fetched menu data:', menuWithIds);
         setMenu(menuWithIds);
+        setError('');
       } else {
         setMenu([]);
+        setError('No menu items found.');
       }
     } catch (err) {
       console.error('Error loading menu:', err);
-      setError('Failed to load menu.');
+      setError('Failed to load menu. API may be unavailable or quota exceeded.');
+      setMenu([]);
+    }
+  };
+
+  const resetMenu = async () => {
+    try {
+      const success = await clearAndResetMenu();
+      if (success) {
+        await fetchMenu();
+        setError('');
+      } else {
+        setError('Failed to reset menu. API may be unavailable or quota exceeded.');
+      }
+    } catch (err) {
+      console.error('Error resetting menu:', err);
+      setError('Failed to reset menu. Please try again later.');
     }
   };
 
@@ -39,7 +61,7 @@ const EditMenu = () => {
     } else {
       fetchMenu();
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   const handleDelete = async (id) => {
     try {
@@ -47,12 +69,13 @@ const EditMenu = () => {
       const success = await saveData('menu', updatedMenu.map(({ id, ...rest }) => rest));
       if (success) {
         setMenu(updatedMenu);
+        setError('');
       } else {
-        setError('Failed to delete item.');
+        setError('Failed to delete item. API may be unavailable or quota exceeded.');
       }
     } catch (err) {
       console.error('Error deleting menu item:', err);
-      setError('Failed to delete item.');
+      setError('Failed to delete item. Please try again later.');
     }
   };
 
@@ -62,6 +85,7 @@ const EditMenu = () => {
 
       const validatedItem = {
         ...itemWithoutId,
+        category: newItem.category,
         ingredients: Array.isArray(newItem.ingredients)
           ? newItem.ingredients
           : newItem.ingredients.split(',').map(s => s.trim()).filter(s => s.length > 0),
@@ -79,14 +103,14 @@ const EditMenu = () => {
 
       const success = await saveData('menu', newMenu.map(({ id, ...rest }) => rest));
       if (success) {
-        setMenu(newMenu);
+        await fetchMenu();
         setError('');
       } else {
-        setError('Misslyckades med att skapa ny rätt.');
+        setError('Misslyckades med att skapa ny rätt. API may be unavailable or quota exceeded.');
       }
     } catch (err) {
       console.error('Error creating menu item:', err);
-      setError('Misslyckades med att skapa ny rätt.');
+      setError('Misslyckades med att skapa ny rätt. Please try again later.');
     }
   };
 
@@ -96,10 +120,14 @@ const EditMenu = () => {
 
       const validatedItem = {
         ...itemWithoutId,
+        category: updatedItem.category,
         ingredients: Array.isArray(updatedItem.ingredients)
           ? updatedItem.ingredients
           : updatedItem.ingredients.split(',').map(s => s.trim()).filter(s => s.length > 0),
+        group: undefined,
       };
+
+      console.log('Validated item before schema check:', validatedItem); // ดีบักข้อมูลก่อนตรวจสอบ
 
       const { error } = dishSchema.validate(validatedItem, { abortEarly: false });
 
@@ -115,25 +143,27 @@ const EditMenu = () => {
 
       const success = await saveData('menu', updatedMenu.map(({ id, ...rest }) => rest));
       if (success) {
-        setMenu(updatedMenu);
+        await fetchMenu();
         setError('');
       } else {
-        setError('Misslyckades med att uppdatera rätt.');
+        setError('Misslyckades med att uppdatera rätt. API may be unavailable or quota exceeded.');
       }
     } catch (err) {
       console.error('Error updating menu item:', err);
-      setError('Misslyckades med att uppdatera rätt.');
+      setError('Misslyckades med att uppdatera rätt. Please try again later.');
     }
   };
 
-  const groups = ['Maki', 'Nigiri', 'Sashimi', 'Drinks'];
+  const groups = ['maki', 'nigiri', 'sashimi', 'drinks'];
 
   const groupedMenu = menu.reduce((acc, item) => {
-    const group = item.group || item.category || 'Övrigt';
-    if (!acc[group]) acc[group] = [];
-    acc[group].push(item);
+    const category = item.category || 'Övrigt';
+    if (!acc[category]) acc[category] = [];
+    acc[category].push(item);
     return acc;
   }, {});
+
+  console.log('Grouped menu:', groupedMenu);
 
   return (
     <div className="admin-container">
@@ -146,6 +176,9 @@ const EditMenu = () => {
           <button onClick={fetchMenu} style={{ marginBottom: '1rem' }}>
             Förnya Menyn
           </button>
+          <button onClick={resetMenu} style={{ marginBottom: '1rem', marginLeft: '1rem' }}>
+            Reset Menu
+          </button>
           {error && <p className="menu-form-error">{error}</p>}
           {menu.length === 0 ? (
             <p>No menu items available.</p>
@@ -155,7 +188,7 @@ const EditMenu = () => {
                 <div key={group} className="menu-group">
                   <p> </p>
                   <p> </p>
-                  <h3>{group}</h3>
+                  <h3>{group.charAt(0).toUpperCase() + group.slice(1)}</h3>
                   <MenuList
                     menu={groupedMenu[group]}
                     onDelete={handleDelete}

@@ -1,88 +1,73 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
+  console.log('MenuForm received menuItem:', menuItem); // ดีบักข้อมูล menuItem
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setMenuItem((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleIngredientChange = (index, value) => {
-    const newIngredients = [...menuItem.ingredients];
-    newIngredients[index] = value.trim(); 
-    setMenuItem({ ...menuItem, ingredients: newIngredients.filter(ingredient => ingredient.length > 0) });
+    const updatedIngredients = [...menuItem.ingredients];
+    updatedIngredients[index] = value;
+    setMenuItem((prev) => ({ ...prev, ingredients: updatedIngredients }));
   };
 
   const addIngredient = () => {
-    setMenuItem({ ...menuItem, ingredients: [...menuItem.ingredients, ''] });
+    setMenuItem((prev) => ({ ...prev, ingredients: [...prev.ingredients, ''] }));
   };
 
   const removeIngredient = (index) => {
-    setMenuItem({
-      ...menuItem,
-      ingredients: menuItem.ingredients.filter((_, i) => i !== index),
-    });
-  };
-
-  // ฟังก์ชันสำหรับจัดการการป้อนเฉพาะตัวเลข
-  const handleNumberInput = (e, field) => {
-    const value = e.target.value;
-    // อนุญาตให้เป็นตัวเลขเท่านั้น (รวมถึงช่องว่างเพื่อให้สามารถลบได้)
-    if (/^\d*$/.test(value)) {
-      setMenuItem({ ...menuItem, [field]: value });
-    }
+    const updatedIngredients = menuItem.ingredients.filter((_, i) => i !== index);
+    setMenuItem((prev) => ({ ...prev, ingredients: updatedIngredients }));
   };
 
   return (
-    <form onSubmit={onSubmit} className="menu-form">
-      <div>
-        <label>Group</label>
-        <select
-          value={menuItem.group || ''}
-          onChange={(e) => setMenuItem({ ...menuItem, group: e.target.value })}
-          required
-        >
-          <option value="" disabled>Select a group</option>
-          <option value="Maki">Maki</option>
-          <option value="Nigiri">Nigiri</option>
-          <option value="Sashimi">Sashimi</option>
-          <option value="Drinks">Drycker</option>
+    <form className="menu-form" onSubmit={onSubmit}>
+      <label>
+        Kategori:
+        <select name="category" value={menuItem.category || ''} onChange={handleChange}>
+          <option value="">Välj kategori</option>
+          <option value="maki">Maki</option>
+          <option value="nigiri">Nigiri</option>
+          <option value="sashimi">Sashimi</option>
+          <option value="drinks">Drycker</option>
         </select>
-      </div>
-      <div>
-        <label>Lägg till titel</label>
-        <input
-          type="text"
-          value={menuItem.name}
-          onChange={(e) => setMenuItem({ ...menuItem, name: e.target.value })}
-          required
-        />
-          {errors?.text && <p className="error-message">{errors.text}</p>}
+      </label>
 
-      </div>
-      <div>
-        <label>Beskrivning</label>
-        <textarea
-          value={menuItem.description}
-          onChange={(e) => setMenuItem({ ...menuItem, description: e.target.value })}
-          required
-        />
-      </div>
-      <div>
-        <label>Pris(kr)</label>
-        <input
-          type="text"
-          value={menuItem.price}
-          onChange={(e) => handleNumberInput(e, 'price')}
-          pattern="\d*"
-          required
-        />
-      </div>
-      <div>
-        <label>Extra Pris (kr) (optional)</label>
-        <input
-          type="text"
-          value={menuItem.extraPrice || ''}
-          onChange={(e) => handleNumberInput(e, 'extraPrice')}
-          pattern="\d*"
-        />
-      </div>
-      <div>
-        <label>Ingredienser(optional)</label>
+      <label>
+        Namn:
+        <input type="text" name="name" value={menuItem.name} onChange={handleChange} />
+      </label>
+
+      <label>
+        Beskrivning:
+        <textarea name="description" value={menuItem.description} onChange={handleChange} />
+      </label>
+
+      <label>
+        Pris (kr):
+        <input type="number" name="price" value={menuItem.price} onChange={handleChange} />
+      </label>
+
+      {(menuItem.category === 'maki' || menuItem.category === 'sashimi') && (
+        <label>
+          Pris per extra bit (kr):
+          <input type="number" name="extraPrice" value={menuItem.extraPrice} onChange={handleChange} />
+        </label>
+      )}
+
+      {menuItem.category === 'drinks' && (
+        <label>
+          Volym (liter):
+          <input type="text" name="volume" value={menuItem.volume || ''} onChange={handleChange} />
+        </label>
+      )}
+
+      <label>
+        Ingredienser:
         {menuItem.ingredients.map((ingredient, index) => (
           <div key={index} className="ingredient-group">
             <input
@@ -95,13 +80,29 @@ const MenuForm = ({ menuItem, setMenuItem, onSubmit, buttonText }) => {
             </button>
           </div>
         ))}
-        <button type="button" onClick={addIngredient} className="add-ingredient">
-          Lägg till
+        <button type="button" className="add-ingredient" onClick={addIngredient}>
+          Lägg till ingrediens
         </button>
-      </div>
+      </label>
+
       <button type="submit">{buttonText}</button>
     </form>
   );
+};
+
+MenuForm.propTypes = {
+  menuItem: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    ingredients: PropTypes.arrayOf(PropTypes.string),
+    category: PropTypes.string,
+    extraPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    volume: PropTypes.string,
+  }).isRequired,
+  setMenuItem: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired,
 };
 
 export default MenuForm;
