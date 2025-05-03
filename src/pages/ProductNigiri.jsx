@@ -1,10 +1,11 @@
 import "../styles/ProductPage.css";
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { sushiMenu } from "../data/produktLists.js";
 import UploadAllMenus from "../components/UploadAllMenusButton.jsx";
 import { useCartStore } from "../data/CartStore.js";
+import Toast from "../components/Toast.jsx";
 import MenuContext from "../components/MenuContext.jsx";
-import imageNigiri from "../assets/nigiri_sushi.jpg"
+import imageNigiri from "../assets/nigiri_sushi.jpg";
 
 const NigiriSushi = () => {
   const { menuData, error, loading } = useContext(MenuContext);
@@ -12,18 +13,27 @@ const NigiriSushi = () => {
   const nigiriSushi = sushiMenu[1];
   const addToCart = useCartStore((state) => state.addToCart);
 
-  const handleAddToCart = (nigiri) => {
-    addToCart({
-      id: nigiri.id,
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+
+  const handleAddToCart = async (nigiri) => {
+    const cartItem = {
+      id: nigiri.id || crypto.randomUUID(),
       name: nigiri.name,
-      price: nigiri.price,
+      price: parseFloat(nigiri.price) || 0,
       quantity: nigiri.baseQuantity || 2,
       baseQuantity: nigiri.baseQuantity || 2,
       ingredients: nigiri.ingredients || [],
       description: nigiri.description || "",
-      extraBitPrice: nigiri.extraBitPrice,
+      extraBitPrice: parseFloat(nigiri.extraBitPrice) || 0,
       category: "nigiri",
-    });
+      isExtraBit: false,
+    };
+    console.log('Adding to cart:', cartItem);
+    await addToCart(cartItem);
+    setToastMessage(`${nigiri.name} lades till i kundvagnen!`);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500);
   };
 
   return (

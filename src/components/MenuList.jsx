@@ -9,7 +9,7 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
   const handleEditClick = (item) => {
     console.log('Item sent to edit:', item);
     setEditId(item.id);
-    const { group, ...itemWithoutGroup } = item; // ลบ group ออก
+    const { group, ...itemWithoutGroup } = item;
     setFormData(itemWithoutGroup);
     setLocalErrors({});
   };
@@ -27,7 +27,7 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
   const handleSaveClick = () => {
     if (validateForms()) {
       if (onEdit) {
-        const { id, group, ...formWithoutId } = formData; // ลบ group ออก
+        const { id, group, ...formWithoutId } = formData;
         console.log('Updated item sent to onEdit:', formWithoutId);
         onEdit(editId, formWithoutId);
       }
@@ -67,7 +67,12 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
   };
 
   const validateForms = () => {
-    const { error } = dishSchema.validate(formData, { abortEarly: false });
+    const formDataWithStringId = {
+      ...formData,
+      id: formData.id ? String(formData.id) : undefined, // แปลง id เป็น string
+    };
+    console.log('Form data before validation:', formDataWithStringId); // ดีบัก formData
+    const { error } = dishSchema.validate(formDataWithStringId, { abortEarly: false });
     if (error) {
       const formErrors = {};
       error.details.forEach((detail) => {

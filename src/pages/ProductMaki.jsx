@@ -5,7 +5,7 @@ import UploadAllMenus from "../components/UploadAllMenusButton.jsx";
 import { useCartStore } from "../data/CartStore.js";
 import Toast from "../components/Toast.jsx";
 import MenuContext from "../components/MenuContext.jsx";
-import imageMakiSushi from "../assets/maki_sushi.jpg"
+import imageMakiSushi from "../assets/maki_sushi.jpg";
 
 const MakiSushi = () => {
   const { menuData, error, loading } = useContext(MenuContext);
@@ -17,42 +17,48 @@ const MakiSushi = () => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
-  const handleAddToCart = (maki) => {
-    addToCart({
-      id: maki.id,
+  const handleAddToCart = async (maki) => {
+    const cartItem = {
+      id: maki.id || crypto.randomUUID(), // สร้าง id ใหม่หากไม่มี id
       name: maki.name,
-      price: maki.price,
+      price: parseFloat(maki.price) || 0,
       quantity: maki.baseQuantity || 8,
       baseQuantity: maki.baseQuantity || 8,
       ingredients: maki.ingredients || [],
       description: maki.description || "",
-      extraBitPrice: maki.extraBitPrice,
+      extraBitPrice: parseFloat(maki.extraBitPrice) || 0,
       category: "maki",
-    });
+      isExtraBit: false,
+    };
+    console.log('Adding to cart:', cartItem);
+    await addToCart(cartItem);
     setToastMessage(`${maki.name} lades till i kundvagnen!`);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2500);
   };
 
-  const handleAddExtraBit = (maki) => {
-    addToCart({
-      id: maki.id,
+  const handleAddExtraBit = async (maki) => {
+    const extraBitItem = {
+      id: maki.id || crypto.randomUUID(),
       name: maki.name,
-      price: maki.extraBitPrice,
+      price: parseFloat(maki.extraBitPrice) || 0,
       quantity: 1,
       baseQuantity: maki.baseQuantity || 8,
       ingredients: maki.ingredients || [],
       description: maki.description || "",
-      extraBitPrice: maki.extraBitPrice,
+      extraBitPrice: parseFloat(maki.extraBitPrice) || 0,
       category: "maki",
-    });
+      isExtraBit: true,
+    };
+    console.log('Adding extra bit to cart:', extraBitItem);
+    await addToCart(extraBitItem);
     setToastMessage(`Extra bit av ${maki.name} lades till!`);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2500);
   };
 
   const isExtraBitEnabled = (maki) => {
-    const existing = cart.find((item) => item.id === maki.id);
+    const existing = cart.find((item) => item.id === maki.id && !item.isExtraBit);
     return existing && existing.quantity >= (maki.baseQuantity || 8);
   };
 

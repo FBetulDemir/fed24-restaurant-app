@@ -59,8 +59,7 @@ const AddMenu = () => {
       const existingMenu = (await loadData('menu', abortController.signal)) || [];
       console.log('Existing menu before adding:', existingMenu);
 
-      const newId = existingMenu.length > 0 ? Math.max(...existingMenu.map(item => item.id)) + 1 : 1;
-      const newItem = { id: newId, ...newMenuItem };
+      const newItem = { id: crypto.randomUUID(), ...newMenuItem }; // ใช้ crypto.randomUUID() เพื่อสร้าง id
       const updatedMenu = [...existingMenu, newItem];
       console.log('New menu to save:', updatedMenu);
 

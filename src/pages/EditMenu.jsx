@@ -21,7 +21,7 @@ const EditMenu = () => {
       const data = await loadData('menu');
       if (Array.isArray(data)) {
         const menuWithIds = data.map((item, index) => ({
-          id: item.id || index + 1,
+          id: item.id ? String(item.id) : `temp-id-${index}`, // แปลง id เป็น string
           ...item,
           category: item.category || item.group || 'Övrigt',
           group: undefined,
@@ -101,7 +101,7 @@ const EditMenu = () => {
         return;
       }
 
-      const newMenu = [...menu, { ...validatedItem, id: menu.length + 1 }];
+      const newMenu = [...menu, { ...validatedItem, id: crypto.randomUUID() }];
 
       const success = await saveData('menu', newMenu.map(({ id, ...rest }) => rest));
       if (success) {
@@ -120,7 +120,7 @@ const EditMenu = () => {
     try {
       console.log('Received updatedItem in handleEdit:', updatedItem);
 
-      const { id: ignoredId, group, ...itemWithoutId } = updatedItem; // ลบ group ออก
+      const { id: ignoredId, group, ...itemWithoutId } = updatedItem;
 
       const validatedItem = {
         ...itemWithoutId,

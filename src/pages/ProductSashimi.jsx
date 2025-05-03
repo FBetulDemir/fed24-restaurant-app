@@ -1,10 +1,11 @@
 import "../styles/ProductPage.css";
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { sushiMenu } from "../data/produktLists";
 import UploadAllMenus from "../components/UploadAllMenusButton.jsx";
 import { useCartStore } from "../data/CartStore.js";
+import Toast from "../components/Toast.jsx";
 import MenuContext from "../components/MenuContext.jsx";
-import imageSashimi from "../assets/sashimi.jpg"
+import imageSashimi from "../assets/sashimi.jpg";
 
 const Sashimi = () => {
   const { menuData, error, loading } = useContext(MenuContext);
@@ -13,36 +14,51 @@ const Sashimi = () => {
   const cart = useCartStore((state) => state.cart);
   const addToCart = useCartStore((state) => state.addToCart);
 
-  const handleAddToCart = (item) => {
-    addToCart({
-      id: item.id,
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+
+  const handleAddToCart = async (item) => {
+    const cartItem = {
+      id: item.id || crypto.randomUUID(),
       name: item.name,
-      price: item.price,
+      price: parseFloat(item.price) || 0,
       quantity: item.baseQuantity || 5,
       baseQuantity: item.baseQuantity || 5,
       ingredients: item.ingredients || [],
       description: item.description || "",
-      extraBitPrice: item.extraBitPrice,
+      extraBitPrice: parseFloat(item.extraBitPrice) || 0,
       category: "sashimi",
-    });
+      isExtraBit: false,
+    };
+    console.log('Adding to cart:', cartItem);
+    await addToCart(cartItem);
+    setToastMessage(`${item.name} lades till i kundvagnen!`);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500);
   };
 
-  const handleAddExtraBit = (item) => {
-    addToCart({
-      id: item.id,
+  const handleAddExtraBit = async (item) => {
+    const extraBitItem = {
+      id: item.id || crypto.randomUUID(),
       name: item.name,
-      price: item.extraBitPrice,
+      price: parseFloat(item.extraBitPrice) || 0,
       quantity: 1,
       baseQuantity: item.baseQuantity || 5,
       ingredients: item.ingredients || [],
       description: item.description || "",
-      extraBitPrice: item.extraBitPrice,
+      extraBitPrice: parseFloat(item.extraBitPrice) || 0,
       category: "sashimi",
-    });
+      isExtraBit: true,
+    };
+    console.log('Adding extra bit to cart:', extraBitItem);
+    await addToCart(extraBitItem);
+    setToastMessage(`Extra bit av ${item.name} lades till!`);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500);
   };
 
   const isBaseQuantityAdded = (id, baseQuantity) => {
-    const item = cart.find((i) => i.id === id);
+    const item = cart.find((i) => i.id === id && !i.isExtraBit);
     return item && item.quantity >= baseQuantity;
   };
 
