@@ -7,9 +7,11 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
   const [localErrors, setLocalErrors] = useState({});
 
   const handleEditClick = (item) => {
+    console.log('Item sent to edit:', item);
     setEditId(item.id);
-    setFormData({ ...item });
-    setLocalErrors({}); 
+    const { group, ...itemWithoutGroup } = item; // ลบ group ออก
+    setFormData(itemWithoutGroup);
+    setLocalErrors({});
   };
 
   const validateForm = () => {
@@ -23,9 +25,10 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
   };
 
   const handleSaveClick = () => {
-    if (validateForms()) { 
+    if (validateForms()) {
       if (onEdit) {
-        const { id, ...formWithoutId } = formData;
+        const { id, group, ...formWithoutId } = formData; // ลบ group ออก
+        console.log('Updated item sent to onEdit:', formWithoutId);
         onEdit(editId, formWithoutId);
       }
       setEditId(null);
@@ -34,16 +37,16 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
 
   const validateField = (fieldName, value) => {
     if (fieldName === 'id' || fieldName === 'ingredients' || fieldName === 'description' || fieldName === 'group') {
-      return '';  
+      return '';
     }
-  
+
     switch (fieldName) {
       case 'name':
         return value.trim() === '' ? 'Namnet är obligatoriskt.' : '';
       case 'price':
         return value.trim() === '' ? 'Pris är obligatoriskt.' : '';
       default:
-        return '';  
+        return '';
     }
   };
 
@@ -51,11 +54,7 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
     const { name, value } = e.target;
     const updatedFormData = { ...formData, [name]: value };
     setFormData(updatedFormData);
-  
-    if (name === "group") {
-      return;
-    }
-  
+
     try {
       const singleFieldSchema = dishSchema.extract(name);
       const { error } = singleFieldSchema.validate(value);
@@ -72,9 +71,10 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
     if (error) {
       const formErrors = {};
       error.details.forEach((detail) => {
-        const field = detail.path[0]; 
+        const field = detail.path[0];
         formErrors[field] = detail.message;
       });
+      console.log('Validation errors:', formErrors);
       setLocalErrors(formErrors);
       return false;
     }
@@ -88,23 +88,24 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
         editId === item.id ? (
           <div key={item.id} className="menu-item edit-mode">
             <div>
-              <label></label>
+              <label>Kategori:</label>
               <select
-                name="group"
-                value={formData.group}
+                name="category"
+                value={formData.category || ''}
                 onChange={handleChange}
               >
-                <option value="Maki">Maki</option>
-                <option value="Nigiri">Nigiri</option>
-                <option value="Sashimi">Sashimi</option>
-                <option value="Drycker">Drycker</option>
+                <option value="">Välj kategori</option>
+                <option value="maki">Maki</option>
+                <option value="nigiri">Nigiri</option>
+                <option value="sashimi">Sashimi</option>
+                <option value="drinks">Drycker</option>
               </select>
-              {localErrors.group && (
-                <p className="error-message">{localErrors.group}</p>
+              {localErrors.category && (
+                <p className="error-message">{localErrors.category}</p>
               )}
             </div>
             <div>
-              <label></label>
+              <label>Namn:</label>
               <input
                 name="name"
                 value={formData.name}
@@ -115,7 +116,7 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
               )}
             </div>
             <div>
-              <label></label>
+              <label>Beskrivning:</label>
               <input
                 name="description"
                 value={formData.description || ''}
@@ -126,7 +127,7 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
               )}
             </div>
             <div>
-              <label></label>
+              <label>Pris (kr):</label>
               <input
                 name="price"
                 value={formData.price}
@@ -136,11 +137,37 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
                 <p className="error-message">{localErrors.price}</p>
               )}
             </div>
+            {(formData.category === 'maki' || formData.category === 'sashimi') && (
+              <div>
+                <label>Pris per extra bit (kr):</label>
+                <input
+                  name="extraBitPrice"
+                  value={formData.extraBitPrice || ''}
+                  onChange={handleChange}
+                />
+                {localErrors.extraBitPrice && (
+                  <p className="error-message">{localErrors.extraBitPrice}</p>
+                )}
+              </div>
+            )}
+            {formData.category === 'drinks' && (
+              <div>
+                <label>Volym (liter):</label>
+                <input
+                  name="volume"
+                  value={formData.volume || ''}
+                  onChange={handleChange}
+                />
+                {localErrors.volume && (
+                  <p className="error-message">{localErrors.volume}</p>
+                )}
+              </div>
+            )}
             <button onClick={handleSaveClick}>Spara</button>
           </div>
         ) : (
           <div key={item.id} className="menu-item">
-            <p><strong>{item.name}</strong> ({item.group}) – {item.price} kr</p>
+            <p><strong>{item.name}</strong> ({item.category}) – {item.price} kr</p>
             <div className="menu-actions">
               <button onClick={() => handleEditClick(item)}>✏️</button>
               <button onClick={() => onDelete(item.id)}>🗑️</button>

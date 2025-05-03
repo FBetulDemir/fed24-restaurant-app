@@ -91,6 +91,8 @@ const EditMenu = () => {
           : newItem.ingredients.split(',').map(s => s.trim()).filter(s => s.length > 0),
       };
 
+      console.log('Validated item (create):', validatedItem);
+
       const { error } = dishSchema.validate(validatedItem, { abortEarly: false });
 
       if (error) {
@@ -116,7 +118,9 @@ const EditMenu = () => {
 
   const handleEdit = async (id, updatedItem) => {
     try {
-      const { id: ignoredId, ...itemWithoutId } = updatedItem;
+      console.log('Received updatedItem in handleEdit:', updatedItem);
+
+      const { id: ignoredId, group, ...itemWithoutId } = updatedItem; // ลบ group ออก
 
       const validatedItem = {
         ...itemWithoutId,
@@ -124,10 +128,9 @@ const EditMenu = () => {
         ingredients: Array.isArray(updatedItem.ingredients)
           ? updatedItem.ingredients
           : updatedItem.ingredients.split(',').map(s => s.trim()).filter(s => s.length > 0),
-        group: undefined,
       };
 
-      console.log('Validated item before schema check:', validatedItem); // ดีบักข้อมูลก่อนตรวจสอบ
+      console.log('Validated item (edit):', validatedItem);
 
       const { error } = dishSchema.validate(validatedItem, { abortEarly: false });
 
