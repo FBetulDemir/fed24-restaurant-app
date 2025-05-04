@@ -21,7 +21,7 @@ const EditMenu = () => {
       const data = await loadData('menu');
       if (Array.isArray(data)) {
         const menuWithIds = data.map((item, index) => ({
-          id: item.id ? String(item.id) : `temp-id-${index}`, // แปลง id เป็น string
+          id: item.id ? String(item.id) : `temp-id-${index}`,
           ...item,
           category: item.category || item.group || 'Övrigt',
           group: undefined,
@@ -175,13 +175,15 @@ const EditMenu = () => {
       </aside>
       <main className="admin-main">
         <div className="admin-content">
-          <h2>Redigera Meny</h2>
-          <button onClick={fetchMenu} style={{ marginBottom: '1rem' }}>
-            Förnya Menyn
-          </button>
-          <button onClick={resetMenu} style={{ marginBottom: '1rem', marginLeft: '1rem' }}>
-            Reset Menu
-          </button>
+          <h2 className="center-text">Redigera Meny</h2>
+          <div className="button-group">
+            <button className="custom-button" onClick={fetchMenu}>
+              Förnya Menyn
+            </button>
+            <button className="custom-button" onClick={resetMenu}>
+              Reset Menu
+            </button>
+          </div>
           {error && <p className="menu-form-error">{error}</p>}
           {menu.length === 0 ? (
             <p>No menu items available.</p>
