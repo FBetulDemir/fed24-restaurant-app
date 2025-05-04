@@ -69,9 +69,9 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
   const validateForms = () => {
     const formDataWithStringId = {
       ...formData,
-      id: formData.id ? String(formData.id) : undefined, // แปลง id เป็น string
+      id: formData.id ? String(formData.id) : undefined,
     };
-    console.log('Form data before validation:', formDataWithStringId); // ดีบัก formData
+    console.log('Form data before validation:', formDataWithStringId);
     const { error } = dishSchema.validate(formDataWithStringId, { abortEarly: false });
     if (error) {
       const formErrors = {};
