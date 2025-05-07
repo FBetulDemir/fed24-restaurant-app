@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import "../styles/AdminStart.css";
-import UploadAllMenusButton from "./UploadAllMenusButton";
 import MenuResetButton from "./MenuResetButton";
 import { useNavigate } from "react-router-dom";
 import useAdminStore from '../stores/authorizationStore.js';
@@ -18,7 +17,6 @@ const AdminStart = () => {
       <NavLink to="/pages/editMenu">
         <button className="form-btn">Redigera/Ta bort meny</button>
       </NavLink>
-      <UploadAllMenusButton />
       <MenuResetButton />
       <NavLink to="/">
         <button className="form-btn">Logga ut</button>

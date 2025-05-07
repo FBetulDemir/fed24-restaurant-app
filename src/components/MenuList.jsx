@@ -14,6 +14,17 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
     setLocalErrors({});
   };
 
+  const validateField = (fieldName, value) => {
+    // ให้ Joi จัดการข้อความคำเตือนทั้งหมด
+    try {
+      const singleFieldSchema = dishSchema.extract(fieldName);
+      const { error } = singleFieldSchema.validate(value);
+      return error ? error.message : '';
+    } catch (err) {
+      return '';
+    }
+  };
+
   const validateForm = () => {
     let formErrors = {};
     Object.keys(formData).forEach((field) => {
@@ -32,21 +43,6 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
         onEdit(editId, formWithoutId);
       }
       setEditId(null);
-    }
-  };
-
-  const validateField = (fieldName, value) => {
-    if (fieldName === 'id' || fieldName === 'ingredients' || fieldName === 'description' || fieldName === 'group') {
-      return '';
-    }
-
-    switch (fieldName) {
-      case 'name':
-        return value.trim() === '' ? 'Namnet är obligatoriskt.' : '';
-      case 'price':
-        return value.trim() === '' ? 'Pris är obligatoriskt.' : '';
-      default:
-        return '';
     }
   };
 
@@ -121,7 +117,7 @@ const MenuList = ({ menu, onEdit, onDelete, errors }) => {
               )}
             </div>
             <div>
-              <label>Beskrivning:</label>
+              <label>Beskrivning (valfritt):</label>
               <input
                 name="description"
                 value={formData.description || ''}
